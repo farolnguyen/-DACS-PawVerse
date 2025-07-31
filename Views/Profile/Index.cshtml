@@ -1,0 +1,117 @@
+@model PawVerse.Models.ViewModels.ProfileViewModel
+@{
+    ViewData["Title"] = "Hồ sơ cá nhân";
+    Layout = "_Layout";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/profile.css" />
+}
+
+<div class="profile-container">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="profile-card">
+                    <div class="profile-header">
+                        <div class="avatar-container">
+                            @if (!string.IsNullOrEmpty(Model.Avatar))
+                            {
+                                <img src="@Url.Content(Model.Avatar)" alt="Avatar" class="avatar-img">
+                            }
+                            else
+                            {
+                                <div class="avatar-placeholder">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    
+                    <div class="user-info">
+                        <h1 class="user-name">@Model.FullName</h1>
+                        <p class="user-username">@Model.UserName</p>
+                        <p class="user-email">
+                            <i class="fas fa-envelope me-2"></i>@Model.Email
+                        </p>
+                        
+                        <div class="profile-actions">
+                            <a asp-action="Edit" class="btn btn-edit">
+                                <i class="fas fa-user-edit me-2"></i>Chỉnh sửa hồ sơ
+                            </a>
+                            <a asp-action="ChangePassword" class="btn btn-change-password">
+                                <i class="fas fa-key me-2"></i>Đổi mật khẩu
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="profile-details">
+                        <div class="detail-item">
+                            <span class="detail-label">
+                                <i class="fas fa-id-card me-2"></i>Họ và tên
+                            </span>
+                            <span class="detail-value">@Model.FullName</span>
+                        </div>
+                        
+                        <div class="detail-item">
+                            <span class="detail-label">
+                                <i class="fas fa-envelope me-2"></i>Email
+                            </span>
+                            <span class="detail-value">@Model.Email</span>
+                        </div>
+                        
+                        <div class="detail-item">
+                            <span class="detail-label">
+                                <i class="fas fa-phone me-2"></i>Số điện thoại
+                            </span>
+                            <span class="detail-value">@(!string.IsNullOrEmpty(Model.PhoneNumber) ? Model.PhoneNumber : "Chưa cập nhật")</span>
+                        </div>
+                        
+                        <div class="detail-item">
+                            <span class="detail-label">
+                                <i class="fas fa-map-marker-alt me-2"></i>Địa chỉ
+                            </span>
+                            <span class="detail-value">@(!string.IsNullOrEmpty(Model.Address) ? Model.Address : "Chưa cập nhật")</span>
+                        </div>
+                        
+                        <div class="detail-item">
+                            <span class="detail-label">
+                                <i class="fas fa-venus-mars me-2"></i>Giới tính
+                            </span>
+                            <span class="detail-value">
+                                @(!string.IsNullOrEmpty(Model.Gender) ? Model.Gender : "Chưa cập nhật")
+                            </span>
+                        </div>
+                        
+                        <div class="detail-item">
+                            <span class="detail-label">
+                                <i class="fas fa-birthday-cake me-2"></i>Ngày sinh
+                            </span>
+                            <span class="detail-value">
+                                @(Model.NgaySinh?.ToString("dd/MM/yyyy") ?? "Chưa cập nhật")
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+        <div class="col-lg-8">
+            <div class="card mb-4">
+                <div class="card-body">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <script>
+            toastr.success('@TempData["SuccessMessage"]');
+        </script>
+    }
+}

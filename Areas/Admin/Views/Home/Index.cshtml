@@ -1,0 +1,567 @@
+@{
+    ViewData["Title"] = "Bảng điều khiển";
+
+    string GetOrderStatusBadgeClass(string status)
+    {
+        return status switch
+        {
+            "Chờ xác nhận" => "bg-warning text-dark",
+            "Đã xác nhận" => "bg-info text-dark",
+            "Đang xử lý" => "bg-primary",
+            "Đang giao hàng" => "bg-info",
+            "Đã giao hàng" => "bg-success",
+            "Hoàn thành" => "bg-success",
+            "Đã hủy" => "bg-danger",
+            _ => "bg-secondary",
+        };
+    }
+
+    string TranslateStatusToVietnameseForAdminDashboard(string status)
+    {
+        if (string.IsNullOrEmpty(status)) return "Không xác định";
+        return status.ToLower() switch
+        {
+            "pending confirmation" => "Chờ xác nhận",
+            "pending" => "Chờ xác nhận",
+            "confirmed" => "Đã xác nhận",
+            "processing" => "Đang xử lý",
+            "shipping" => "Đang giao hàng",
+            "delivered" => "Đã giao hàng",
+            "completed" => "Hoàn thành",
+            "cancelled" => "Đã hủy",
+            // Already Vietnamese or other cases
+            "chờ xác nhận" => "Chờ xác nhận",
+            "đã xác nhận" => "Đã xác nhận",
+            "đang xử lý" => "Đang xử lý",
+            "đang giao hàng" => "Đang giao hàng",
+            "đã giao hàng" => "Đã giao hàng",
+            "hoàn thành" => "Hoàn thành",
+            "đã hủy" => "Đã hủy",
+            _ => status // Return original if no specific translation
+        };
+    }
+}
+
+<!-- Page Heading -->
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Bảng điều khiển</h1>
+    <div>
+        <a asp-controller="Order" asp-action="Index" class="btn btn-info btn-sm me-2">
+            <i class="fas fa-shopping-cart me-1"></i> Quản lý đơn hàng
+        </a>
+        <a asp-area="Admin" asp-controller="Home" asp-action="ExportDashboardToExcel" class="btn btn-success btn-sm shadow-sm">
+            <i class="fas fa-file-excel fa-sm text-white-50"></i> Xuất ra Excel
+        </a>
+    </div>
+</div>
+
+<!-- Content Row -->
+<div class="row">
+    <!-- Total Revenue Card -->
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-primary shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                            Doanh thu (tháng)</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">@ViewBag.MonthlyRevenue.ToString("N0") ₫</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Total Orders Card -->
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-success shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                            Đơn hàng (tháng)</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">@ViewBag.MonthlyOrders</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-shopping-cart fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Today's Orders Card -->
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-info shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                            Đơn hàng hôm nay</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">@ViewBag.TodayOrders</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-calendar-day fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pending Orders Card -->
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-warning shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                            Đơn chờ xử lý</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">@ViewBag.PendingOrders</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-clock fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Total Products Card -->
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-info shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                            Tổng sản phẩm</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">@ViewBag.TotalProducts</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-boxes fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Total Customers Card -->
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-primary shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                            Tổng khách hàng</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">@ViewBag.TotalCustomers</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-users fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Total Categories Card -->
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-success shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                            Tổng danh mục</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">@ViewBag.TotalCategories</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-list fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Total Brands Card -->
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-danger shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
+                            Tổng thương hiệu</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">@ViewBag.TotalBrands</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-copyright fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Content Row -->
+<div class="row">
+    <!-- Area Chart -->
+    <div class="col-xl-8 col-lg-7">
+        <div class="card shadow mb-4">
+            <!-- Card Header - Dropdown -->
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold text-primary">Tổng quan doanh thu</h6>
+                <div class="dropdown no-arrow">
+                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                       data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                         aria-labelledby="dropdownMenuLink">
+                        <div class="dropdown-header">Tùy chọn:</div>
+                        <a class="dropdown-item" href="#">Xuất dữ liệu</a>
+                        <a class="dropdown-item" href="#">Cài đặt</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Xem chi tiết</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Card Body -->
+            <div class="card-body">
+                <div class="chart-area">
+                    <canvas id="myAreaChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pie Chart -->
+    <div class="col-xl-4 col-lg-5">
+        <div class="card shadow mb-4">
+            <!-- Card Header - Dropdown -->
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold text-primary">Nguồn doanh thu</h6>
+                <div class="dropdown no-arrow">
+                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                       data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                         aria-labelledby="dropdownMenuLink">
+                        <div class="dropdown-header">Tùy chọn:</div>
+                        <a class="dropdown-item" href="#">Xuất dữ liệu</a>
+                        <a class="dropdown-item" href="#">Cài đặt</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Xem chi tiết</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Card Body -->
+            <div class="card-body">
+                <div class="chart-pie pt-4 pb-2">
+                    <canvas id="myPieChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Content Row -->
+<div class="row">
+    <!-- Recent Orders -->
+    <div class="col-12">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3 d-flex justify-content-between align-items-center">
+                <h6 class="m-0 font-weight-bold text-primary">Đơn hàng gần đây</h6>
+                <a asp-controller="Order" asp-action="Index" class="btn btn-sm btn-primary">Xem tất cả</a>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Mã đơn</th>
+                                <th>Khách hàng</th>
+                                <th>Ngày đặt</th>
+                                <th>Tổng tiền</th>
+                                <th>Trạng thái</th>
+                                <th>Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (ViewBag.RecentOrders != null && ((List<PawVerse.Models.DonHang>)ViewBag.RecentOrders).Any())
+                            {
+                                foreach (var order in (List<PawVerse.Models.DonHang>)ViewBag.RecentOrders)
+                                {
+                                    <tr>
+                                        <td>@order.IdDonHang</td>
+                                        <td>@(order.NguoiDung?.FullName ?? "Khách vãng lai")</td>
+                                        <td>@order.NgayDatHang.ToString("dd/MM/yyyy HH:mm")</td>
+                                        <td>@order.TongTien.ToString("N0") ₫</td>
+                                        <td>
+                                            @{
+                                                var translatedStatus = TranslateStatusToVietnameseForAdminDashboard(order.TrangThai);
+                                            }
+                                            <span class="badge @GetOrderStatusBadgeClass(translatedStatus)">@translatedStatus</span>
+                                        </td>
+                                        <td>
+                                            <a asp-area="Admin" asp-controller="Order" asp-action="Details" asp-route-id="@order.IdDonHang" class="btn btn-sm btn-info" title="Xem chi tiết">
+                                                <i class="fas fa-eye"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="6" class="text-center">Chưa có đơn hàng nào.</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Quick Stats -->
+<div class="row">
+    <div class="col-lg-6 mb-4">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Sản phẩm bán chạy</h6>
+            </div>
+            <div class="card-body" style="max-height: 400px; overflow-y: auto;">
+                @if (ViewBag.TopSellingProducts != null && ((List<PawVerse.ViewModels.TopSellingProductViewModel>)ViewBag.TopSellingProducts).Any())
+                {
+                    <ul class="list-group list-group-flush">
+                        @foreach (var product in (List<PawVerse.ViewModels.TopSellingProductViewModel>)ViewBag.TopSellingProducts)
+                        {
+                            <li class="list-group-item d-flex justify-content-between align-items-center px-0 py-2">
+                                <div class="d-flex align-items-center">
+                                    @if (!string.IsNullOrEmpty(product.ProductImage))
+                                    {
+                                        <img src="@Url.Content(product.ProductImage.Replace("\\", "/"))" alt="@product.ProductName" style="width: 40px; height: 40px; object-fit: cover; margin-right: 10px; border-radius: .25rem;" />
+                                    }
+                                    else
+                                    {
+                                        <div style="width: 40px; height: 40px; background-color: #f0f0f0; margin-right: 10px; border-radius: .25rem; display: flex; align-items: center; justify-content: center;">
+                                            <i class="fas fa-image text-muted"></i>
+                                        </div>
+                                    }
+                                    <span title="@product.ProductName" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 200px;">@product.ProductName</span>
+                                </div>
+                                <span class="badge bg-primary rounded-pill text-white">@product.QuantitySold</span>
+                            </li>
+                        }
+                    </ul>
+                }
+                else
+                {
+                    <p class="text-center mb-0">Chưa có dữ liệu.</p>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6 mb-4">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-success">Khách hàng thân thiết</h6>
+            </div>
+            <div class="card-body" style="max-height: 400px; overflow-y: auto;">
+                @if (ViewBag.LoyalCustomers != null && ((List<PawVerse.ViewModels.LoyalCustomerViewModel>)ViewBag.LoyalCustomers).Any())
+                {
+                    <ul class="list-group list-group-flush">
+                        @foreach (var customer in (List<PawVerse.ViewModels.LoyalCustomerViewModel>)ViewBag.LoyalCustomers)
+                        {
+                            <li class="list-group-item d-flex justify-content-between align-items-center px-0 py-2">
+                                <div class="d-flex align-items-center">
+                                    @if (!string.IsNullOrEmpty(customer.AvatarUrl))
+                                    {
+                                        <img src="@Url.Content(customer.AvatarUrl)" alt="@customer.CustomerName" style="width: 40px; height: 40px; object-fit: cover; margin-right: 10px; border-radius: 50%;" />
+                                    }
+                                    else
+                                    {
+                                        <div style="width: 40px; height: 40px; background-color: #1cc88a; color:white; margin-right: 10px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight:bold;">
+                                            @(!string.IsNullOrEmpty(customer.CustomerName) ? customer.CustomerName.Substring(0,1).ToUpper() : "?")
+                                        </div>
+                                    }
+                                    <div>
+                                        <div title="@customer.CustomerName" style="font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 180px;">@customer.CustomerName</div>
+                                        <small class="text-muted" title="@customer.CustomerEmail" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 180px;">@customer.CustomerEmail</small>
+                                    </div>
+                                </div>
+                                <div class="text-end">
+                                    <span class="badge bg-success rounded-pill text-white">@customer.OrderCount đơn</span>
+                                    <div class="small text-muted">@customer.TotalSpent.ToString("N0") ₫</div>
+                                </div>
+                            </li>
+                        }
+                    </ul>
+                }
+                else
+                {
+                    <p class="text-center mb-0">Chưa có dữ liệu.</p>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Debug: RevenueChartLabels Count: @(ViewBag.RevenueChartLabels != null ? ((List<string>)ViewBag.RevenueChartLabels).Count : -1) -->
+<!-- Debug: RevenueChartData Count: @(ViewBag.RevenueChartData != null ? ((List<decimal>)ViewBag.RevenueChartData).Count : -1) -->
+<!-- Debug: PieChartLabels Count: @(ViewBag.PieChartLabels != null ? ((List<string>)ViewBag.PieChartLabels).Count : -1) -->
+<!-- Debug: PieChartData Count: @(ViewBag.PieChartData != null ? ((List<decimal>)ViewBag.PieChartData).Count : -1) -->
+<!-- Debug: LoyalCustomers Count: @(ViewBag.LoyalCustomers != null ? ((List<PawVerse.ViewModels.LoyalCustomerViewModel>)ViewBag.LoyalCustomers).Count : -1) -->
+
+@section Scripts {
+    <script>
+        // Wait for document to be fully loaded and Chart.js to be available
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if Chart is available
+            if (typeof Chart === 'undefined') {
+                console.error('Chart.js is not loaded');
+                return;
+            }
+
+            // Area Chart
+            var areaCtx = document.getElementById("myAreaChart");
+            if (areaCtx) {
+                new Chart(areaCtx, {
+                    type: 'line',
+                    data: {
+                        labels: @Html.Raw(Json.Serialize(ViewBag.RevenueChartLabels)),
+                        datasets: [{
+                            label: "Doanh thu",
+                            lineTension: 0.3,
+                            backgroundColor: "rgba(78, 115, 223, 0.05)",
+                            borderColor: "rgba(78, 115, 223, 1)",
+                            pointRadius: 3,
+                            pointBackgroundColor: "rgba(78, 115, 223, 1)",
+                            pointBorderColor: "rgba(78, 115, 223, 1)",
+                            pointHoverRadius: 3,
+                            pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
+                            pointHoverBorderColor: "rgba(78, 115, 223, 1)",
+                            pointHitRadius: 10,
+                            pointBorderWidth: 2,
+                            data: @Html.Raw(Json.Serialize(ViewBag.RevenueChartData)),
+                        }],
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            x: {
+                                grid: {
+                                    display: false,
+                                    drawBorder: false
+                                },
+                                ticks: {
+                                    maxTicksLimit: 7
+                                }
+                            },
+                            y: {
+                                ticks: {
+                                    maxTicksLimit: 5,
+                                    padding: 10,
+                                    callback: function(value, index, values) {
+                                        return value.toLocaleString('vi-VN') + ' đ';
+                                    }
+                                },
+                                grid: {
+                                    color: "rgb(234, 236, 244)",
+                                    zeroLineColor: "rgb(234, 236, 244)",
+                                    drawBorder: false,
+                                    borderDash: [2],
+                                    zeroLineBorderDash: [2]
+                                }
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                display: false
+                            },
+                            tooltip: {
+                                backgroundColor: "rgb(255,255,255)",
+                                bodyColor: "#858796",
+                                titleMarginBottom: 10,
+                                titleColor: '#6e707e',
+                                titleFontSize: 14,
+                                borderColor: '#dddfeb',
+                                borderWidth: 1,
+                                padding: 15,
+                                displayColors: false,
+                                intersect: false,
+                                mode: 'index',
+                                callbacks: {
+                                    label: function(context) {
+                                        var label = context.dataset.label || '';
+                                        if (label) {
+                                            label += ': ';
+                                        }
+                                        if (context.parsed.y !== null) {
+                                            label += new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(context.parsed.y);
+                                        }
+                                        return label;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            // Pie Chart
+            var pieCtx = document.getElementById("myPieChart");
+            if (pieCtx) {
+                new Chart(pieCtx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: @Html.Raw(Json.Serialize(ViewBag.PieChartLabels ?? new List<string>())),
+                        datasets: [{
+                            data: @Html.Raw(Json.Serialize(ViewBag.PieChartData ?? new List<decimal>())),
+                            backgroundColor: @Html.Raw(Json.Serialize(ViewBag.PieChartColors ?? new List<string> { "#4e73df", "#1cc88a", "#36b9cc", "#f6c23e", "#e74a3b", "#5a5c69", "#fd7e14", "#6f42c1", "#20c997" })),
+                            hoverBackgroundColor: @Html.Raw(Json.Serialize(ViewBag.PieChartColors ?? new List<string> { "#2e59d9", "#17a673", "#2c9faf", "#dda20a", "#c9302c", "#40414a", "#e0620d", "#5a2b9d", "#1baa80" })),
+                            hoverBorderColor: "rgba(234, 236, 244, 1)",
+                        }],
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        cutout: '80%',
+                        plugins: {
+                            legend: {
+                                position: 'bottom',
+                                labels: {
+                                    boxWidth: 12,
+                                    padding: 20
+                                }
+                            },
+                            tooltip: {
+                                backgroundColor: "rgb(255,255,255)",
+                                bodyColor: "#858796",
+                                borderColor: '#dddfeb',
+                                borderWidth: 1,
+                                padding: 15,
+                                displayColors: false,
+                                callbacks: {
+                                    label: function(context) {
+                                        var label = context.label || '';
+                                        if (label) {
+                                            label += ': ';
+                                        }
+                                        if (context.raw !== null) {
+                                            label += context.raw + '%';
+                                        }
+                                        return label;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+        });
+    </script>
+}

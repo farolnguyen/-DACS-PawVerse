@@ -1,0 +1,194 @@
+@model IEnumerable<PawVerse.Areas.Admin.ViewModels.OrderListViewModel>
+@{
+    ViewData["Title"] = "Quản lý đơn hàng";
+    var status = Context.Request.Query["status"];
+    var allClass = "btn btn-outline-primary";
+    var pendingClass = "btn btn-outline-primary";
+    var processingClass = "btn btn-outline-primary";
+    var shippingClass = "btn btn-outline-primary";
+    var completedClass = "btn btn-outline-primary";
+    var cancelledClass = "btn btn-outline-primary";
+
+    switch (status)
+    {
+        case "pending":
+            pendingClass = "btn btn-primary";
+            break;
+        case "processing":
+            processingClass = "btn btn-primary";
+            break;
+        case "shipping":
+            shippingClass = "btn btn-primary";
+            break;
+        case "completed":
+            completedClass = "btn btn-primary";
+            break;
+        case "cancelled":
+            cancelledClass = "btn btn-primary";
+            break;
+        default:
+            allClass = "btn btn-primary";
+            break;
+    }
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1>Quản lý đơn hàng</h1>
+</div>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        @TempData["SuccessMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        @TempData["ErrorMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3 d-flex justify-content-between align-items-center">
+        <h6 class="m-0 font-weight-bold text-primary">Danh sách đơn hàng</h6>
+        <div class="btn-group" role="group">
+            <a class="@allClass" asp-action="Index" asp-route-status="all">Tất cả</a>
+            <a class="@pendingClass" asp-action="Index" asp-route-status="pending">Chờ xác nhận</a>
+            <a class="@processingClass" asp-action="Index" asp-route-status="processing">Đang xử lý</a>
+            <a class="@shippingClass" asp-action="Index" asp-route-status="shipping">Đang giao hàng</a>
+            <a class="@completedClass" asp-action="Index" asp-route-status="completed">Hoàn thành</a>
+            <a class="@cancelledClass" asp-action="Index" asp-route-status="cancelled">Đã hủy</a>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Mã đơn hàng</th>
+                        <th>Khách hàng</th>
+                        <th>Ngày đặt</th>
+                        <th>Tổng tiền</th>
+                        <th>Phương thức TT</th>
+                        <th>Trạng thái</th>
+                        <th>Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>#@item.IdDonHang</td>
+                            <td>@item.TenKhachHang</td>
+                            <td>@item.NgayDatHang.ToString("dd/MM/yyyy HH:mm")</td>
+                            <td>@item.TongTien.ToString("N0") ₫</td>
+                            <td>@item.PhuongThucThanhToan</td>
+                            <td>
+                                @switch (item.TrangThai)
+                                {
+                                    case "pending":
+                                        <span class="badge bg-warning">Chờ xác nhận</span>
+                                        break;
+                                    case "processing":
+                                        <span class="badge bg-info">Đang xử lý</span>
+                                        break;
+                                    case "shipping":
+                                        <span class="badge bg-primary">Đang giao hàng</span>
+                                        break;
+                                    case "completed":
+                                        <span class="badge bg-success">Hoàn thành</span>
+                                        break;
+                                    case "cancelled":
+                                        <span class="badge bg-danger">Đã hủy</span>
+                                        break;
+                                    default:
+                                        <span class="badge bg-secondary">@item.TrangThai</span>
+                                        break;
+                                }
+                            </td>
+                            <td>
+                                <div class="btn-group" role="group">
+                                    <a asp-action="Details" asp-route-id="@item.IdDonHang" class="btn btn-info btn-sm" data-bs-toggle="tooltip" title="Xem chi tiết">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
+                                    @if (item.TrangThai != "completed" && item.TrangThai != "cancelled")
+                                    {
+                                        <a asp-action="Edit" asp-route-id="@item.IdDonHang" class="btn btn-warning btn-sm" data-bs-toggle="tooltip" title="Cập nhật trạng thái">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                    }
+                                    @if (item.TrangThai != "cancelled" && item.TrangThai != "completed")
+                                    {
+                                        <button type="button" class="btn btn-danger btn-sm cancel-order" data-id="@item.IdDonHang" data-bs-toggle="tooltip" title="Hủy đơn hàng">
+                                            <i class="fas fa-times"></i>
+                                        </button>
+                                    }
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Cancel Order Modal -->
+<div class="modal fade" id="cancelOrderModal" tabindex="-1" aria-labelledby="cancelOrderModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="cancelOrderModalLabel">Xác nhận hủy đơn hàng</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form id="cancelOrderForm" method="post">
+                <div class="modal-body">
+                    <p>Bạn có chắc chắn muốn hủy đơn hàng này?</p>
+                    <div class="mb-3">
+                        <label for="cancelReason" class="form-label">Lý do hủy (nếu có):</label>
+                        <textarea class="form-control" id="cancelReason" name="ghiChu" rows="3"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                    <button type="submit" class="btn btn-danger">Xác nhận hủy</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            // Initialize DataTables
+            var table = $('#dataTable').DataTable({
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.10.25/i18n/Vietnamese.json"
+                },
+                "order": [[2, "desc"]], // Sort by order date by default
+                "columnDefs": [
+                    { "orderable": false, "targets": [6] } // Disable sorting on action column
+                ]
+            });
+
+            // Handle cancel order button click
+            $('.cancel-order').on('click', function() {
+                var orderId = $(this).data('id');
+                var form = $('#cancelOrderForm');
+                form.attr('action', '/Admin/Order/Cancel/' + orderId);
+                $('#cancelOrderModal').modal('show');
+            });
+
+            // Initialize tooltips
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl);
+            });
+        });
+    </script>
+}

@@ -1,0 +1,91 @@
+@model PawVerse.Models.ThuongHieu
+
+@{
+    ViewData["Title"] = "Xóa Thương hiệu: " + Model.TenThuongHieu;
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayoutV2.cshtml";
+}
+
+<div class="container-fluid px-4">
+    <h1 class="mt-4">@ViewData["Title"]</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item"><a asp-area="Admin" asp-controller="Dashboard" asp-action="Index">Trang chủ</a></li>
+        <li class="breadcrumb-item"><a asp-area="Admin" asp-controller="Brand" asp-action="Index">Quản lý Thương hiệu</a></li>
+        <li class="breadcrumb-item active">Xóa: @Model.TenThuongHieu</li>
+    </ol>
+
+    <div class="card mb-4">
+        <div class="card-header bg-danger text-white">
+            <h5 class="mb-0"><i class="fas fa-exclamation-triangle me-1"></i> Xác nhận xóa Thương hiệu</h5>
+        </div>
+        <div class="card-body">
+            <div class="alert alert-warning" role="alert">
+                <h4 class="alert-heading">Cảnh báo!</h4>
+                <p>Bạn có chắc chắn muốn xóa thương hiệu <strong>@Model.TenThuongHieu</strong>?</p>
+                <hr>
+                <p class="mb-0">Hành động này không thể hoàn tác. Nếu thương hiệu này đang được sử dụng bởi bất kỳ sản phẩm nào, bạn sẽ không thể xóa cho đến khi các sản phẩm đó được cập nhật hoặc xóa.</p>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="text-center mb-3">
+                        @if (!string.IsNullOrEmpty(Model.Logo))
+                        {
+                            <img src="@Url.Content(Model.Logo)" alt="Logo @Model.TenThuongHieu" class="img-fluid rounded shadow-sm" style="max-height: 150px; object-fit: contain;" />
+                        }
+                        else
+                        {
+                            <div class="border rounded p-4 bg-light text-center" style="height: 150px; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                                <i class="fas fa-image fa-2x text-muted mb-2"></i>
+                                <p class="mb-0 text-muted small">Không có logo</p>
+                            </div>
+                        }
+                    </div>
+                    <p><strong>ID:</strong> @Model.IdThuongHieu</p>
+                    <p><strong>Tên Alias:</strong> @(string.IsNullOrEmpty(Model.TenAlias) ? "N/A" : Model.TenAlias)</p>
+                    <p><strong>Trạng thái:</strong> 
+                        <span class="badge @(Model.TrangThai == "Hoạt động" ? "bg-success" : "bg-danger")">
+                            @Model.TrangThai
+                        </span>
+                    </p>
+                </div>
+                <div class="col-md-8">
+                    <h5>@Model.TenThuongHieu</h5>
+                    <p><strong>Mô tả:</strong></p>
+                    <p>@(string.IsNullOrEmpty(Model.MoTa) ? "Chưa có mô tả." : Model.MoTa)</p>
+
+                    @if (ViewBag.ProductCount > 0)
+                    {
+                        <div class="alert alert-danger mt-3" role="alert">
+                            <h5 class="alert-heading"><i class="fas fa-ban me-1"></i> Không thể xóa!</h5>
+                            <p>Thương hiệu này hiện đang được liên kết với <strong>@ViewBag.ProductCount sản phẩm</strong>. Vui lòng gỡ bỏ hoặc thay đổi thương hiệu của các sản phẩm này trước khi xóa.</p>
+                            <a asp-area="Admin" asp-controller="Product" asp-action="Index" asp-route-brandId="@Model.IdThuongHieu" class="btn btn-sm btn-outline-danger">
+                                Xem các sản phẩm liên quan <i class="fas fa-arrow-right ms-1"></i>
+                            </a>
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <div class="mt-4 text-end">
+                @if (ViewBag.ProductCount == 0)
+                {
+                    <form asp-area="Admin" asp-controller="Brand" asp-action="DeleteConfirmed" asp-route-id="@Model.IdThuongHieu" method="post">
+                        @Html.AntiForgeryToken()
+                        <button type="submit" class="btn btn-danger">
+                            <i class="fas fa-trash-alt me-1"></i> Xác nhận xóa
+                        </button>
+                        <a asp-area="Admin" asp-controller="Brand" asp-action="Index" class="btn btn-secondary ms-2">
+                            <i class="fas fa-times me-1"></i> Hủy
+                        </a>
+                    </form>
+                }
+                else
+                {
+                    <a asp-area="Admin" asp-controller="Brand" asp-action="Index" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left me-1"></i> Quay lại danh sách
+                    </a>
+                }
+            </div>
+        </div>
+    </div>
+</div>

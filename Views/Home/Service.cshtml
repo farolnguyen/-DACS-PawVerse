@@ -1,0 +1,80 @@
+@{
+    ViewData["Title"] = "Dịch vụ";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/service.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+}
+
+<div class="service-page-container">
+    <div class="service-title-container">
+        <h2 class="service-title">DỊCH VỤ</h2>
+        <div class="service-title-icon">
+            <i class="fas fa-heart"></i>
+        </div>
+        <p class="service-subtitle">Chúng tôi cung cấp các dịch vụ chăm sóc thú cưng chất lượng cao</p>
+    </div>
+
+    <div class="service-cards-container">
+        <!-- Hotel Service -->
+        <a href="@Url.Action("HotelService", "Home")" class="service-card-link">
+            <div class="service-card">
+                <div class="service-card-inner">
+                    <div class="service-card-logo">
+                        <img src="/images/headerandfooter/logo.png" alt="PawVerse Logo">
+                    </div>
+                    <h3 class="service-card-title">HOTEL SERVICE</h3>
+                    <div class="service-card-icon">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <p class="service-card-description">Dịch vụ lưu trú cao cấp cho thú cưng của bạn</p>
+                </div>
+            </div>
+        </a>
+
+        <!-- Spa - Grooming -->
+        <a href="@Url.Action("SpaService", "Home")" class="service-card-link">
+            <div class="service-card">
+                <div class="service-card-inner">
+                    <div class="service-card-logo">
+                        <img src="/images/headerandfooter/logo.png" alt="PawVerse Logo">
+                    </div>
+                    <h3 class="service-card-title">SPA - GROOMING</h3>
+                    <div class="service-card-icon">
+                        <i class="fas fa-pump-soap"></i>
+                    </div>
+                    <p class="service-card-description">Dịch vụ làm đẹp và chăm sóc toàn diện</p>
+                </div>
+            </div>
+        </a>
+
+        <!-- Other Service -->
+        <a href="@Url.Action("OtherService", "Home")" class="service-card-link">
+            <div class="service-card">
+                <div class="service-card-inner">
+                    <div class="service-card-logo">
+                        <img src="/images/headerandfooter/logo.png" alt="PawVerse Logo">
+                    </div>
+                    <h3 class="service-card-title">OTHER SERVICE</h3>
+                    <div class="service-card-icon">
+                        <i class="fas fa-paw"></i>
+                    </div>
+                    <p class="service-card-description">Các dịch vụ đặc biệt khác dành cho thú cưng</p>
+                </div>
+            </div>
+        </a>
+    </div>
+    
+    <div class="service-info-container">
+        <div class="service-info-header">
+            <h3>Thông tin dịch vụ</h3>
+            <p>Chúng tôi đang phát triển các dịch vụ chăm sóc thú cưng chất lượng cao. Vui lòng liên hệ với chúng tôi để biết thêm chi tiết.</p>
+        </div>
+        <div class="service-contact">
+            <a href="#" class="btn btn-contact"><i class="fas fa-phone-alt me-2"></i>Liên hệ ngay</a>
+        </div>
+    </div>
+</div>

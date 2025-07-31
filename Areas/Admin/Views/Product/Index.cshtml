@@ -1,0 +1,135 @@
+@model IEnumerable<PawVerse.Models.SanPham>
+
+@{
+    ViewData["Title"] = "Quản lý Sản phẩm";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1>Quản lý Sản phẩm</h1>
+    <a asp-action="Create" class="btn btn-primary">
+        <i class="fas fa-plus"></i> Thêm sản phẩm mới
+    </a>
+</div>
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Danh sách sản phẩm</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Hình ảnh</th>
+                        <th>Tên sản phẩm</th>
+                        <th>Danh mục</th>
+                        <th>Giá bán</th>
+                        <th>Tồn kho</th>
+                        <th>Đã bán</th>
+                        <th>Trạng thái</th>
+                        <th>Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                <img src="@item.HinhAnh" alt="@item.TenSanPham" style="width: 60px; height: 60px; object-fit: cover;" />
+                            </td>
+                            <td>@item.TenSanPham</td>
+                            <td>@(item.IdDanhMucNavigationIdDanhMucNavigation?.TenDanhMuc ?? "N/A")</td>
+                            <td>@item.GiaBan.ToString("#,##0") đ</td>
+                            <td>@item.SoLuongTonKho</td>
+                            <td>@item.SoLuongDaBan</td>
+                            <td>
+                                @if (item.TrangThai == "Còn hàng")
+                                {
+                                    <span class="badge bg-success">@item.TrangThai</span>
+                                }
+                                else if (item.TrangThai == "Hết hàng")
+                                {
+                                    <span class="badge bg-danger">@item.TrangThai</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-warning">@item.TrangThai</span>
+                                }
+                            </td>
+                            <td>
+                                <div class="btn-group" role="group">
+                                    <a asp-action="Edit" asp-route-id="@item.IdSanPham" class="btn btn-sm btn-primary" title="Sửa">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <a asp-action="Details" asp-route-id="@item.IdSanPham" class="btn btn-sm btn-info" title="Xem chi tiết">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
+                                    <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal-@item.IdSanPham" title="Xóa">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                                
+                                <!-- Delete Modal -->
+                                <div class="modal fade" id="deleteModal-@item.IdSanPham" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="deleteModalLabel">Xác nhận xóa</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                Bạn có chắc chắn muốn xóa sản phẩm <strong>@item.TenSanPham</strong>?
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                                                <form asp-action="Delete" method="post">
+                                                    <input type="hidden" name="id" value="@item.IdSanPham" />
+                                                    <button type="submit" class="btn btn-danger">Xóa</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            try {
+                // Initialize DataTable with Vietnamese language and responsive extension
+                var table = $('#dataTable').DataTable({
+                    responsive: true,
+                    language: {
+                        url: '//cdn.datatables.net/plug-ins/1.11.5/i18n/vi.json'
+                    },
+                    order: [[1, 'asc']],
+                    columnDefs: [
+                        { orderable: false, targets: [0, 7] }, // Disable sorting on image and action columns
+                        { responsivePriority: 1, targets: 0 },  // Make image column more important for responsive
+                        { responsivePriority: 2, targets: 1 },  // Make product name more important for responsive
+                        { responsivePriority: 3, targets: 7 }   // Make action buttons more important for responsive
+                    ]
+                });
+
+                // Add custom search box for DataTable
+                $('.dataTables_filter input')
+                    .attr('placeholder', 'Tìm kiếm...')
+                    .addClass('form-control form-control-sm');
+
+                // Style the length menu
+                $('.dataTables_length select').addClass('form-control form-control-sm');
+
+                console.log('DataTable initialized successfully');
+            } catch (error) {
+                console.error('Error initializing DataTable:', error);
+            }
+        });
+    </script>
+}

@@ -1,0 +1,118 @@
+@{
+    ViewData["Title"] = "Spa Service";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/service.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .service-detail-container {
+            max-width: 1200px;
+            margin: 120px auto 50px;
+            padding: 0 15px;
+            margin-top: 200px;
+        }
+        
+        .service-detail-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .service-detail-header h2 {
+            font-family: 'Bangers', cursive;
+            font-size: 3rem;
+            color: #ff6b35;
+            margin-bottom: 15px;
+        }
+        
+        .service-detail-image {
+            width: auto;
+            max-width: 100%;
+            text-align: center;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .service-detail-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 15px;
+        }
+        
+        .service-detail-content {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+        }
+        
+        .service-detail-content h3 {
+            color: #333;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        
+        .service-detail-content p {
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+        
+        .service-register-button {
+            display: block;
+            width: 100%;
+            max-width: 300px;
+            margin: 30px auto;
+            padding: 15px 25px;
+            background-color: #ff6b35;
+            color: white;
+            text-align: center;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none !important;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(255, 107, 53, 0.3);
+        }
+        
+        .service-register-button:hover {
+            background-color: #e85a2a;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(255, 107, 53, 0.4);
+            color: white;
+        }
+        
+        .service-back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #666;
+            text-decoration: none;
+        }
+        
+        .service-back-link:hover {
+            color: #ff6b35;
+        }
+    </style>
+}
+
+<div class="service-detail-container">
+    <div class="service-detail-header">
+        <h2>SPA - GROOMING</h2>
+        <p>Dịch vụ làm đẹp và chăm sóc toàn diện</p>
+    </div>
+    
+    <div class="service-detail-image">
+        <img src="/images/service/spa-service.jpg" alt="Spa Service">
+    </div>
+    
+    
+    <a href="#" class="service-register-button">Đăng ký dịch vụ ngay</a>
+    
+    <a href="@Url.Action("Service", "Home")" class="service-back-link">
+        <i class="fas fa-arrow-left me-2"></i>Quay lại trang dịch vụ
+    </a>
+</div>

@@ -1,0 +1,287 @@
+@model PawVerse.Models.SanPham
+
+@{
+    ViewData["Title"] = "Chỉnh sửa sản phẩm";
+    var hasImage = !string.IsNullOrEmpty(Model?.HinhAnh);
+    var hasPromotion = Model.GiaKhuyenMai.HasValue && Model.GiaKhuyenMai > 0 && Model.GiaKhuyenMai < Model.GiaBan;
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1>Chỉnh sửa sản phẩm</h1>
+    <a asp-action="Index" class="btn btn-secondary">
+        <i class="fas fa-arrow-left"></i> Quay lại danh sách
+    </a>
+</div>
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Thông tin sản phẩm</h6>
+    </div>
+    <div class="card-body">
+        <form asp-action="Edit" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="IdSanPham" />
+            <input type="hidden" asp-for="SoLuongDaBan" />
+            <input type="hidden" asp-for="SoLanXem" />
+            <input type="hidden" asp-for="NgayTao" />
+            <input type="hidden" asp-for="HinhAnh" id="currentImage" />
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group mb-3">
+                        <label asp-for="TenSanPham" class="control-label">Tên sản phẩm <span class="text-danger">*</span></label>
+                        <input asp-for="TenSanPham" class="form-control" placeholder="Nhập tên sản phẩm" onchange="generateAlias()" />
+                        <span asp-validation-for="TenSanPham" class="text-danger"></span>
+                    </div>
+                    
+                    <div class="form-group mb-3">
+                        <label asp-for="MoTa" class="control-label">Mô tả</label>
+                        <textarea asp-for="MoTa" class="form-control" rows="3"></textarea>
+                        <span asp-validation-for="MoTa" class="text-danger"></span>
+                    </div>
+                    
+                    <div class="form-group mb-3">
+                        <label asp-for="TenAlias" class="control-label">Tên định danh (URL)</label>
+                        <div class="input-group">
+                            <input asp-for="TenAlias" class="form-control" id="aliasInput" />
+                            <button type="button" class="btn btn-outline-secondary" onclick="generateAlias()">
+                                <i class="fas fa-sync-alt"></i>
+                            </button>
+                        </div>
+                        <span asp-validation-for="TenAlias" class="text-danger"></span>
+                    </div>
+                    
+                    <div class="form-group mb-3">
+                        <label asp-for="IdDanhMuc" class="control-label">Danh mục <span class="text-danger">*</span></label>
+                        <select asp-for="IdDanhMuc" class="form-control" asp-items="ViewBag.DanhMucList">
+                            <option value="">-- Chọn danh mục --</option>
+                        </select>
+                        <span asp-validation-for="IdDanhMuc" class="text-danger"></span>
+                    </div>
+                    
+                    <div class="form-group mb-3">
+                        <label asp-for="IdThuongHieu" class="control-label">Thương hiệu <span class="text-danger">*</span></label>
+                        <select asp-for="IdThuongHieu" class="form-control" asp-items="ViewBag.ThuongHieuList">
+                            <option value="">-- Chọn thương hiệu --</option>
+                        </select>
+                        <span asp-validation-for="IdThuongHieu" class="text-danger"></span>
+                    </div>
+                    
+                    <div class="form-group mb-3">
+                        <label asp-for="TrongLuong" class="control-label">Trọng lượng (g)</label>
+                        <input asp-for="TrongLuong" class="form-control" type="number" min="0" />
+                        <span asp-validation-for="TrongLuong" class="text-danger"></span>
+                    </div>
+                    
+                    <div class="form-group mb-3">
+                        <label asp-for="MauSac" class="control-label">Màu sắc</label>
+                        <input asp-for="MauSac" class="form-control" placeholder="Ví dụ: Đen, Trắng, Xám" />
+                        <span asp-validation-for="MauSac" class="text-danger"></span>
+                    </div>
+                    
+                    <div class="form-group mb-3">
+                        <label asp-for="XuatXu" class="control-label">Xuất xứ</label>
+                        <input asp-for="XuatXu" class="form-control" placeholder="Ví dụ: Việt Nam, Trung Quốc, Thái Lan" />
+                        <span asp-validation-for="XuatXu" class="text-danger"></span>
+                    </div>
+                    
+                    <div class="form-group mb-3">
+                        <label asp-for="TrangThai" class="control-label">Trạng thái</label>
+                        <select asp-for="TrangThai" class="form-control">
+                            <option value="Còn hàng">Còn hàng</option>
+                            <option value="Hết hàng">Hết hàng</option>
+                        </select>
+                        <span asp-validation-for="TrangThai" class="text-danger"></span>
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="form-group mb-3">
+                        <label asp-for="HinhAnh" class="control-label">Hình ảnh sản phẩm</label>
+                        <div class="mb-2">
+                            @if (hasImage)
+                            {
+                                <img id="imagePreview" src="@Model.HinhAnh" alt="Hình ảnh sản phẩm" class="img-thumbnail mb-2" style="max-height: 200px;" />
+                            }
+                            else
+                            {
+                                <img id="imagePreview" src="#" alt="Hình ảnh xem trước" class="img-thumbnail mb-2 d-none" style="max-height: 200px;" />
+                            }
+                        </div>
+                        <div class="input-group">
+                            <input type="file" class="form-control" id="fileUpload" name="fileUpload" accept="image/*" onchange="previewImage(this);" />
+                        </div>
+                        <small class="form-text text-muted">Chọn hình ảnh mới để thay đổi ảnh hiện tại</small>
+                        <span asp-validation-for="HinhAnh" class="text-danger"></span>
+                        
+                        @if (hasImage)
+                        {
+                            <div class="form-check mt-2">
+                                <input class="form-check-input" type="checkbox" id="removeImage" name="removeImage" value="true" />
+                                <label class="form-check-label" for="removeImage">
+                                    Xóa ảnh hiện tại
+                                </label>
+                                <input type="hidden" name="removeImage" value="false" />
+                            </div>
+                        }
+                    </div>
+                    
+                    <div class="form-group mb-3">
+                        <label asp-for="GiaBan" class="control-label">Giá bán (VNĐ) <span class="text-danger">*</span></label>
+                        <input asp-for="GiaBan" class="form-control" type="number" min="0" step="1000" />
+                        <span asp-validation-for="GiaBan" class="text-danger"></span>
+                    </div>
+                    
+                    <div class="form-group mb-3">
+                        <label asp-for="GiaVon" class="control-label">Giá vốn (VNĐ)</label>
+                        <input asp-for="GiaVon" class="form-control" type="number" min="0" step="1000" />
+                        <span asp-validation-for="GiaVon" class="text-danger"></span>
+                    </div>
+                    
+                    <div class="form-group mb-3">
+                        <label asp-for="GiaKhuyenMai" class="control-label">Giá khuyến mãi (VNĐ)</label>
+                        <input asp-for="GiaKhuyenMai" class="form-control" type="number" min="0" step="1000" />
+                        <span asp-validation-for="GiaKhuyenMai" class="text-danger"></span>
+                    </div>
+                    
+                    <div class="form-group mb-3">
+                        <label asp-for="SoLuongTonKho" class="control-label">Số lượng tồn kho <span class="text-danger">*</span></label>
+                        <input asp-for="SoLuongTonKho" class="form-control" type="number" min="0" />
+                        <span asp-validation-for="SoLuongTonKho" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group mb-3">
+                        <label asp-for="NgaySanXuat" class="control-label">Ngày sản xuất</label>
+                        <input asp-for="NgaySanXuat" class="form-control" type="date" />
+                        <span asp-validation-for="NgaySanXuat" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group mb-3">
+                        <label asp-for="HanSuDung" class="control-label">Hạn sử dụng</label>
+                        <input asp-for="HanSuDung" class="form-control" type="date" />
+                        <span asp-validation-for="HanSuDung" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-group mb-3">
+                <label asp-for="MoTa" class="control-label">Mô tả sản phẩm</label>
+                <textarea asp-for="MoTa" class="form-control" rows="4"></textarea>
+                <span asp-validation-for="MoTa" class="text-danger"></span>
+            </div>
+            
+            
+            <div class="form-group text-end">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-save me-1"></i> Lưu thay đổi
+                </button>
+                <a asp-action="Index" class="btn btn-secondary ms-2">
+                    <i class="fas fa-times me-1"></i> Hủy bỏ
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    
+    <script>
+        // Generate URL-friendly alias from product name
+        function generateAlias() {
+            const name = document.getElementById('TenSanPham').value;
+            const aliasInput = document.getElementById('aliasInput');
+            
+            if (name && (!aliasInput.value || aliasInput.value === '')) {
+                const alias = name.toLowerCase()
+                    .normalize('NFD').replace(/[\u0300-\u036f]/g, '') // Remove accents
+                    .replace(/[^a-z0-9\s-]/g, '') // Remove invalid chars
+                    .replace(/\s+/g, '-')           // Replace spaces with -
+                    .replace(/-+/g, '-')            // Replace multiple - with single -
+                    .replace(/^-+|-+$/g, '');       // Trim - from start/end
+                aliasInput.value = alias;
+            }
+        }
+        
+        // Preview image before upload
+        function previewImage(input) {
+            const preview = document.getElementById('imagePreview');
+            const file = input.files[0];
+            
+            if (file) {
+                const reader = new FileReader();
+                
+                reader.onload = function(e) {
+                    preview.src = e.target.result;
+                    preview.classList.remove('d-none');
+                    
+                    // Update file label
+                    const fileName = file.name;
+                    const label = input.nextElementSibling;
+                    if (label) {
+                        label.textContent = fileName;
+                    }
+                    
+                    // Clear the remove image checkbox when a new image is selected
+                    const removeCheckbox = document.getElementById('removeImage');
+                    if (removeCheckbox) {
+                        removeCheckbox.checked = false;
+                    }
+                };
+                
+                reader.readAsDataURL(file);
+            }
+        }
+        
+        // Handle remove image checkbox
+        document.addEventListener('DOMContentLoaded', function() {
+            const removeCheckbox = document.getElementById('removeImage');
+            if (removeCheckbox) {
+                removeCheckbox.addEventListener('change', function() {
+                    const fileUpload = document.getElementById('fileUpload');
+                    const imagePreview = document.getElementById('imagePreview');
+                    
+                    if (this.checked) {
+                        // Clear file input and hide preview
+                        if (fileUpload) fileUpload.value = '';
+                        if (imagePreview) imagePreview.classList.add('d-none');
+                    } else {
+                        // Restore current image
+                        const currentImage = document.getElementById('currentImage');
+                        if (currentImage && currentImage.value) {
+                            imagePreview.src = currentImage.value;
+                            imagePreview.classList.remove('d-none');
+                        }
+                    }
+                });
+            }
+            
+            // Initialize date inputs with proper format
+            const dateInputs = document.querySelectorAll('input[type="date"]');
+            dateInputs.forEach(input => {
+                if (input.value) {
+                    try {
+                        const date = new Date(input.value);
+                        if (!isNaN(date.getTime())) {
+                            const formattedDate = date.toISOString().split('T')[0];
+                            input.value = formattedDate;
+                        }
+                    } catch (e) {
+                        console.error('Error formatting date:', e);
+                    }
+                }
+            });
+            
+            // Auto-generate alias when leaving the product name field
+            const productNameInput = document.getElementById('TenSanPham');
+            if (productNameInput) {
+                productNameInput.addEventListener('blur', generateAlias);
+            }
+        });
+    </script>
+}

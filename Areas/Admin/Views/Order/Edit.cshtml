@@ -1,0 +1,69 @@
+@model PawVerse.Areas.Admin.ViewModels.UpdateOrderStatusViewModel
+@{
+    ViewData["Title"] = "Cập nhật trạng thái đơn hàng #" + Model.IdDonHang;
+}
+
+<div class="row">
+    <div class="col-md-8 mx-auto">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Cập nhật trạng thái đơn hàng #@Model.IdDonHang</h6>
+            </div>
+            <div class="card-body">
+                <form asp-action="Edit">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="IdDonHang" />
+                    
+                    <div class="mb-3">
+                        <label asp-for="TrangThai" class="form-label">Trạng thái đơn hàng</label>
+                        <select asp-for="TrangThai" class="form-select">
+                            <option value="pending">Chờ xác nhận</option>
+                            <option value="processing">Đang xử lý</option>
+                            <option value="shipping">Đang giao hàng</option>
+                            <option value="completed">Hoàn thành</option>
+                            <option value="cancelled">Đã hủy</option>
+                        </select>
+                        <span asp-validation-for="TrangThai" class="text-danger"></span>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label asp-for="GhiChu" class="form-label">Ghi chú (nếu có)</label>
+                        <textarea asp-for="GhiChu" class="form-control" rows="3"></textarea>
+                        <span asp-validation-for="GhiChu" class="text-danger"></span>
+                    </div>
+                    
+                    <div class="d-flex justify-content-between">
+                        <a asp-action="Details" asp-route-id="@Model.IdDonHang" class="btn btn-secondary">
+                            <i class="fas fa-arrow-left me-1"></i> Quay lại
+                        </a>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save me-1"></i> Lưu thay đổi
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        $(document).ready(function() {
+            // Initialize select2 if you're using it
+            // $('#TrangThai').select2({
+            //     theme: 'bootstrap-5',
+            //     width: '100%'
+            // });
+            
+            // Show/hide note field based on status
+            $('#TrangThai').on('change', function() {
+                if ($(this).val() === 'cancelled') {
+                    $('#GhiChu').closest('.mb-3').show();
+                } else {
+                    $('#GhiChu').closest('.mb-3').hide();
+                }
+            }).trigger('change');
+        });
+    </script>
+}

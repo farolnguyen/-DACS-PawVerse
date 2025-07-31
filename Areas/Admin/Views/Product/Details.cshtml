@@ -1,0 +1,297 @@
+@model PawVerse.Models.SanPham
+
+@{
+    ViewData["Title"] = "Chi tiết sản phẩm";
+    var hasImage = !string.IsNullOrEmpty(Model.HinhAnh);
+    var hasPromotion = Model.GiaKhuyenMai.HasValue && Model.GiaKhuyenMai > 0 && Model.GiaKhuyenMai < Model.GiaBan;
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1>Chi tiết sản phẩm</h1>
+    <div>
+        <a asp-action="Edit" asp-route-id="@Model.IdSanPham" class="btn btn-primary me-2">
+            <i class="fas fa-edit me-1"></i> Chỉnh sửa
+        </a>
+        <a asp-action="Index" class="btn btn-secondary">
+            <i class="fas fa-arrow-left me-1"></i> Quay lại danh sách
+        </a>
+    </div>
+</div>
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3 bg-primary text-white">
+        <h6 class="m-0 font-weight-bold">Thông tin cơ bản</h6>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-4">
+                @if (hasImage)
+                {
+                    <div class="text-center mb-3">
+                        <img src="@Model.HinhAnh" alt="@Model.TenSanPham" class="img-fluid rounded" style="max-height: 300px;" />
+                    </div>
+                }
+                else
+                {
+                    <div class="text-center p-5 bg-light rounded">
+                        <i class="fas fa-box-open fa-5x text-muted mb-3"></i>
+                        <p class="mb-0">Không có hình ảnh</p>
+                    </div>
+                }
+                
+                <div class="mt-4">
+                    <h5 class="mb-3">Thống kê</h5>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Tổng số lượng đã bán:</span>
+                        <span class="fw-bold">@Model.SoLuongDaBan</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Số lần xem:</span>
+                        <span class="fw-bold">@Model.SoLanXem</span>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <span>Ngày tạo:</span>
+                        <span class="fw-bold">@Model.NgayTao.ToString("dd/MM/yyyy HH:mm")</span>
+                    </div>
+                    @if (Model.NgayCapNhat != default)
+                    {
+                        <div class="d-flex justify-content-between">
+                            <span>Cập nhật lần cuối:</span>
+                            <span class="fw-bold">@Model.NgayCapNhat.ToString("dd/MM/yyyy HH:mm")</span>
+                        </div>
+                    }
+                </div>
+            </div>
+            
+            <div class="col-md-8">
+                <h2 class="mb-3">@Model.TenSanPham</h2>
+                
+                <div class="mb-4">
+                    @if (hasPromotion)
+                    {
+                        <div class="d-flex align-items-center">
+                            <h3 class="text-danger mb-0 me-3">@Model.GiaKhuyenMai?.ToString("#,##0") đ</h3>
+                            <h5 class="text-muted text-decoration-line-through mb-0">@Model.GiaBan.ToString("#,##0") đ</h5>
+                            <span class="badge bg-danger ms-2">Giảm @((int)((1 - Model.GiaKhuyenMai / Model.GiaBan) * 100))%</span>
+                        </div>
+                    }
+                    else
+                    {
+                        <h3 class="text-primary">@Model.GiaBan.ToString("#,##0") đ</h3>
+                    }
+                </div>
+                
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <h6><i class="fas fa-tag me-2 text-muted"></i> Danh mục</h6>
+                            <p class="ms-4">@(Model.IdDanhMucNavigation?.TenDanhMuc ?? "N/A")</p>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <h6><i class="fas fa-industry me-2 text-muted"></i> Thương hiệu</h6>
+                            <p class="ms-4">@(Model.IdThuongHieuNavigation?.TenThuongHieu ?? "N/A")</p>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <h6><i class="fas fa-palette me-2 text-muted"></i> Màu sắc</h6>
+                            <p class="ms-4">@(string.IsNullOrEmpty(Model.MauSac) ? "N/A" : Model.MauSac)</p>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <h6><i class="fas fa-box me-2 text-muted"></i> Tồn kho</h6>
+                            <div class="ms-4">
+                                <span class="fw-bold @(Model.SoLuongTonKho > 0 ? "text-success" : "text-danger")">
+                                    @Model.SoLuongTonKho @(Model.SoLuongTonKho > 0 ? "sản phẩm có sẵn" : "hết hàng")
+                                </span>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <h6><i class="fas fa-weight-hanging me-2 text-muted"></i> Trọng lượng</h6>
+                            <p class="ms-4">@(!string.IsNullOrEmpty(Model.TrongLuong) ? Model.TrongLuong : "N/A")</p>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <h6><i class="fas fa-flag me-2 text-muted"></i> Xuất xứ</h6>
+                            <p class="ms-4">@(string.IsNullOrEmpty(Model.XuatXu) ? "N/A" : Model.XuatXu)</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mb-4">
+                    <h5><i class="fas fa-info-circle me-2 text-primary"></i> Mô tả sản phẩm</h5>
+                    <div class="p-3 bg-light rounded">
+                        @if (!string.IsNullOrEmpty(Model.MoTa))
+                        {
+                            @Html.Raw(Model.MoTa.Replace("\n", "<br />"))
+                        }
+                        else
+                        {
+                            <p class="text-muted fst-italic">Chưa có mô tả cho sản phẩm này</p>
+                        }
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card border-left-primary h-100">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <h6 class="text-primary mb-0">Ngày sản xuất</h6>
+                                        <p class="mb-0">@(Model.NgaySanXuat != default ? Model.NgaySanXuat.ToString("dd/MM/yyyy") : "N/A")</p>
+                                    </div>
+                                    <i class="fas fa-calendar-alt fa-2x text-gray-300"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card border-left-success h-100">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <h6 class="text-success mb-0">Hạn sử dụng</h6>
+                                        <p class="mb-0">@(Model.HanSuDung != default ? Model.HanSuDung.ToString("dd/MM/yyyy") : "N/A")</p>
+                                    </div>
+                                    <i class="fas fa-hourglass-half fa-2x text-gray-300"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3 bg-primary text-white">
+        <h6 class="m-0 font-weight-bold">Thông tin bổ sung</h6>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-6">
+                <h5><i class="fas fa-tags me-2 text-primary"></i> Thông tin giá</h5>
+                <hr class="mt-1 mb-3" />
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <tr>
+                            <td class="w-50">Giá bán:</td>
+                            <td class="text-end fw-bold">@Model.GiaBan.ToString("#,##0") đ</td>
+                        </tr>
+                        @if (hasPromotion)
+                        {
+                            <tr class="table-warning">
+                                <td>Giá khuyến mãi:</td>
+                                <td class="text-end fw-bold text-danger">@Model.GiaKhuyenMai?.ToString("#,##0") đ</td>
+                            </tr>
+                        }
+                        <tr>
+                            <td>Giá vốn:</td>
+                            <td class="text-end">@(Model.GiaVon != 0 ? Model.GiaVon.ToString("#,##0") : "N/A") đ</td>
+                        </tr>
+                        @if (Model.GiaVon != 0)
+                        {
+                            var profit = hasPromotion ? Model.GiaKhuyenMai - Model.GiaVon : Model.GiaBan - Model.GiaVon;
+                            <tr>
+                                <td>Lợi nhuận ước tính:</td>
+                                <td class="text-end @(profit >= 0 ? "text-success" : "text-danger") fw-bold">
+                                    @profit?.ToString("#,##0") đ
+                                </td>
+                            </tr>
+                        }
+                    </table>
+                </div>
+            </div>
+            
+            <div class="col-md-6">
+                <h5><i class="fas fa-info-circle me-2 text-primary"></i> Trạng thái</h5>
+                <hr class="mt-1 mb-3" />
+                <div class="alert @(Model.TrangThai == "Còn hàng" ? "alert-success" : Model.TrangThai == "Hết hàng" ? "alert-danger" : "alert-warning") mb-4">
+                    <div class="d-flex align-items-center">
+                        <i class="fas @(Model.TrangThai == "Còn hàng" ? "fa-check-circle" : Model.TrangThai == "Hết hàng" ? "fa-times-circle" : "fa-exclamation-circle") me-2"></i>
+                        <div>
+                            <h6 class="alert-heading mb-1">Trạng thái: @Model.TrangThai</h6>
+                            @if (Model.TrangThai == "Còn hàng")
+                            {
+                                <p class="mb-0">Sản phẩm đang được bán trên website.</p>
+                            }
+                            else if (Model.TrangThai == "Hết hàng")
+                            {
+                                <p class="mb-0">Sản phẩm tạm thời hết hàng.</p>
+                            }
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="alert alert-info">
+                    <div class="d-flex align-items-center">
+                        <i class="fas fa-chart-line me-3"></i>
+                        <div>
+                            <h6 class="alert-heading mb-1">Hiệu suất bán hàng</h6>
+                            @if (Model.SoLuongDaBan > 0)
+                            {
+                                <p class="mb-0">Đã bán được @Model.SoLuongDaBan sản phẩm với tổng doanh thu ước tính @((Model.GiaBan * Model.SoLuongDaBan).ToString("#,##0")) đ</p>
+                            }
+                            else
+                            {
+                                <p class="mb-0">Sản phẩm chưa có đơn hàng nào.</p>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="d-flex justify-content-between">
+    <a asp-action="Edit" asp-route-id="@Model.IdSanPham" class="btn btn-primary">
+        <i class="fas fa-edit me-1"></i> Chỉnh sửa
+    </a>
+    <a asp-action="Index" class="btn btn-secondary">
+        <i class="fas fa-arrow-left me-1"></i> Quay lại danh sách
+    </a>
+</div>
+
+@section Styles {
+    <style>
+        .card {
+            border: none;
+            box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
+            margin-bottom: 1.5rem;
+        }
+        
+        .card-header {
+            border-bottom: 1px solid #e3e6f0;
+        }
+        
+        .bg-primary {
+            background-color: #4e73df !important;
+        }
+        
+        .border-left-primary {
+            border-left: 0.25rem solid #4e73df !important;
+        }
+        
+        .border-left-success {
+            border-left: 0.25rem solid #1cc88a !important;
+        }
+        
+        .text-gray-300 {
+            color: #dddfeb !important;
+        }
+        
+        .fw-bold {
+            font-weight: 600 !important;
+        }
+        
+        .fst-italic {
+            font-style: italic !important;
+        }
+    </style>
+}

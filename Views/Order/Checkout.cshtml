@@ -1,0 +1,144 @@
+@model PawVerse.Models.ViewModels.CheckoutViewModel
+
+@{
+    ViewData["Title"] = "Thanh toán";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/checkout.css" />
+}
+
+<div class="container py-5">
+    <h1 class="mb-4">Thanh toán đơn hàng</h1>
+    
+    <div class="row">
+        <!-- Thông tin thanh toán -->
+        <div class="col-lg-8" id="checkoutFormContainer">
+            @await Html.PartialAsync("_CheckoutFormPartial", Model)
+        </div>
+
+        <!-- Tóm tắt đơn hàng -->
+        <div class="col-lg-4">
+            <div class="card mb-4">
+                <div class="card-header bg-light">
+                    <h5 class="mb-0">Đơn hàng của bạn</h5>
+                </div>
+                <div class="card-body">
+                    <div class="list-group list-group-flush mb-3">
+                        @foreach (var item in Model.CartItems)
+                        {
+                            <div class="list-group-item d-flex justify-content-between align-items-center px-0">
+                                <div class="d-flex align-items-center">
+                                    <img src="@item.ImageUrl" alt="@item.ProductName" class="img-thumbnail me-2" style="width: 50px; height: 50px; object-fit: cover;">
+                                    <div>
+                                        <h6 class="mb-0">@item.ProductName</h6>
+                                        <small class="text-muted">Số lượng: @item.Quantity</small>
+                                    </div>
+                                </div>
+                                <span>@item.TotalPrice.ToString("#,##0")₫</span>
+                            </div>
+                        }
+                    </div>
+                    
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Tạm tính:</span>
+                        <span>@Model.SubTotal.ToString("#,##0")₫</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Phí vận chuyển:</span>
+                        <span>@Model.ShippingFee.ToString("#,##0")₫</span>
+                    </div>
+                    <hr>
+                    <div class="d-flex justify-content-between fw-bold fs-5">
+                        <span>Tổng cộng:</span>
+                        <span class="text-primary">@Model.Total.ToString("#,##0")₫</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    
+    <script>
+        $(document).ready(function() {
+            // Initialize location selection
+            initializeLocationSelection();
+            
+            // The AJAX form submission handler has been removed to allow standard form submission.
+            
+            // Reinitialize when Select2 dropdown is opened (in case of any issues)
+            $(document).on('select2:open', function(e) {
+                // Only reinitialize if the dropdown is not properly initialized
+                const $select = $(e.target);
+                if ($select.hasClass('location-select') && !$select.hasClass('select2-hidden-accessible')) {
+                    initializeLocationSelection();
+                }
+            });
+            
+            // Order status checking has been removed in favor of direct redirect
+            
+            // Clear any previous order session data
+            sessionStorage.removeItem('lastOrderId');
+            sessionStorage.removeItem('lastOrderRequestId');
+            sessionStorage.removeItem('lastOrderConfirmed');
+            sessionStorage.removeItem('lastOrderStatus');
+        });
+        
+        function initializeLocationSelection() {
+            // This function will be called by location.js after it's loaded
+            if (typeof window.initializeLocationSelects === 'function') {
+                // Enable all selects first
+                const $district = $('#district');
+                const $ward = $('#ward');
+                
+                // Only enable district if province is selected
+                const $province = $('#province');
+                const isProvinceSelected = $province.val() !== '';
+                $district.prop('disabled', !isProvinceSelected);
+                
+                // Only enable ward if district is selected
+                const isDistrictSelected = $district.val() !== '';
+                $ward.prop('disabled', !isDistrictSelected);
+                
+                window.initializeLocationSelects({
+                    provinceSelector: '#province',
+                    districtSelector: '#district',
+                    wardSelector: '#ward',
+                    apiBaseUrl: '/api/locations',
+                    onProvinceChange: function(provinceCode) {
+                        console.log('Province changed:', provinceCode);
+                        // Enable/disable district based on province selection
+                        const $district = $('#district');
+                        $district.prop('disabled', !provinceCode);
+                        
+                        // Reset and disable ward when province changes
+                        const $ward = $('#ward');
+                        $ward.val('').trigger('change').prop('disabled', true);
+                    },
+                    onDistrictChange: function(districtCode) {
+                        console.log('District changed:', districtCode);
+                        // Enable/disable ward based on district selection
+                        const $ward = $('#ward');
+                        $ward.prop('disabled', !districtCode);
+                    },
+                    onWardChange: function(wardCode) {
+                        console.log('Ward changed:', wardCode);
+                    }
+                });
+                
+                // Manually trigger change events to update the UI if values are already selected
+                if ($province.val()) {
+                    $province.trigger('change');
+                }
+                if ($district.val()) {
+                    $district.trigger('change');
+                }
+            } else {
+                console.warn('initializeLocationSelects function not found. Make sure location.js is loaded.');
+            }
+        }
+    </script>
+}

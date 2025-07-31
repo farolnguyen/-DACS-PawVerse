@@ -1,0 +1,84 @@
+@page
+@model RegisterModel
+
+@{
+    ViewData["Title"] = "Đăng ký";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/account.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+}
+
+<div class="account-container">
+    <div class="account-card register-card">
+        <!-- Form Section (Left) -->
+        <div class="account-form-wrapper">
+            <h2>@ViewData["Title"]</h2>
+            <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-2" role="alert"></div>
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.FullName" class="form-control" autocomplete="name" aria-required="true" placeholder="Họ và tên" />
+                    <label asp-for="Input.FullName" class="form-label">Họ và tên</label>
+                    <span asp-validation-for="Input.FullName" class="text-danger"></span>
+                </div>
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.Email" class="form-control" autocomplete="email" aria-required="true" placeholder="name@example.com" />
+                    <label asp-for="Input.Email" class="form-label">Email</label>
+                    <span asp-validation-for="Input.Email" class="text-danger"></span>
+                </div>
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
+                    <label asp-for="Input.Password" class="form-label">Mật khẩu</label>
+                    <span asp-validation-for="Input.Password" class="text-danger"></span>
+                </div>
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
+                    <label asp-for="Input.ConfirmPassword" class="form-label">Xác nhận mật khẩu</label>
+                    <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                </div>
+                <div class="d-grid gap-2 mb-3">
+                    <button id="register-submit" type="submit" class="btn btn-primary">Đăng ký</button>
+                </div>
+                <p class="text-center mt-3">
+                    Đã có tài khoản? <a asp-page="./Login" asp-route-returnUrl="@Model.ReturnUrl">Đăng nhập</a>
+                </p>
+            </form>
+            
+            @if ((Model.ExternalLogins?.Count ?? 0) > 0)
+            {
+                <div class="divider-text">hoặc</div>
+                <section>
+                    <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
+                        <div class="social-login-buttons">
+                            @foreach (var provider in Model.ExternalLogins)
+                            {
+                                string btnClass = provider.Name.ToLower() == "github" ? "btn-github" : "btn-google";
+                                string logoPath = provider.Name.ToLower() == "github" ? "/images/icons/github-logo.svg" : "/images/icons/google-logo.svg";
+
+                                <button type="submit" class="btn btn-social @btnClass" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">
+                                    <img src="@Url.Content(logoPath)" alt="@provider.DisplayName logo" />
+                                    <span>Đăng ký với @provider.DisplayName</span>
+                                </button>
+                            }
+                        </div>
+                    </form>
+                </section>
+            }
+        </div>
+        <!-- Banner Section (Right) -->
+        <div class="account-banner register-banner">
+            <div class="account-banner-content">
+                <img src="~/images/headerandfooter/logo.png" alt="PawVerse Logo">
+                <h1>Meow Welcome!</h1>
+                <p>Join our feline friends and discover the purr-fect pet experience.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

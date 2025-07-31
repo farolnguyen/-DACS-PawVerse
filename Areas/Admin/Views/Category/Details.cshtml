@@ -1,0 +1,199 @@
+@model PawVerse.Models.DanhMuc
+
+@{
+    ViewData["Title"] = "Chi tiết danh mục: " + Model.TenDanhMuc;
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayoutV2.cshtml";
+}
+
+<nav aria-label="breadcrumb" class="mb-4">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/admin">Trang chủ</a></li>
+        <li class="breadcrumb-item"><a asp-action="Index">Quản lý danh mục</a></li>
+        <li class="breadcrumb-item active" aria-current="page">@Model.TenDanhMuc</li>
+    </ol>
+</nav>
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3 d-flex justify-content-between align-items-center">
+        <h6 class="m-0 font-weight-bold text-primary">Thông tin chi tiết danh mục</h6>
+        <div>
+            <a asp-action="Edit" asp-route-id="@Model.IdDanhMuc" class="btn btn-primary btn-sm">
+                <i class="fas fa-edit me-1"></i> Chỉnh sửa
+            </a>
+            <a asp-action="Index" class="btn btn-secondary btn-sm">
+                <i class="fas fa-arrow-left me-1"></i> Quay lại
+            </a>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="text-center mb-4">
+                    @if (!string.IsNullOrEmpty(Model.HinhAnh))
+                    {
+                        <img src="@Model.HinhAnh" alt="@Model.TenDanhMuc" class="img-fluid rounded shadow" style="max-height: 250px;" />
+                    }
+                    else
+                    {
+                        <div class="border rounded p-5 bg-light text-center" style="height: 250px; display: flex; align-items: center; justify-content: center;">
+                            <div>
+                                <i class="fas fa-image fa-4x text-muted mb-3"></i>
+                                <p class="mb-0 text-muted">Không có hình ảnh</p>
+                            </div>
+                        </div>
+                    }
+                </div>
+                
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h6 class="m-0 font-weight-bold">Trạng thái</h6>
+                    </div>
+                    <div class="card-body">
+                        @if (Model.TrangThai == "Hoạt động")
+                        {
+                            <span class="badge bg-success">@Model.TrangThai</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-secondary">@Model.TrangThai</span>
+                        }
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h6 class="m-0 font-weight-bold">Thông tin bổ sung</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-2">
+                            <strong>ID:</strong> @Model.IdDanhMuc
+                        </div>
+                        <div class="mb-2">
+                            <strong>Ngày tạo:</strong> @DateTime.Now.ToString("dd/MM/yyyy")
+                        </div>
+                        <div>
+                            <strong>Ngày cập nhật:</strong> @DateTime.Now.ToString("dd/MM/yyyy")
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-8">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h6 class="m-0 font-weight-bold">Thông tin chung</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <h4 class="text-primary">@Model.TenDanhMuc</h4>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <h6 class="font-weight-bold">Mô tả:</h6>
+                            @if (!string.IsNullOrEmpty(Model.MoTa))
+                            {
+                                <p class="mb-0">@Model.MoTa</p>
+                            }
+                            else
+                            {
+                                <p class="text-muted mb-0">Chưa có mô tả</p>
+                            }
+                        </div>
+                        
+                        <div class="mb-3">
+                            <h6 class="font-weight-bold">Đường dẫn:</h6>
+                            <code>/danh-muc/@Model.IdDanhMuc</code>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h6 class="m-0 font-weight-bold">Sản phẩm trong danh mục</h6>
+                        <span class="badge bg-primary">@ViewBag.ProductCount sản phẩm</span>
+                    </div>
+                    <div class="card-body">
+                        @if (ViewBag.Products != null && ViewBag.Products.Count > 0)
+                        {
+                            <div class="table-responsive">
+                                <table class="table table-sm table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Hình ảnh</th>
+                                            <th>Tên sản phẩm</th>
+                                            <th>Giá bán</th>
+                                            <th>Trạng thái</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var product in ViewBag.Products)
+                                        {
+                                            <tr>
+                                                <td>
+                                                    <img src="@product.HinhAnh" alt="@product.TenSanPham" style="width: 40px; height: 40px; object-fit: cover;" />
+                                                </td>
+                                                <td>@product.TenSanPham</td>
+                                                <td>@product.GiaBan.ToString("#,##0") đ</td>
+                                                <td>
+                                                    @if (product.TrangThai == "Còn hàng")
+                                                    {
+                                                        <span class="badge bg-success">@product.TrangThai</span>
+                                                    }
+                                                    else if (product.TrangThai == "Hết hàng")
+                                                    {
+                                                        <span class="badge bg-danger">@product.TrangThai</span>
+                                                    }
+                                                    else
+                                                    {
+                                                        <span class="badge bg-warning">@product.TrangThai</span>
+                                                    }
+                                                </td>
+                                                <td class="text-end">
+                                                    <a href="/admin/product/details/@product.IdSanPham" class="btn btn-sm btn-info" title="Xem chi tiết">
+                                                        <i class="fas fa-eye"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                            <div class="text-end mt-3">
+                                <a href="/admin/product?categoryId=@Model.IdDanhMuc" class="btn btn-sm btn-outline-primary">
+                                    Xem tất cả sản phẩm <i class="fas fa-arrow-right ms-1"></i>
+                                </a>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="text-center py-4">
+                                <i class="fas fa-box-open fa-3x text-muted mb-3"></i>
+                                <p class="mb-0">Không có sản phẩm nào trong danh mục này</p>
+                                <a href="/admin/product/create?categoryId=@Model.IdDanhMuc" class="btn btn-primary btn-sm mt-3">
+                                    <i class="fas fa-plus me-1"></i> Thêm sản phẩm mới
+                                </a>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            // Initialize DataTable for products
+            $('.table').DataTable({
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.10.25/i18n/Vietnamese.json"
+                },
+                "order": [[1, "asc"]],
+                "pageLength": 5
+            });
+        });
+    </script>
+}

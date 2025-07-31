@@ -1,0 +1,50 @@
+@page
+@model LockoutModel
+@{
+    ViewData["Title"] = "Tài khoản bị khóa";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="/css/lockout.css" />
+
+<div class="lockout-container">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="lockout-card card">
+                    <div class="lockout-header">
+                        <div class="lockout-icon">
+                            <i class="fas fa-lock"></i>
+                        </div>
+                    </div>
+                    <div class="lockout-body">
+                        <h1 class="lockout-title text-center text-danger mb-4">Tài khoản bị khóa</h1>
+                        <div class="lockout-message alert alert-danger">
+                            <p class="mb-0">Tài khoản của bạn đã bị khóa do vi phạm chính sách của chúng tôi hoặc có hoạt động đáng ngờ.</p>
+                        </div>
+                        <p class="lockout-help-text text-center mb-4">
+                            Nếu bạn cho rằng đây là một sự nhầm lẫn, vui lòng liên hệ với đội ngũ hỗ trợ của chúng tôi để được giải quyết.
+                        </p>
+                        <div class="lockout-actions">
+                            <a href="https://mail.google.com/" class="btn btn-support">
+                                <i class="fas fa-envelope me-2"></i>Liên hệ hỗ trợ
+                            </a>
+                            <a href="/" class="btn btn-home">
+                                <i class="fas fa-home me-2"></i>Về trang chủ
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // Thêm hiệu ứng animation cho icon khóa
+        $(document).ready(function() {
+            $(".fa-lock").addClass("animate__animated animate__bounce");
+        });
+    </script>
+}

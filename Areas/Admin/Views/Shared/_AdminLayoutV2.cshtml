@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>@ViewData["Title"] - PawVerse Admin</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" 
+          integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" 
+          integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" 
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.bootstrap5.min.css">
+    
+    <!-- Custom styles for admin template -->
+    <link rel="stylesheet" href="/css/admin-v2.css" asp-append-version="true" />
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+    
+    @await RenderSectionAsync("Styles", required: false)
+</head>
+<body class="paw-admin">
+    <div class="paw-admin-wrapper">
+        <!-- Sidebar -->
+        <div class="paw-admin-sidebar">
+            <div class="paw-admin-sidebar-header">
+                <a href="/" class="paw-admin-brand">
+                    <i class="fas fa-paw"></i>
+                    <span class="paw-admin-brand-text">PawVerse</span>
+                    <span class="paw-admin-brand-badge">Admin</span>
+                </a>
+                <button class="paw-admin-sidebar-toggle">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="paw-admin-sidebar-menu">
+                <ul class="paw-admin-nav">
+                    <li class="paw-admin-nav-item active">
+                        <a href="/Admin" class="paw-admin-nav-link">
+                            <i class="fas fa-fw fa-tachometer-alt"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="paw-admin-nav-item">
+                        <a href="/Admin/Product" class="paw-admin-nav-link">
+                            <i class="fas fa-fw fa-box"></i>
+                            <span>Sản phẩm</span>
+                        </a>
+                    </li>
+                    <li class="paw-admin-nav-item">
+                        <a href="/Admin/Order" class="paw-admin-nav-link">
+                            <i class="fas fa-fw fa-shopping-cart"></i>
+                            <span>Đơn hàng</span>
+                        </a>
+                    </li>
+                    <li class="paw-admin-nav-item">
+                        <a href="/Admin/Category" class="paw-admin-nav-link">
+                            <i class="fas fa-fw fa-tags"></i>
+                            <span>Danh mục</span>
+                        </a>
+                    </li>
+                    <li class="paw-admin-nav-item">
+                        <a href="/Admin/Brand" class="paw-admin-nav-link">
+                            <i class="fas fa-fw fa-copyright"></i>
+                            <span>Thương hiệu</span>
+                        </a>
+                    </li>
+                    <li class="paw-admin-nav-item">
+                        <a href="/Admin/Account" class="paw-admin-nav-link">
+                            <i class="fas fa-fw fa-users"></i>
+                            <span>Người dùng</span>
+                        </a>
+                    </li>                   
+                </ul>
+            </div>
+            
+            <div class="paw-admin-sidebar-footer">
+                <div class="paw-admin-user">
+                    <div class="paw-admin-user-avatar">
+                        @{
+                            var sidebarAvatarPath = User.FindFirst("Avatar")?.Value;
+                            if (!string.IsNullOrEmpty(sidebarAvatarPath))
+                            {
+                                // Handle both paths with and without ~
+                                var resolvedSidebarPath = sidebarAvatarPath.StartsWith("~/") ? Url.Content(sidebarAvatarPath) : sidebarAvatarPath;
+                                <img src="@resolvedSidebarPath" alt="@User.Identity?.Name">
+                            }
+                            else
+                            {
+                                <img src="@Url.Content("~/uploads/avatars/default-avatar.png")" alt="@User.Identity?.Name">
+                            }
+                        }
+                    </div>
+                    <div class="paw-admin-user-info">
+                        <div class="paw-admin-user-name">@User.Identity?.Name</div>
+                        <div class="paw-admin-user-role">
+                            @(User.IsInRole("Admin") ? "Quản trị viên" : "Người dùng")
+                        </div>
+                    </div>
+                </div>
+                <a href="/" class="paw-admin-logout">
+                    <i class="fas fa-sign-out-alt"></i>
+                </a>
+            </div>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="paw-admin-content">
+            <!-- Topbar -->
+            <header class="paw-admin-topbar">
+                <div class="paw-admin-topbar-left">
+                    <button class="paw-admin-sidebar-toggle-mobile">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <div class="paw-admin-breadcrumb">
+                        @if (ViewData["Breadcrumb"] != null)
+                        {
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="/Admin"><i class="fas fa-home"></i></a></li>
+                                    @foreach (var item in (List<string>)ViewData["Breadcrumb"])
+                                    {
+                                        <li class="breadcrumb-item active" aria-current="page">@item</li>
+                                    }
+                                </ol>
+                            </nav>
+                        }
+                    </div>
+                </div>
+                
+                <div class="paw-admin-topbar-right">  
+                    <div class="paw-admin-user-dropdown">
+                        <button class="paw-admin-user-btn">
+                            @{
+                                var avatarPath = User.FindFirst("Avatar")?.Value;
+                                if (!string.IsNullOrEmpty(avatarPath))
+                                {
+                                    // Handle both paths with and without ~
+                                    var resolvedPath = avatarPath.StartsWith("~/") ? Url.Content(avatarPath) : avatarPath;
+                                    <img src="@resolvedPath" alt="@User.Identity?.Name" class="paw-admin-user-avatar">
+                                }
+                                else
+                                {
+                                    <img src="@Url.Content("~/uploads/avatars/default-avatar.png")" alt="@User.Identity?.Name" class="paw-admin-user-avatar">
+                                }
+                            }
+                            <span class="paw-admin-user-name">@User.Identity?.Name</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="paw-admin-user-menu">
+                            <a href="/Profile" class="paw-admin-user-menu-item">
+                                <i class="fas fa-user"></i> Hồ sơ
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            
+            <!-- Main Content -->
+            <main class="paw-admin-main">
+                @RenderBody()
+            </main>
+            
+            <!-- Footer -->
+            <footer class="paw-admin-footer">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="paw-admin-copyright">
+                                &copy; @DateTime.Now.Year <a href="/">PawVerse</a>. All rights reserved.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" 
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" 
+            crossorigin="anonymous"></script>
+    
+    <!-- Bootstrap 5 JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" 
+            integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" 
+            crossorigin="anonymous"></script>
+    
+    <!-- DataTables JS -->
+    <script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.9/js/responsive.bootstrap5.min.js"></script>
+    
+    <!-- SweetAlert2 for better alerts -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+    <!-- Custom scripts for admin template -->
+    <script src="/js/admin-v2.js" asp-append-version="true"></script>
+    
+    <!-- Password utilities -->
+    <script src="~/js/admin/password-utils.js"></script>
+    
+    @await RenderSectionAsync("Scripts", required: false)
+    
+    <!-- Initialize tooltips -->
+    <script>
+        // Initialize tooltips
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl);
+        });
+        
+        // Display toast messages from TempData
+        $(document).ready(function() {
+            var successMessage = '@(TempData["SuccessMessage"] ?? "")';
+            var errorMessage = '@(TempData["ErrorMessage"] ?? "")';
+            
+            if (successMessage) {
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer);
+                        toast.addEventListener('mouseleave', Swal.resumeTimer);
+                    }
+                });
+                
+                Toast.fire({
+                    icon: 'success',
+                    title: successMessage
+                });
+            }
+            
+            if (errorMessage) {
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 5000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer);
+                        toast.addEventListener('mouseleave', Swal.resumeTimer);
+                    }
+                });
+                
+                Toast.fire({
+                    icon: 'error',
+                    title: errorMessage
+                });
+            }
+        });
+    </script>
+</body>
+</html>

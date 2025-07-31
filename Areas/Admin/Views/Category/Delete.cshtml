@@ -1,0 +1,193 @@
+@model PawVerse.Models.DanhMuc
+
+@{
+    ViewData["Title"] = "Xóa danh mục: " + Model.TenDanhMuc;
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayoutV2.cshtml";
+}
+
+<nav aria-label="breadcrumb" class="mb-4">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/admin">Trang chủ</a></li>
+        <li class="breadcrumb-item"><a asp-action="Index">Quản lý danh mục</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Xóa: @Model.TenDanhMuc</li>
+    </ol>
+</nav>
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3 bg-danger text-white">
+        <h6 class="m-0 font-weight-bold">Xác nhận xóa danh mục</h6>
+    </div>
+    <div class="card-body">
+        <div class="alert alert-warning" role="alert">
+            <h5 class="alert-heading"><i class="fas fa-exclamation-triangle me-2"></i>Cảnh báo quan trọng!</h5>
+            <p class="mb-0">Bạn đang chuẩn bị xóa danh mục này. Hành động này không thể hoàn tác và có thể ảnh hưởng đến các sản phẩm liên quan.</p>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-4">
+                <div class="text-center mb-4">
+                    @if (!string.IsNullOrEmpty(Model.HinhAnh))
+                    {
+                        <img src="@Model.HinhAnh" alt="@Model.TenDanhMuc" class="img-fluid rounded shadow" style="max-height: 200px;" />
+                    }
+                    else
+                    {
+                        <div class="border rounded p-4 bg-light text-center" style="height: 150px; display: flex; align-items: center; justify-content: center;">
+                            <div>
+                                <i class="fas fa-image fa-3x text-muted mb-2"></i>
+                                <p class="mb-0 text-muted">Không có hình ảnh</p>
+                            </div>
+                        </div>
+                    }
+                </div>
+                
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h6 class="m-0 font-weight-bold">Thông tin chung</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-2">
+                            <strong>ID:</strong> @Model.IdDanhMuc
+                        </div>
+                        <div class="mb-2">
+                            <strong>Trạng thái:</strong> 
+                            @if (Model.TrangThai == "Hoạt động")
+                            {
+                                <span class="badge bg-success">@Model.TrangThai</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-secondary">@Model.TrangThai</span>
+                            }
+                        </div>
+                        <div>
+                            <strong>Số sản phẩm:</strong> 
+                            <span class="badge bg-primary">@ViewBag.ProductCount</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-8">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h6 class="m-0 font-weight-bold">Chi tiết danh mục</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <h4 class="text-danger">@Model.TenDanhMuc</h4>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <h6 class="font-weight-bold">Mô tả:</h6>
+                            @if (!string.IsNullOrEmpty(Model.MoTa))
+                            {
+                                <p class="mb-0">@Model.MoTa</p>
+                            }
+                            else
+                            {
+                                <p class="text-muted mb-0">Chưa có mô tả</p>
+                            }
+                        </div>
+                        
+                        @if (ViewBag.ProductCount > 0)
+                        {
+                            <div class="alert alert-danger" role="alert">
+                                <h6><i class="fas fa-exclamation-circle me-2"></i>Lưu ý quan trọng!</h6>
+                                <p class="mb-0">
+                                    Không thể xóa danh mục này vì có <strong>@ViewBag.ProductCount sản phẩm</strong> đang thuộc danh mục này. 
+                                    Vui lòng di chuyển hoặc xóa các sản phẩm liên quan trước khi xóa danh mục.
+                                </p>
+                            </div>
+                            
+                            <div class="mt-4">
+                                <h6 class="font-weight-bold mb-3">Danh sách sản phẩm trong danh mục:</h6>
+                                <div class="table-responsive">
+                                    <table class="table table-sm table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Hình ảnh</th>
+                                                <th>Tên sản phẩm</th>
+                                                <th>Giá bán</th>
+                                                <th>Trạng thái</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var product in ViewBag.Products)
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        <img src="@product.HinhAnh" alt="@product.TenSanPham" style="width: 40px; height: 40px; object-fit: cover;" />
+                                                    </td>
+                                                    <td>@product.TenSanPham</td>
+                                                    <td>@product.GiaBan.ToString("#,##0") đ</td>
+                                                    <td>
+                                                        @if (product.TrangThai == "Còn hàng")
+                                                        {
+                                                            <span class="badge bg-success">@product.TrangThai</span>
+                                                        }
+                                                        else if (product.TrangThai == "Hết hàng")
+                                                        {
+                                                            <span class="badge bg-danger">@product.TrangThai</span>
+                                                        }
+                                                        else
+                                                        {
+                                                            <span class="badge bg-warning">@product.TrangThai</span>
+                                                        }
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="alert alert-warning" role="alert">
+                                <h6><i class="fas fa-exclamation-triangle me-2"></i>Bạn có chắc chắn muốn xóa?</h6>
+                                <p class="mb-0">Danh mục này sẽ bị xóa vĩnh viễn và không thể khôi phục lại.</p>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="form-group text-end">
+            @if (ViewBag.ProductCount == 0)
+            {
+                <form asp-action="Delete">
+                    <input type="hidden" asp-for="IdDanhMuc" />
+                    <button type="submit" class="btn btn-danger">
+                        <i class="fas fa-trash-alt me-1"></i> Xác nhận xóa
+                    </button>
+                    <a asp-action="Index" class="btn btn-secondary ms-2">
+                        <i class="fas fa-times me-1"></i> Hủy bỏ
+                    </a>
+                </form>
+            }
+            else
+            {
+                <a asp-action="Index" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left me-1"></i> Quay lại danh sách
+                </a>
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            // Initialize DataTable for products
+            $('.table').DataTable({
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.10.25/i18n/Vietnamese.json"
+                },
+                "order": [[1, "asc"]],
+                "pageLength": 5
+            });
+        });
+    </script>
+}

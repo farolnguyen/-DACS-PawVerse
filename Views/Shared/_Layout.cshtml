@@ -1,0 +1,316 @@
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - PawVerse</title>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/PawVerse.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/cart.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/social-login.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/style.css" />
+    <link rel="stylesheet" href="~/css/auth.css" />
+    <link rel="stylesheet" href="~/css/admin.css" />
+    <link rel="stylesheet" href="~/css/identity.css" />
+    <link rel="stylesheet" href="~/css/order.css" asp-append-version="true" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Select2 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" rel="stylesheet" />
+    
+    @RenderSection("Styles", required: false)
+</head>
+<body data-is-authenticated="@(User.Identity.IsAuthenticated.ToString().ToLower())">
+    
+    <header class="main-header">
+    <div class="header-inner">
+
+        <!-- Icon menu mobile -->
+        <div class="menu-toggle">
+        <i class="bi bi-list"></i>
+        <span>MENU</span>
+        </div>
+
+        <!-- Logo -->
+        <div class="logo">
+        <img src="/images/headerandfooter/Logobig.png" alt="PawVerse" />
+        </div>
+
+        <!-- Navbar -->
+        <nav class="nav-links">
+
+        <!-- Home -->
+        <a asp-controller="Home"
+        asp-action="Index"
+        class="@(ViewContext.RouteData.Values["controller"]?.ToString() == "Home" && ViewContext.RouteData.Values["action"]?.ToString() == "Index" ? "active" : "")">
+            Home
+        </a>
+        
+       
+        
+
+        <!-- Product: trang liệt kê tất cả -->
+        <a asp-controller="Product"
+        asp-action="Index"
+        class="@(ViewContext.RouteData.Values["controller"]?.ToString() == "Product" ? "active" : "")">
+            Product
+        </a>
+
+        <!-- Service -->
+        <a asp-controller="Home"
+        asp-action="Service"
+        class="@(ViewContext.RouteData.Values["controller"]?.ToString() == "Home" && ViewContext.RouteData.Values["action"]?.ToString() == "Service" ? "active" : "")">
+            Service
+        </a>
+
+        <!-- Blog  -->
+        <a asp-controller="Home"
+        asp-action="Blog"
+        class="@(ViewContext.RouteData.Values["controller"]?.ToString() == "Home" && ViewContext.RouteData.Values["action"]?.ToString() == "Blog" ? "active" : "")">
+            Blog
+        </a>
+        
+    </nav>
+
+
+        <!-- Search -->
+        <div class="search-box">
+            <form id="searchForm" asp-controller="Product" asp-action="Index" method="get">
+                <input type="text" name="searchTerm" id="searchInput" placeholder="Tìm kiếm sản phẩm..." />
+                <button type="submit"><i class="bi bi-search"></i></button>
+            </form>
+        </div>
+
+        <!-- Icons -->
+        <div class="header-icons">
+            <!-- Đơn hàng -->
+            <div class="me-3">
+                <a asp-controller="Order" asp-action="MyOrders" class="text-dark text-decoration-none">
+                    <i class="bi bi-box-seam fs-5"></i> Đơn hàng
+                </a>
+            </div>
+            
+            <!-- Giỏ hàng -->
+            <div class="cart me-3 position-relative">
+                <a href="/Cart" class="text-dark text-decoration-none cart-link">
+                    <i class="bi bi-cart fs-5"></i>
+                    @if (User.Identity?.IsAuthenticated == true)
+                    {
+                        // Ưu tiên lấy từ TempData trước, sau đó mới đến ViewData
+                        var cartCount = TempData["CartItemCount"] as int? ?? 
+                                      ViewData["CartItemCount"] as int? ?? 0;
+                                        
+                        // Lưu lại giá trị vào TempData cho các request tiếp theo
+                        TempData.Keep("CartItemCount");
+                        
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger cart-count" 
+                              style="font-size: 0.6rem; @(cartCount > 0 ? "" : "display: none;")">
+                            @cartCount
+                        </span>
+                    }
+                    else
+                    {
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger cart-count" 
+                              style="font-size: 0.6rem; display: none;">
+                            0
+                        </span>
+                    }
+                </a>
+            </div>           
+        </div>
+        @if (User.IsInRole("Admin"))
+         {
+        <a class="nav-item">
+        <a class="nav-link" href="/Admin/Product/Index">Admin</a>  <!-- Liên kết đến trang Admin -->
+        </a>
+        }
+        <partial name="_LoginPartial" />
+    </div>
+    </header>
+
+
+
+    
+    <main role="main" class="pb-3">
+        <partial name="_Notification" />
+        @RenderBody() 
+    </main>   
+
+    <footer class="footer-section">
+    <div class="container footer-grid">
+        
+        <!-- Cột 1: Logo + mô tả -->
+        <div class="footer-logo-col">
+        <img src="~/images/headerandfooter/logo.png" alt="PawVerse Logo" class="footer-logo" />
+        <p class="footer-desc">
+            PawVerse.vn là trang mua sắm trực tuyến các sản phẩm bán lẻ dành cho thú cưng của PawVerse Pet Shop. Công ty TNHH PawVerse.
+        </p>
+        <div class="footer-social">
+            <a href="#"><i class="bi bi-facebook"></i></a>
+            <a href="#"><i class="bi bi-instagram"></i></a>
+            <a href="#"><i class="bi bi-tiktok"></i></a>
+            <a href="#"><i class="bi bi-youtube"></i></a>
+        </div>
+        </div>
+
+        <!-- Cột 2: Company -->
+        <div class="footer-col">
+        <h5>Company</h5>
+        <ul>
+            <li><a href="#">About Us</a></li>
+            <li><a asp-controller="Home" asp-action="Blog">Blog</a></li>
+            <li><a href="#">Minigame</a></li>
+            <li><a href="#">Blog</a></li>
+        </ul>
+        </div>
+
+        <!-- Cột 3: Useful Links -->
+        <div class="footer-col">
+        <h5>Useful Links</h5>
+        <ul>
+            <li><a href="#">New products</a></li>
+            <li><a href="/Home/Index#bestseller-section">Best sellers</a></li>
+            <li><a href="#">Discount</a></li>
+            <li><a href="#">F.A.Q</a></li>
+        </ul>
+        </div>
+
+        <!-- Cột 4: Customer Service -->
+        <div class="footer-col">
+        <h5>Customer Service</h5>
+        <ul>
+            <li><a href="#">Contact Us</a></li>
+            <li><a href="#">Shipping</a></li>
+            <li><a href="#">Returns</a></li>
+            <li><a href="#">Order tracking</a></li>
+        </ul>
+        </div>
+
+        <!-- Cột 5: Store -->
+        <div class="footer-col">
+        <h5>Store</h5>
+        <p>
+            10/80c Song Hành Xa Lộ Hà Nội, Phường Tân Phú, Thủ Đức, Hồ Chí Minh
+        </p>
+        <p><strong>+84 329222698</strong></p>
+        <p><a href="mailto:pawverse@gmail.com">pawverse@gmail.com</a></p>
+        </div>
+
+    </div>
+
+    <!-- Dòng dưới cùng -->
+    <div class="footer-bottom">
+        <p>© Copyright PawVerse 2025. Design by Figma. Tung tung tung</p>
+        <div class="footer-payments">
+        <img src="~/images/headerandfooter/visa.png" alt="Visa" />
+        </div>
+    </div>
+    </footer>
+
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script>
+        // Biến cờ để kiểm soát việc gọi API
+        let isUpdatingCart = false;
+        
+        // Xử lý sự kiện Enter trên thanh tìm kiếm
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('searchInput');
+            if (searchInput) {
+                searchInput.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        document.getElementById('searchForm').submit();
+                    }
+                });
+            }
+        });
+
+        // Cập nhật số lượng sản phẩm trong giỏ hàng khi tải trang
+        $(document).ready(function() {
+            // Chỉ gọi cập nhật nếu đã đăng nhập
+            if ($('body').data('is-authenticated') === 'true') {
+                updateCartCount();
+            }
+        });
+
+        // Hàm cập nhật số lượng sản phẩm trong giỏ hàng
+        function updateCartCount() {
+            // Nếu đang trong quá trình cập nhật thì bỏ qua
+            if (isUpdatingCart) return;
+            
+            isUpdatingCart = true;
+            
+            $.ajax({
+                url: '/Cart/GetCartCount',
+                type: 'GET',
+                cache: false, // Không cache kết quả
+                success: function(data) {
+                    if (data && data.count !== undefined) {
+                        updateCartBadge(data.count);
+                    }
+                    isUpdatingCart = false;
+                },
+                error: function(xhr, status, error) {
+                    console.error('Lỗi khi cập nhật số lượng giỏ hàng:', error);
+                    isUpdatingCart = false;
+                    // Thử lại sau 2 giây nếu có lỗi
+                    setTimeout(updateCartCount, 2000);
+                }
+            });
+        }
+        
+        // Hàm cập nhật hiển thị badge
+        function updateCartBadge(count) {
+            const $cartBadge = $('.cart-count');
+            if (count > 0) {
+                $cartBadge.text(count).fadeIn(200);
+            } else {
+                $cartBadge.fadeOut(200, function() {
+                    $(this).text('0');
+                });
+            }
+        }
+        
+        // Tạo sự kiện toàn cục để các trang khác có thể gọi
+        window.updateCartCount = updateCartCount;
+        
+        // Thêm sự kiện click để cập nhật lại số lượng khi quay lại từ trang khác
+        $(document).on('click', '.cart-link', function(e) {
+            // Nếu đang trong trang giỏ hàng thì không cần cập nhật
+            if (window.location.pathname.toLowerCase() === '/cart') {
+                return true;
+            }
+            // Cập nhật số lượng sau 500ms
+            setTimeout(updateCartCount, 500);
+        });
+        
+        // Lắng nghe sự kiện khi có thay đổi trên trang
+        $(document).ajaxComplete(function() {
+            // Cập nhật lại số lượng sau mỗi lần có AJAX hoàn thành
+            if ($('body').data('is-authenticated') === 'true') {
+                updateCartCount();
+            }
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="~/js/productList.js" asp-append-version="true"></script>
+    <!-- Select2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <!-- Location JS -->
+    <script src="~/js/location.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+    
+    <!-- COZE Chatbot Integration -->
+    <partial name="_ChatbotPartial" />
+</body>
+</html>

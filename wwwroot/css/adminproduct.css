@@ -1,0 +1,62 @@
+/* adminproduct.css */
+.product-container {
+    background-color: #f8f9fa;
+    padding: 30px;
+    border-radius: 8px;
+}
+
+h2 {
+    font-size: 28px;
+    font-weight: bold;
+    color: #0056b3;
+}
+
+.product-form .form-group {
+    margin-bottom: 20px;
+}
+
+.product-form label {
+    font-weight: bold;
+}
+
+.product-form input,
+.product-form select,
+.product-form textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+}
+
+.product-form textarea {
+    height: 100px;
+}
+
+.product-form button {
+    padding: 15px;
+    font-size: 18px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+.product-form button:hover {
+    background-color: #218838;
+}
+
+.row {
+    margin-top: 15px;
+}
+
+/* Styling for the columns in the form */
+.col-md-4 {
+    margin-bottom: 20px;
+}
+
+/* Make the form responsive for smaller screens */
+@media (max-width: 768px) {
+    .col-md-4 {
+        width: 100%;
+    }
+}

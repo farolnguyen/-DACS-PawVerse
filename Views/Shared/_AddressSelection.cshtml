@@ -1,0 +1,55 @@
+@model PawVerse.Models.Location.AddressSelectionModel
+
+<div class="row g-3">
+    <!-- Tỉnh/Thành phố -->
+    <div class="col-md-4">
+        <label asp-for="SelectedProvinceCode" class="form-label">Tỉnh/Thành phố</label>
+        <select asp-for="SelectedProvinceCode" 
+                asp-items="Model.Provinces"
+                id="province"
+                class="form-select location-select" 
+                data-placeholder="Chọn tỉnh/thành phố"
+                data-selected-province="@Model?.SelectedProvinceCode">
+            <option value="">Chọn tỉnh/thành phố</option>
+        </select>
+        <span asp-validation-for="SelectedProvinceCode" class="text-danger"></span>
+    </div>
+
+    <!-- Quận/Huyện -->
+    <div class="col-md-4">
+        <label asp-for="SelectedDistrictCode" class="form-label">Quận/Huyện</label>
+        <select asp-for="SelectedDistrictCode" 
+                id="district"
+                class="form-select location-select" 
+                data-placeholder="Chọn quận/huyện"
+                asp-items="Model.Districts"
+                data-selected-district="@Model?.SelectedDistrictCode"
+                disabled="@(Model.Districts == null || !Model.Districts.Any())">
+            <option value="">@(Model.Districts == null || !Model.Districts.Any() ? (string.IsNullOrEmpty(Model?.SelectedProvinceCode) ? "Vui lòng chọn tỉnh/thành phố trước" : "Đang tải...") : "Chọn quận/huyện")</option>
+        </select>
+        <span asp-validation-for="SelectedDistrictCode" class="text-danger"></span>
+    </div>
+
+    <!-- Phường/Xã -->
+    <div class="col-md-4">
+        <label asp-for="SelectedWardCode" class="form-label">Phường/Xã</label>
+        <select asp-for="SelectedWardCode" 
+                id="ward"
+                class="form-select location-select" 
+                data-placeholder="Chọn phường/xã"
+                asp-items="Model.Wards"
+                data-selected-ward="@Model?.SelectedWardCode"
+                disabled="@(Model.Wards == null || !Model.Wards.Any())">
+            <option value="">@(Model.Wards == null || !Model.Wards.Any() ? (string.IsNullOrEmpty(Model?.SelectedDistrictCode) ? "Vui lòng chọn quận/huyện trước" : "Đang tải...") : "Chọn phường/xã")</option>
+        </select>
+        <span asp-validation-for="SelectedWardCode" class="text-danger"></span>
+    </div>
+</div>
+
+<div class="row mt-3">
+    <div class="col-md-12">
+        <label asp-for="StreetAddress" class="form-label">Địa chỉ cụ thể (Số nhà, tên đường)</label>
+        <input asp-for="StreetAddress" id="AddressInfo_StreetAddress" class="form-control" placeholder="Ví dụ: 123 Đường ABC" />
+        <span asp-validation-for="StreetAddress" class="text-danger"></span>
+    </div>
+</div>

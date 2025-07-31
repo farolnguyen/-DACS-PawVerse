@@ -1,0 +1,694 @@
+/* ==========================================
+   PawVerse Admin v2.0
+   Custom Admin Dashboard Styles
+   All classes are prefixed with 'paw-admin-'
+   to prevent conflicts with frontend styles
+========================================== */
+
+/* ===== Variables ===== */
+:root {
+    /* Colors */
+    --paw-primary: #fd7a00;
+    --paw-primary-light: #8E85FF;
+    --paw-primary-dark: #4A42D6;
+    --paw-secondary: #4ECDC4;
+    --paw-accent: #FF6B6B;
+    --paw-success: #28A745;
+    --paw-info: #17A2B8;
+    --paw-warning: #FFC107;
+    --paw-danger: #DC3545;
+    --paw-light: #F8F9FA;
+    --paw-dark: #343A40;
+    --paw-gray-100: #F8F9FA;
+    --paw-gray-200: #E9ECEF;
+    --paw-gray-300: #DEE2E6;
+    --paw-gray-400: #CED4DA;
+    --paw-gray-500: #ADB5BD;
+    --paw-gray-600: #6C757D;
+    --paw-gray-700: #495057;
+    --paw-gray-800: #343A40;
+    --paw-gray-900: #212529;
+    
+    /* Layout */
+    --paw-sidebar-width: 250px;
+    --paw-sidebar-collapsed-width: 80px;
+    --paw-topbar-height: 70px;
+    --paw-footer-height: 60px;
+    --paw-border-radius: 0.5rem;
+    --paw-box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
+    --paw-transition: all 0.3s ease-in-out;
+}
+
+/* ===== Base Styles ===== */
+.paw-admin {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background-color: #F5F7FB;
+    color: var(--paw-gray-800);
+    font-size: 0.9375rem;
+    line-height: 1.5;
+    overflow-x: hidden;
+}
+
+.paw-admin *,
+.paw-admin *::before,
+.paw-admin *::after {
+    box-sizing: border-box;
+}
+
+.paw-admin a {
+    text-decoration: none;
+    transition: var(--paw-transition);
+}
+
+.paw-admin a:hover {
+    color: var(--paw-primary-dark);
+    text-decoration: none;
+}
+
+.paw-admin img {
+    max-width: 100%;
+    height: auto;
+}
+
+.paw-admin .form-control:focus {
+    border-color: var(--paw-primary-light);
+    box-shadow: 0 0 0 0.2rem rgba(108, 99, 255, 0.25);
+}
+
+/* ===== Layout ===== */
+.paw-admin-wrapper {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Sidebar */
+.paw-admin-sidebar {
+    width: var(--paw-sidebar-width);
+    background: #FFFFFF;
+    box-shadow: var(--paw-box-shadow);
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    transition: var(--paw-transition);
+}
+
+.paw-admin-sidebar-header {
+    padding: 1.5rem 1.5rem 1rem;
+    border-bottom: 1px solid var(--paw-gray-200);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.paw-admin-brand {
+    display: flex;
+    align-items: center;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--paw-primary);
+}
+
+.paw-admin-brand i {
+    font-size: 1.75rem;
+    margin-right: 0.5rem;
+}
+
+.paw-admin-brand-badge {
+    font-size: 0.65rem;
+    font-weight: 600;
+    padding: 0.15rem 0.5rem;
+    border-radius: 50px;
+    background: var(--paw-primary);
+    color: #FFFFFF;
+    margin-left: 0.5rem;
+}
+
+.paw-admin-sidebar-toggle {
+    background: none;
+    border: none;
+    color: var(--paw-gray-600);
+    font-size: 1.25rem;
+    padding: 0.5rem;
+    cursor: pointer;
+    display: none;
+}
+
+.paw-admin-sidebar-menu {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1rem 0;
+}
+
+.paw-admin-nav {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.paw-admin-nav-item {
+    margin: 0.25rem 0.75rem;
+    border-radius: var(--paw-border-radius);
+    overflow: hidden;
+}
+
+.paw-admin-nav-item.active {
+    background: rgba(108, 99, 255, 0.1);
+}
+
+.paw-admin-nav-link {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    color: var(--paw-gray-700);
+    font-weight: 500;
+    transition: var(--paw-transition);
+}
+
+.paw-admin-nav-link:hover {
+    color: var(--paw-primary);
+    background: rgba(108, 99, 255, 0.05);
+}
+
+.paw-admin-nav-link i {
+    width: 1.5rem;
+    margin-right: 0.75rem;
+    font-size: 1.1rem;
+    text-align: center;
+}
+
+.paw-admin-nav-item.active .paw-admin-nav-link {
+    color: var(--paw-primary);
+    font-weight: 600;
+}
+
+.paw-admin-sidebar-footer {
+    padding: 1.25rem 1.5rem;
+    border-top: 1px solid var(--paw-gray-200);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.paw-admin-user {
+    display: flex;
+    align-items: center;
+}
+
+.paw-admin-user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 0.75rem;
+    background: var(--paw-gray-200);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.paw-admin-user-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.paw-admin-user-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.paw-admin-user-name {
+    font-weight: 600;
+    color: var(--paw-gray-900);
+    margin-bottom: 0.15rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.paw-admin-user-role {
+    font-size: 0.75rem;
+    color: var(--paw-gray-600);
+}
+
+.paw-admin-logout {
+    color: var(--paw-gray-600);
+    font-size: 1.1rem;
+    padding: 0.5rem;
+    margin-left: 0.5rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--paw-transition);
+}
+
+.paw-admin-logout:hover {
+    color: var(--paw-danger);
+    background: rgba(220, 53, 69, 0.1);
+}
+
+/* Main Content */
+.paw-admin-content {
+    flex: 1;
+    margin-left: var(--paw-sidebar-width);
+    transition: var(--paw-transition);
+}
+
+/* Topbar */
+.paw-admin-topbar {
+    height: var(--paw-topbar-height);
+    background: #FFFFFF;
+    box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
+    padding: 0 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 900;
+}
+
+.paw-admin-topbar-left {
+    display: flex;
+    align-items: center;
+}
+
+.paw-admin-sidebar-toggle-mobile {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 1.25rem;
+    color: var(--paw-gray-600);
+    margin-right: 1rem;
+    padding: 0.5rem;
+    cursor: pointer;
+}
+
+.paw-admin-breadcrumb {
+    display: flex;
+    align-items: center;
+}
+
+.paw-admin-breadcrumb .breadcrumb {
+    margin-bottom: 0;
+    background: transparent;
+    padding: 0;
+}
+
+.paw-admin-breadcrumb .breadcrumb-item a {
+    color: var(--paw-gray-600);
+}
+
+.paw-admin-breadcrumb .breadcrumb-item.active {
+    color: var(--paw-primary);
+}
+
+.paw-admin-topbar-right {
+    display: flex;
+    align-items: center;
+}
+
+.paw-admin-search {
+    position: relative;
+    margin-right: 1rem;
+}
+
+.paw-admin-search .form-control {
+    width: 250px;
+    padding-left: 2.5rem;
+    border-radius: 50px;
+    border: 1px solid var(--paw-gray-300);
+    height: 40px;
+    font-size: 0.875rem;
+}
+
+.paw-admin-search-btn {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: var(--paw-gray-500);
+    padding: 0;
+    cursor: pointer;
+}
+
+.paw-admin-notification {
+    position: relative;
+    margin-right: 1rem;
+}
+
+.paw-admin-notification-btn {
+    background: none;
+    border: none;
+    color: var(--paw-gray-600);
+    font-size: 1.25rem;
+    padding: 0.5rem;
+    cursor: pointer;
+    position: relative;
+}
+
+.paw-admin-notification-badge {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: var(--paw-danger);
+    color: #FFFFFF;
+    font-size: 0.6rem;
+    font-weight: 600;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #FFFFFF;
+}
+
+.paw-admin-user-dropdown {
+    position: relative;
+}
+
+.paw-admin-user-btn {
+    display: flex;
+    align-items: center;
+    background: none;
+    border: none;
+    padding: 0.25rem;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: var(--paw-transition);
+}
+
+.paw-admin-user-btn:hover {
+    background: var(--paw-gray-200);
+}
+
+.paw-admin-user-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 0.5rem;
+}
+
+.paw-admin-user-name {
+    font-weight: 500;
+    color: var(--paw-gray-800);
+    margin-right: 0.5rem;
+    max-width: 120px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.paw-admin-user-menu {
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    right: 0;
+    width: 220px;
+    background: #FFFFFF;
+    border-radius: var(--paw-border-radius);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+    padding: 0.5rem 0;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: var(--paw-transition);
+    z-index: 1000;
+}
+
+.paw-admin-user-dropdown:hover .paw-admin-user-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.paw-admin-user-menu-item {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 1.25rem;
+    color: var(--paw-gray-700);
+    font-size: 0.9rem;
+    transition: var(--paw-transition);
+}
+
+.paw-admin-user-menu-item i {
+    width: 1.5rem;
+    margin-right: 0.75rem;
+    font-size: 1rem;
+    text-align: center;
+    color: var(--paw-gray-600);
+}
+
+.paw-admin-user-menu-item:hover {
+    background: var(--paw-gray-100);
+    color: var(--paw-primary);
+    text-decoration: none;
+}
+
+.paw-admin-user-menu-item:hover i {
+    color: var(--paw-primary);
+}
+
+/* Main Content */
+.paw-admin-main {
+    min-height: calc(100vh - var(--paw-topbar-height) - var(--paw-footer-height));
+    padding: 1.5rem;
+}
+
+/* Footer */
+.paw-admin-footer {
+    height: var(--paw-footer-height);
+    background: #FFFFFF;
+    border-top: 1px solid var(--paw-gray-200);
+    display: flex;
+    align-items: center;
+    padding: 0 1.5rem;
+}
+
+.paw-admin-copyright {
+    color: var(--paw-gray-600);
+    font-size: 0.875rem;
+}
+
+/* Cards */
+.paw-admin-card {
+    background: #FFFFFF;
+    border-radius: var(--paw-border-radius);
+    box-shadow: var(--paw-box-shadow);
+    margin-bottom: 1.5rem;
+    transition: var(--paw-transition);
+}
+
+.paw-admin-card:hover {
+    box-shadow: 0 0.5rem 1.5rem 0.5rem rgba(58, 59, 69, 0.2);
+}
+
+.paw-admin-card-header {
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid var(--paw-gray-200);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.paw-admin-card-title {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--paw-gray-900);
+}
+
+.paw-admin-card-body {
+    padding: 1.5rem;
+}
+
+/* Buttons */
+.paw-admin-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    user-select: none;
+    border: 1px solid transparent;
+    padding: 0.5rem 1.25rem;
+    font-size: 0.9375rem;
+    line-height: 1.5;
+    border-radius: var(--paw-border-radius);
+    transition: var(--paw-transition);
+    cursor: pointer;
+}
+
+.paw-admin-btn i {
+    margin-right: 0.5rem;
+}
+
+.paw-admin-btn-primary {
+    background: var(--paw-primary);
+    color: #FFFFFF;
+}
+
+.paw-admin-btn-primary:hover {
+    background: var(--paw-primary-dark);
+    color: #FFFFFF;
+}
+
+.paw-admin-btn-outline-primary {
+    background: transparent;
+    border-color: var(--paw-primary);
+    color: var(--paw-primary);
+}
+
+.paw-admin-btn-outline-primary:hover {
+    background: var(--paw-primary);
+    color: #FFFFFF;
+}
+
+/* Tables */
+.paw-admin-table {
+    width: 100%;
+    margin-bottom: 1rem;
+    color: var(--paw-gray-700);
+    border-collapse: collapse;
+}
+
+.paw-admin-table th,
+.paw-admin-table td {
+    padding: 0.75rem 1rem;
+    vertical-align: middle;
+    border-top: 1px solid var(--paw-gray-200);
+}
+
+.paw-admin-table thead th {
+    background: var(--paw-gray-100);
+    color: var(--paw-gray-800);
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    border-bottom: 2px solid var(--paw-gray-200);
+}
+
+.paw-admin-table tbody tr:hover {
+    background: var(--paw-gray-50);
+}
+
+/* Badges */
+.paw-admin-badge {
+    display: inline-block;
+    padding: 0.35em 0.65em;
+    font-size: 0.75em;
+    font-weight: 600;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: 50rem;
+}
+
+.paw-admin-badge-primary {
+    background: rgba(108, 99, 255, 0.1);
+    color: var(--paw-primary);
+}
+
+.paw-admin-badge-success {
+    background: rgba(40, 167, 69, 0.1);
+    color: var(--paw-success);
+}
+
+.paw-admin-badge-warning {
+    background: rgba(255, 193, 7, 0.1);
+    color: var(--paw-warning);
+}
+
+.paw-admin-badge-danger {
+    background: rgba(220, 53, 69, 0.1);
+    color: var(--paw-danger);
+}
+
+/* Responsive */
+@media (max-width: 1199.98px) {
+    .paw-admin-sidebar {
+        transform: translateX(-100%);
+        z-index: 1050;
+    }
+    
+    .paw-admin-sidebar.show {
+        transform: translateX(0);
+    }
+    
+    .paw-admin-content {
+        margin-left: 0;
+    }
+    
+    .paw-admin-sidebar-toggle {
+        display: block;
+    }
+    
+    .paw-admin-sidebar-toggle-mobile {
+        display: block;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .paw-admin-search {
+        display: none;
+    }
+    
+    .paw-admin-user-name {
+        display: none;
+    }
+    
+    .paw-admin-main {
+        padding: 1rem;
+    }
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideInDown {
+    from {
+        transform: translateY(-10px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Utilities */
+.paw-admin-mb-0 { margin-bottom: 0 !important; }
+.paw-admin-mt-0 { margin-top: 0 !important; }
+.paw-admin-mr-0 { margin-right: 0 !important; }
+.paw-admin-ml-0 { margin-left: 0 !important; }
+.paw-admin-mb-1 { margin-bottom: 0.5rem !important; }
+.paw-admin-mt-1 { margin-top: 0.5rem !important; }
+.paw-admin-mr-1 { margin-right: 0.5rem !important; }
+.paw-admin-ml-1 { margin-left: 0.5rem !important; }
+.paw-admin-mb-2 { margin-bottom: 1rem !important; }
+.paw-admin-mt-2 { margin-top: 1rem !important; }
+.paw-admin-mr-2 { margin-right: 1rem !important; }
+.paw-admin-ml-2 { margin-left: 1rem !important; }
+.paw-admin-mb-3 { margin-bottom: 1.5rem !important; }
+.paw-admin-mt-3 { margin-top: 1.5rem !important; }
+.paw-admin-mr-3 { margin-right: 1.5rem !important; }
+.paw-admin-ml-3 { margin-left: 1.5rem !important; }
+.paw-admin-mb-4 { margin-bottom: 2rem !important; }
+.paw-admin-mt-4 { margin-top: 2rem !important; }
+.paw-admin-mr-4 { margin-right: 2rem !important; }
+.paw-admin-ml-4 { margin-left: 2rem !important; }

@@ -1,0 +1,484 @@
+@{
+    ViewData["Title"] = "PawVerse – Trang chủ";
+}
+
+<main id="home-page">
+
+    <!-- HERO SECTION – v3 -->
+    <section class="hero">
+    <div class="hero__inner">
+
+        <!-- LEFT -->
+        <div class="hero__text">
+        <span class="hero__badge">PawVerse</span>
+
+        <h1 class="hero__title">
+            A pet store <br>
+            with <span class="highlight">everything</span><br>
+            you need
+        </h1>
+
+        <p class="hero__desc">
+            Không chỉ yêu thương – PawVerse tôn vinh vẻ đẹp, sức khỏe và
+            hạnh phúc của thú cưng từng ngày.
+        </p>
+
+        <a href="#categories" class="btn-cta">Mua ngay</a>
+        </div>
+
+        <!-- RIGHT -->
+        <div class="hero__visual">
+        <img src="~/images/dogeatkem.png" class="hero__dog"  alt="Dog licking ice-cream">
+        <img src="~/images/birdfly.png"   class="hero__bird" alt="">
+        </div>
+
+    </div>
+    </section>
+    <!-- DANH MỤC SẢN PHẨM ======================================== -->
+    <div class="container categories">
+    <h2 class="cat-title text-center mb-4">Danh mục sản phẩm</h2>
+
+    <div class="row g-4">
+        <!-- CARD 1 -->
+        <div class="col-12 col-sm-6 col-lg-3">
+        <a asp-controller="Product" asp-action="Index" asp-route-categoryId="@ViewData["ToyCategoryId"]" class="cat-card">
+            <img src="~/images/catephukien.png"   alt="Đồ chơi"  class="cat-img">
+            <div class="cat-body">
+            <h5>Phụ kiện &amp; Đồ chơi</h5>
+            <span class="cat-count">@ViewData["ToyProductCount"] sản phẩm</span>
+            <i class="bi bi-arrow-right-short cat-arrow"></i>
+            </div>
+        </a>
+        </div>
+
+        <!-- CARD 2 -->
+        <div class="col-12 col-sm-6 col-lg-3">
+        <a asp-controller="Product" asp-action="Index" asp-route-categoryId="@ViewData["FoodCategoryId"]" class="cat-card">
+            <img src="~/images/catethucpham.png"  alt="Thức phẩm" class="cat-img">
+            <div class="cat-body">
+            <h5>Thực phẩm</h5>
+            <span class="cat-count">@ViewData["FoodProductCount"] sản phẩm</span>
+            <i class="bi bi-arrow-right-short cat-arrow"></i>
+            </div>
+        </a>
+        </div>
+
+        <!-- CARD 3 -->
+        <div class="col-12 col-sm-6 col-lg-3">
+        <a asp-controller="Product" asp-action="Index" asp-route-categoryId="@ViewData["InteriorCategoryId"]" class="cat-card">
+            <img src="~/images/catenoithat.png"  alt="Nội thất" class="cat-img">
+            <div class="cat-body">
+            <h5>Nội thất</h5>
+            <span class="cat-count">@ViewData["InteriorProductCount"] sản phẩm</span>
+            <i class="bi bi-arrow-right-short cat-arrow"></i>
+            </div>
+        </a>
+        </div>
+
+        <!-- CARD 4 -->
+        <div class="col-12 col-sm-6 col-lg-3">
+        <a asp-controller="Product" asp-action="Index" asp-route-categoryId="@ViewData["FashionCategoryId"]" class="cat-card">
+            <img src="~/images/catetrangphuc.png"  alt="Trang phục" class="cat-img">
+            <div class="cat-body">
+            <h5>Trang phục</h5>
+            <span class="cat-count">@ViewData["FashionProductCount"] sản phẩm</span>
+            <i class="bi bi-arrow-right-short cat-arrow"></i>
+            </div>
+        </a>
+        </div>
+    </div>
+    </div>
+    <!-- THƯƠNG HIỆU NỔI BẬT -------------------------------------->
+<div class="container featured mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="cat-title m-0">Thương hiệu nổi bật</h2>
+        
+    </div>
+
+    <div class="swiper featured-swiper">
+        <div class="swiper-wrapper">
+            @{
+                var featuredBrands = ViewData["FeaturedBrands"] as IEnumerable<ThuongHieu>;
+                if (featuredBrands != null && featuredBrands.Any())
+                {
+                    var imagePaths = new Dictionary<string, string>
+                    {
+                        { "Royal Canin", "/images/brands/royal-canin.png" },
+                        { "Ferplast", "/images/brands/ferplast.jpg" },
+                        { "Catit", "/images/brands/catit.jpg" }
+                    };
+
+                    foreach (var brand in featuredBrands)
+                    {
+                        if (imagePaths.TryGetValue(brand.TenThuongHieu, out var imagePath))
+                        {
+                            <div class="swiper-slide">
+                                <a asp-controller="Product" asp-action="Index" asp-route-brand="@brand.TenThuongHieu" class="text-decoration-none text-dark">
+                                    <div class="prod-card">
+                                        <figure class="prod-img d-flex align-items-center justify-content-center" style="height: 220px; background-color: #f8f9fa; border-radius: 0.5rem;">
+                                            <img src="@imagePath" alt="@brand.TenThuongHieu" style="max-height: 120px; max-width: 100%; object-fit: contain;">
+                                        </figure>
+                                        <div class="prod-meta">
+                                            <div class="meta-text text-center w-100">
+                                                <span class="prod-name d-block fs-5">@brand.TenThuongHieu</span>
+                                                <span class="prod-price text-muted">Xem sản phẩm</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        }
+                    }
+                }
+            }
+        </div><!-- /.swiper-wrapper -->
+    </div><!-- /.swiper -->
+</div>
+    <!-- SẢN PHẨM BÁN CHẠY NHẤT ================================= -->
+    @model IEnumerable<SanPham>
+    <div class="container bestseller my-5" id="bestseller-section">
+        <h2 class="cat-title text-center mb-4">Sản phẩm bán chạy nhất</h2>
+
+        @if (Model != null && Model.Any())
+        {
+            <div class="row g-4">
+                @foreach (var product in Model)
+                {
+                    <div class="col-6 col-lg-3">
+                        <div class="best-card">
+                            <a asp-controller="Product" asp-action="Info" asp-route-id="@product.IdSanPham" class="text-decoration-none">
+                                <figure class="best-img">
+                                    <img src="@(string.IsNullOrEmpty(product.HinhAnh) ? "/images/default-product.jpg" : product.HinhAnh)" 
+                                         alt="@product.TenSanPham" class="img-fluid">
+                                </figure>
+                                <div class="best-meta">
+                                    <span class="best-name">@product.TenSanPham</span>
+                                    <div class="price-wrapper">
+                                        @if (product.GiaKhuyenMai.HasValue && product.GiaKhuyenMai < product.GiaBan)
+                                        {
+                                            <span class="best-price discounted">@product.GiaKhuyenMai.Value.ToString("N0")₫</span>
+                                            <span class="best-price original">@product.GiaBan.ToString("N0")₫</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="best-price">@product.GiaBan.ToString("N0")₫</span>
+                                        }
+                                    </div>
+                                </div>
+                            </a>
+                            <button class="best-like" data-product-id="@product.IdSanPham">
+                                <i class="bi bi-heart"></i>
+                            </button>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+        else
+        {
+            <div class="text-center py-4">
+                <p>Hiện chưa có sản phẩm bán chạy nào.</p>
+            </div>
+        }
+    </div>
+    <!-- DỊCH VỤ ================================================= -->
+    <section class="services">
+    <!-- 3 linh vật décor -->
+    <img src="~/images/service/dog.png"  alt="" class="svc-dog">
+    <img src="~/images/service/cat.png"   alt="" class="svc-cat">
+    <img src="~/images/service/bird.png" alt="" class="svc-bird">
+
+    <div class="svc-box">
+        <div class="row justify-content-center g-4">
+
+        <!-- Ô 1 -->
+        <div class="col-12 col-md-6 col-lg-3 svc-item text-center">
+            <span class="svc-icon bg-blue1"><i class="bi bi-moon-fill"></i></span>
+            <h5 class="svc-title">Over Night Care</h5>
+            <p class="svc-desc">Qua đêm an tâm – gửi bé cưng cho PawVerse chăm sóc tận tình!</p>
+        </div>
+
+        <!-- Ô 2 -->
+        <div class="col-12 col-md-6 col-lg-3 svc-item text-center">
+            <span class="svc-icon bg-orange"><i class="bi bi-shuffle"></i></span>
+            <h5 class="svc-title">Pet Walking</h5>
+            <p class="svc-desc">Bận việc cứ để PawVerse – cùng bé cưng đi dạo vui vẻ hăng say!</p>
+        </div>
+
+        <!-- Ô 3 -->
+        <div class="col-12 col-md-6 col-lg-3 svc-item text-center">
+            <span class="svc-icon bg-yellow1"><i class="bi bi-stars"></i></span>
+            <h5 class="svc-title">Pet Grooming</h5>
+            <p class="svc-desc">Bạn quá bận rộn? Đã có PawVerse chăm bé cưng như ở nhà!</p>
+        </div>
+
+        <!-- Ô 4 -->
+        <div class="col-12 col-md-6 col-lg-3 svc-item text-center">
+            <span class="svc-icon bg-cyan"><i class="bi bi-shield-check"></i></span>
+            <h5 class="svc-title">Vaccination</h5>
+            <p class="svc-desc">Tiêm đúng – đủ – an toàn, để bé cưng luôn khỏe mạnh cùng PawVerse!</p>
+        </div>
+
+        </div><!-- /.row -->
+    </div><!-- /.svc-box -->
+    </section>
+    <!-- MỨC GIÁ ================================================= -->
+    <section class="pricing py-5">
+    <div class="container text-center">
+        <span class="section-label">Mức giá</span>
+        <h2 class="section-title mb-5">Gói đặc biệt cho thú cưng</h2>
+
+        <div class="row justify-content-center g-4">
+        <!-- GÓI FRIENDLY -->
+        <div class="col-md-4">
+            <div class="price-card">
+            <h4 class="price-title">Gói Friendly</h4>
+            <div class="price-value">
+                <span>$</span>100<small>/ Visit</small>
+                <div class="price-line"></div>
+            </div>
+            <ul class="price-feature">
+                <li>15 Days Services</li>
+                <li>Pet Showar</li>
+                <li>Intensive Checkup</li>
+                <li>Grooming</li>
+                <li>Hair & Nail Cut</li>
+            </ul>
+            <a href="#" class="btn-choose">Choose Plan</a>
+            </div>
+        </div>
+
+        <!-- GÓI EXCLUSIVE -->
+        <div class="col-md-4">
+            <div class="price-card highlight">
+            <h4 class="price-title">Gói Exclusive</h4>
+            <div class="price-value">
+                <span>$</span>185<small>/ Visit</small>
+                <div class="price-line"></div>
+            </div>
+            <ul class="price-feature">
+                <li>15 Days Services</li>
+                <li>Pet Showar</li>
+                <li>Intensive Checkup</li>
+                <li>Grooming</li>
+                <li>Hair & Nail Cut</li>
+                <li>Control Hair Falling</li>
+                <li>Fresh Snack</li>
+                <li>Pet Park & Games</li>
+            </ul>
+            <a href="#" class="btn-choose btn-white">Choose Plan</a>
+            </div>
+        </div>
+
+        <!-- GÓI FAMILY -->
+        <div class="col-md-4">
+            <div class="price-card">
+            <h4 class="price-title">Gói Family</h4>
+            <div class="price-value">
+                <span>$</span>225<small>/ Visit</small>
+                <div class="price-line"></div>
+            </div>
+            <ul class="price-feature">
+                <li>15 Days Services</li>
+                <li>Pet Showar</li>
+                <li>Intensive Checkup</li>
+                <li>Grooming</li>
+                <li>Hair & Nail Cut</li>
+            </ul>
+            <a href="#" class="btn-choose">Choose Plan</a>
+            </div>
+        </div>
+        </div>
+    </div>
+    </section>
+
+    <!-- VỀ CHÚNG TÔI -->
+    <section class="about-us my-5">
+
+    <!-- Ảnh nền phía trên -->
+    <div class="about-banner">
+        <img src="~/images/picaboutus.png" alt="About Banner" class="img-fluid w-100">
+    </div>
+
+    <!-- Các thông số nổi bật -->
+    <div class="about-stats container">
+        <div class="row text-center justify-content-center gx-4 gy-4">
+
+        <!-- Card 1 -->
+        <div class="col-6 col-md-3">
+            <div class="about-card bg-blue">
+            <div class="about-icon">
+                <div class="icon-circle">
+                <i class="bi bi-award-fill"></i>
+                </div>
+            </div>
+            <h3 class="about-number">105+</h3>
+            <p>Award Winning</p>
+            </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="col-6 col-md-3">
+            <div class="about-card bg-pink">
+            <div class="about-icon">
+                <div class="icon-circle">
+                <i class="bi bi-people-fill"></i>
+                </div>
+            </div>
+            <h3 class="about-number">50k</h3>
+            <p>Happy Client</p>
+            </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="col-6 col-md-3">
+            <div class="about-card bg-yellow">
+            <div class="about-icon">
+                <div class="icon-circle">
+                <i class="bi bi-person-workspace"></i>
+                </div>
+            </div>
+            <h3 class="about-number">35+</h3>
+            <p>Team Member</p>
+            </div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="col-6 col-md-3">
+            <div class="about-card bg-green">
+            <div class="about-icon">
+                <div class="icon-circle">
+                <i class="bi bi-shield-check"></i>
+                </div>
+            </div>
+            <h3 class="about-number">99%</h3>
+            <p>Protection</p>
+            </div>
+        </div>
+
+        </div>
+    </div>
+    </section>
+    <!-- ĐÁNH GIÁ -->
+    <section class="testimonial-section my-5">
+    <div class="testimonial-wrapper d-flex flex-wrap align-items-center justify-content-between">
+
+        <!-- Cột ảnh -->
+        <div class="testimonial-img">
+        <img src="~/images/aboutus/womanwithdog.png" alt="Khách hàng yêu thú cưng" />
+        </div>
+
+        <!-- Cột nội dung -->
+        <div class="testimonial-content">
+        <span class="testimonial-badge">ĐÁNH GIÁ</span>
+        <h2 class="testimonial-title">NHỮNG NGƯỜI YÊU THÚ CƯNG NÓI GÌ VỀ CHÚNG TÔI</h2>
+
+        <div class="testimonial-quote">
+            <i class="bi bi-chat-quote"></i>
+            <p>
+            Dịch vụ spa và nhuộm lông cho bé Đom Đóm nhà mình quá tuyệt,
+            bé được chăm sóc kỹ lưỡng mà tiệm thì đáng iu, thân thiện quá trời!
+            </p>
+        </div>
+
+        <div class="testimonial-author d-flex align-items-center gap-3 mt-3">
+            <img src="~/images/aboutus/AnhJ.png" alt="Jack 97" class="avatar" />
+            <div>
+            <h5 class="mb-0">Jack 97</h5>
+            <small>Singer</small>
+            </div>
+        </div>
+
+        <div class="testimonial-nav d-flex align-items-center justify-content-center justify-content-md-start gap-3 mt-4">
+            <button class="nav-btn"><i class="bi bi-arrow-left"></i></button>
+            <button class="nav-btn"><i class="bi bi-arrow-right"></i></button>
+        </div>
+
+        </div>
+    </div>
+    </section>
+    <!-- ĐĂNG KÝ NHẬN TIN TỨC -->
+    <section class="newsletter-section">
+    <div class="newsletter-content">
+        <!-- TEXT + FORM -->
+        <div class="newsletter-text">
+        <h2 class="newsletter-heading">Đăng ký để nhận tin tức</h2>
+        <form class="newsletter-form">
+            <input type="email" placeholder="Nhập địa chỉ email của bạn" required />
+            <button type="submit">Đăng ký ngay</button>
+        </form>
+        </div>
+
+        <!-- IMAGE -->
+        <div class="newsletter-dog">
+        <img src="~/images/bigdog.png" alt="Dog sitting">
+        </div>
+    </div>
+    </section>
+    
+    <!-- TIN TỨC MỚI NHẤT -->
+    <section class="news-section py-5">
+    <div class="container text-center">
+        <span class="badge-news">News & Blog</span>
+        <h2 class="section-title mt-2 mb-4">TIN TỨC MỚi NHẤT</h2>
+
+        <div class="row justify-content-center g-4">
+        <!-- News Card 1 -->
+        <div class="col-md-4">
+            <div class="news-card">
+            <div class="news-image">
+                <img src="/images/news/img-1.png" alt="News Image 1" />
+            </div>
+            <div class="news-meta">
+                <small>Bởi Admin • Ngày 13 tháng 05, năm 2025</small>
+            </div>
+            <h5 class="news-title"><a href="https://www.bbc.com/news/articles/c98g4q15ryvo" style="text-decoration: none; color: black;">People don’t realise cats can get diabetes</a></h5>
+            <p class="news-desc">
+                According to charities, diabetes can affect up to one in 100 cats...
+            </p>
+            </div>
+        </div>
+
+        <!-- News Card 2 -->
+        <div class="col-md-4">
+            <div class="news-card">
+            <div class="news-image">
+                <img src="/images/news/img-2.png" alt="News Image 2" />
+            </div>
+            <div class="news-meta">
+                <small>By Admin • May 14, 2025</small>
+            </div>
+            <h5 class="news-title"><a href="https://www.bbc.com/news/articles/c0719j13k87o" style="text-decoration: none; color: black;">Shelter appeals for help after kitten 'surge'</a></h5>
+            <p class="news-desc">
+                An animal shelter says it is experiencing an "overwhelming surge" in vulnerable cats and kittens being brought in...
+            </p>
+            </div>
+        </div>
+
+        <!-- News Card 3 -->
+        <div class="col-md-4">
+            <div class="news-card">
+            <div class="news-image">
+                <img src="/images/news/img-3.png" alt="News Image 3" />
+            </div>
+            <div class="news-meta">
+                <small>By Admin • Sep 03, 2025</small>
+            </div>
+            <h5 class="news-title"><a href="https://www.bbc.com/news/articles/c0719j13k87o" style="text-decoration: none; color: black;">Pet owners dress up their furry friends for Ho Chi Minh City festival</a></h5>
+            <p class="news-desc">
+                The second Pet Perfect Festival was held at Suoi Tien Theme Park...
+            </p>
+            </div>
+        </div>
+        </div>
+    </div>
+    </section>
+
+
+
+
+
+
+
+    
+</main>

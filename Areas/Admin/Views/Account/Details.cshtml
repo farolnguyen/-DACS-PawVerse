@@ -1,0 +1,249 @@
+@model PawVerse.Models.ApplicationUser
+@{
+    ViewData["Title"] = "Chi tiết người dùng: " + Model.FullName;
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayoutV2.cshtml";
+}
+
+<nav aria-label="breadcrumb" class="mb-4">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/admin">Trang chủ</a></li>
+        <li class="breadcrumb-item"><a asp-area="Admin" asp-controller="Account" asp-action="Index">Quản lý người dùng</a></li>
+        <li class="breadcrumb-item active" aria-current="page">@Model.FullName</li>
+    </ol>
+</nav>
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1>Thông tin chi tiết</h1>
+    <div>
+        <a asp-area="Admin" asp-controller="Account" asp-action="Index" class="btn btn-secondary me-2">
+            <i class="fas fa-arrow-left me-1"></i> Quay lại
+        </a>
+        <a asp-action="ManageRoles" asp-route-id="@Model.Id" class="btn btn-info me-2 text-white">
+            <i class="fas fa-user-tag me-1"></i> Phân quyền
+        </a>
+        @if (Model.LockoutEnd != null && Model.LockoutEnd > DateTimeOffset.Now)
+        {
+            <form asp-action="UnlockUser" method="post" class="d-inline">
+                <input type="hidden" name="userId" value="@Model.Id" />
+                <button type="submit" class="btn btn-success">
+                    <i class="fas fa-unlock me-1"></i> Mở khóa tài khoản
+                </button>
+            </form>
+        }
+        else
+        {
+            <form asp-action="LockUser" method="post" class="d-inline">
+                <input type="hidden" name="userId" value="@Model.Id" />
+                <button type="submit" class="btn btn-warning" onclick="return confirm('Bạn có chắc chắn muốn khóa tài khoản này?')">
+                    <i class="fas fa-lock me-1"></i> Khóa tài khoản
+                </button>
+            </form>
+        }
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="card mb-4">
+            <div class="card-body text-center">
+                @if (!string.IsNullOrEmpty(Model.Avatar))
+                {
+                    // Handle both paths with and without ~
+                    var avatarPath = Model.Avatar.StartsWith("~/") ? Url.Content(Model.Avatar) : Model.Avatar;
+                    <img src="@avatarPath" alt="@Model.FullName" class="rounded-circle mb-3" style="width: 150px; height: 150px; object-fit: cover;">
+                }
+                else
+                {
+                    <div class="bg-secondary rounded-circle d-flex align-items-center justify-content-center mx-auto mb-3" style="width: 150px; height: 150px;">
+                        <i class="fas fa-user text-white" style="font-size: 5rem;"></i>
+                    </div>
+                }
+                <h4>@Model.FullName</h4>
+                <p class="text-muted mb-0">@Model.Email</p>
+                
+                @if (Model.LockoutEnd != null && Model.LockoutEnd > DateTimeOffset.Now)
+                {
+                    <span class="badge bg-danger mt-2">Tài khoản bị khóa</span>
+                }
+                else if (Model.EmailConfirmed)
+                {
+                    <span class="badge bg-success mt-2">Đã xác thực email</span>
+                }
+                else
+                {
+                    <span class="badge bg-warning mt-2">Chưa xác thực email</span>
+                }
+                
+                <div class="mt-3">
+                    <a asp-action="ChangePassword" asp-route-id="@Model.Id" class="btn btn-primary">
+                        <i class="fas fa-key me-1"></i> Đặt lại mật khẩu
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5 class="mb-0">Thông tin tài khoản</h5>
+            </div>
+            <div class="card-body">
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <p class="mb-1"><strong>Họ và tên:</strong></p>
+                        <p>@Model.FullName</p>
+                    </div>
+                    <div class="col-md-6">
+                        <p class="mb-1"><strong>Tên đăng nhập:</strong></p>
+                        <p>@Model.UserName</p>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-12">
+                        <p class="mb-1"><strong>Phân quyền:</strong></p>
+                        <p>
+                            <span class="badge bg-primary">@ViewData["CurrentRole"]</span>
+                        </p>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <p class="mb-1"><strong>Email:</strong></p>
+                        <p>@Model.Email</p>
+                    </div>
+                    <div class="col-md-6">
+                        <p class="mb-1"><strong>Số điện thoại:</strong></p>
+                        <p>@(string.IsNullOrEmpty(Model.PhoneNumber) ? "Chưa cập nhật" : Model.PhoneNumber)</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <p class="mb-1"><strong>Địa chỉ:</strong></p>
+                        <p>@(string.IsNullOrEmpty(Model.DiaChi) ? "Chưa cập nhật" : Model.DiaChi)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        @if (ViewBag.UserRoles != null && ViewBag.UserRoles.Count > 0)
+        {
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5 class="mb-0">Vai trò</h5>
+                </div>
+                <div class="card-body">
+                    @foreach (var role in ViewBag.UserRoles)
+                    {
+                        <span class="badge bg-primary me-1 mb-1">@role</span>
+                    }
+                </div>
+            </div>
+        }
+    </div>
+    
+    <div class="col-md-8">
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5 class="mb-0">Thông tin chi tiết</h5>
+            </div>
+            <div class="card-body">
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <p class="mb-1"><strong>Ngày tạo tài khoản:</strong></p>
+                        <p>@Model.NgayTao.ToString("dd/MM/yyyy HH:mm")</p>
+                    </div>
+                    <div class="col-md-6">
+                        <p class="mb-1"><strong>Ngày cập nhật:</strong></p>
+                        <p>@Model.NgayCapNhat.ToString("dd/MM/yyyy HH:mm")</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <p class="mb-1"><strong>Địa chỉ email:</strong></p>
+                        <p>@Model.Email</p>
+                    </div>
+                </div>
+                @if (!string.IsNullOrEmpty(Model.PhoneNumber))
+                {
+                    <div class="row">
+                        <div class="col-12">
+                            <p class="mb-1"><strong>Số điện thoại:</strong></p>
+                            <p>@Model.PhoneNumber</p>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+        
+        @if (ViewBag.Orders != null && ViewBag.Orders.Count > 0)
+        {
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5 class="mb-0">Đơn hàng gần đây</h5>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Mã đơn</th>
+                                    <th>Ngày đặt</th>
+                                    <th>Tổng tiền</th>
+                                    <th>Trạng thái</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var order in ViewBag.Orders)
+                                {
+                                    <tr>
+                                        <td>#@order.IdDonHang</td>
+                                        <td>@order.NgayDatHang.ToString("dd/MM/yyyy HH:mm")</td>
+                                        <td>@order.TongTien.ToString("N0") đ</td>
+                                        <td>
+                                            @switch (order.TrangThai.Trim().ToLowerInvariant())
+                                            {
+                                                case "chờ xác nhận":
+                                                case "pending":
+                                                    <span class="badge bg-warning">Chờ xác nhận</span>
+                                                    break;
+                                                case "đã xác nhận":
+                                                case "confirmed":
+                                                    <span class="badge bg-info">Đã xác nhận</span>
+                                                    break;
+                                                case "đang xử lý":
+                                                case "processing":
+                                                    <span class="badge" style="background-color: #6f42c1; color: white;">Đang xử lý</span>
+                                                    break;
+                                                case "đang giao hàng":
+                                                case "shipped":
+                                                case "shipping":
+                                                    <span class="badge bg-primary">Đang giao hàng</span>
+                                                    break;
+                                                case "đã giao hàng":
+                                                case "delivered":
+                                                case "completed":
+                                                    <span class="badge bg-success">Đã giao hàng</span>
+                                                    break;
+                                                case "đã hủy":
+                                                case "cancelled":
+                                                    <span class="badge bg-danger">Đã hủy</span>
+                                                    break;
+                                                default:
+                                                    var displayStatus = System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(order.TrangThai.Trim().ToLowerInvariant());
+                                                    <span class="badge bg-secondary">@displayStatus</span>
+                                                    break;
+                                            }
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

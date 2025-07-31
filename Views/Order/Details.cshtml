@@ -1,0 +1,168 @@
+@model PawVerse.Models.ViewModels.OrderConfirmationViewModel
+
+@{
+    ViewData["Title"] = "Chi tiết đơn hàng #" + Model.IdDonHang;
+    Layout = "_Layout";
+}
+
+<div class="container py-5">
+    <div class="order-details-container">
+
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2>Đơn hàng #@Model.IdDonHang</h2>
+            @{
+                var vietnameseStatus = TranslateStatusToVietnamese(Model.TrangThaiDonHang);
+                <span class="badge @GetStatusBadgeClass(vietnameseStatus) fs-6">@vietnameseStatus</span>
+            }
+        </div>
+
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+        }
+        @if (TempData["ErrorMessage"] != null)
+        {
+            <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+        }
+
+        <div class="row">
+            <!-- Left Column: Product Details -->
+            <div class="col-lg-8">
+                <div class="detail-section">
+                    <h5>Sản phẩm trong đơn (@Model.ChiTietDonHangs.Count())</h5>
+                    @foreach (var item in Model.ChiTietDonHangs)
+                    {
+                        <div class="product-item-detail">
+                            <img src="@item.ImageUrl" alt="@item.TenSanPham" />
+                            <div class="product-info">
+                                <div class="product-name">@item.TenSanPham | </div>
+                                <div class="product-meta">@item.DonGia.ToString("N0") đ x @item.SoLuong</div>
+                            </div>
+                            <div class="fw-bold ms-auto">@item.ThanhTien.ToString("N0") đ</div>
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <!-- Right Column: Shipping and Summary -->
+            <div class="col-lg-4">
+                <div class="detail-section mb-4">
+                    <h5>Thông tin giao hàng</h5>
+                    <p class="mb-1"><strong>Địa chỉ:</strong> @Model.DiaChiGiaoHang</p>
+                    <p class="mb-0"><strong>SĐT:</strong> @Model.SoDienThoai</p>
+                </div>
+                <div class="detail-section order-summary">
+                    <h5>Tổng cộng</h5>
+                    <div class="summary-item">
+                        <span>Tạm tính:</span>
+                        <strong>@((Model.TongTienDonHang - Model.PhiVanChuyen).ToString("N0")) đ</strong>
+                    </div>
+                    <div class="summary-item">
+                        <span>Phí vận chuyển:</span>
+                        <strong>@Model.PhiVanChuyen.ToString("N0") đ</strong>
+                    </div>
+                    <div class="summary-item">
+                        <span>Thanh toán:</span>
+                        <strong>@Model.PhuongThucThanhToan</strong>
+                    </div>
+                     @if (!string.IsNullOrEmpty(Model.GhiChu))
+                    {
+                        <div class="summary-item">
+                            <span>Ghi chú:</span>
+                            <strong class="text-muted">@Model.GhiChu</strong>
+                        </div>
+                    }
+                    <div class="summary-total">
+                        <span>Tổng cộng:</span>
+                        <span>@Model.TongTienDonHang.ToString("N0") đ</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="actions-section">
+            @if (vietnameseStatus == "Chờ xác nhận")
+            {
+                <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#cancelOrderModal">
+                    <i class="fas fa-times"></i> Hủy đơn hàng
+                </button>
+            }
+            @if (vietnameseStatus == "Đã giao hàng" || vietnameseStatus == "Hoàn thành")
+            {
+                <a asp-action="GenerateInvoicePdf" asp-route-orderId="@Model.IdDonHang" class="btn btn-success">
+                    <i class="fas fa-file-pdf"></i> Xuất hóa đơn (PDF)
+                </a>
+            }
+            <a asp-action="MyOrders" class="btn btn-outline-secondary">
+                <i class="fas fa-arrow-left"></i> Quay lại danh sách
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- Cancel Order Modal -->
+@if (TranslateStatusToVietnamese(Model.TrangThaiDonHang) == "Chờ xác nhận")
+{
+    <div class="modal fade" id="cancelOrderModal" tabindex="-1" aria-labelledby="cancelOrderModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="cancelOrderModalLabel">Xác nhận hủy đơn hàng</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Bạn có chắc chắn muốn hủy đơn hàng #@Model.IdDonHang?</p>
+                    <p class="text-danger">Hành động này không thể hoàn tác.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                    <form asp-action="Cancel" method="post" class="d-inline">
+                        <input type="hidden" name="id" value="@Model.IdDonHang" />
+                        <button type="submit" class="btn btn-danger">Xác nhận hủy</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@functions {
+    string TranslateStatusToVietnamese(string status)
+    {
+        if (string.IsNullOrEmpty(status)) return "Không xác định";
+        status = status.Trim();
+
+        return status.ToLowerInvariant() switch
+        {
+            "pending" => "Chờ xác nhận",
+            "confirmed" => "Đã xác nhận",
+            "processing" => "Đang xử lý",
+            "shipping" => "Đang giao hàng",
+            "shipped" => "Đang giao hàng",
+            "delivered" => "Đã giao hàng",
+            "completed" => "Đã giao hàng",
+            "cancelled" => "Đã hủy",
+            "canceled" => "Đã hủy",
+            "chờ xác nhận" => "Chờ xác nhận",
+            "đã xác nhận" => "Đã xác nhận",
+            "đang xử lý" => "Đang xử lý",
+            "đang giao hàng" => "Đang giao hàng",
+            "đã giao hàng" => "Đã giao hàng",
+            "đã hủy" => "Đã hủy",
+            _ => status
+        };
+    }
+
+    string GetStatusBadgeClass(string status)
+    {
+        return status switch
+        {
+            "Chờ xác nhận" => "bg-warning text-dark",
+            "Đã xác nhận" => "bg-info text-white",
+            "Đang giao hàng" => "bg-primary text-white",
+            "Đã giao hàng" => "bg-success text-white",
+            "Đã hủy" => "bg-danger text-white",
+            _ => "bg-secondary text-white"
+        };
+    }
+}

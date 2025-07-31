@@ -1,0 +1,142 @@
+@model PawVerse.Models.SanPham
+
+@{
+    ViewData["Title"] = "Xóa sản phẩm";
+    var hasImage = !string.IsNullOrEmpty(Model.HinhAnh);
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1>Xác nhận xóa sản phẩm</h1>
+    <a asp-action="Index" class="btn btn-secondary">
+        <i class="fas fa-arrow-left"></i> Quay lại danh sách
+    </a>
+</div>
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3 bg-danger text-white">
+        <h6 class="m-0 font-weight-bold">Bạn có chắc chắn muốn xóa sản phẩm này?</h6>
+    </div>
+    <div class="card-body">
+        <div class="alert alert-warning" role="alert">
+            <i class="fas fa-exclamation-triangle me-2"></i>
+            <strong>Cảnh báo:</strong> Hành động này không thể hoàn tác. Sản phẩm sẽ bị xóa vĩnh viễn khỏi hệ thống.
+        </div>
+        
+        <div class="row">
+            <div class="col-md-4">
+                @if (hasImage)
+                {
+                    <div class="text-center mb-3">
+                        <img src="@Model.HinhAnh" alt="@Model.TenSanPham" class="img-fluid rounded" style="max-height: 250px;" />
+                    </div>
+                }
+                else
+                {
+                    <div class="text-center mb-3 p-4 bg-light rounded">
+                        <i class="fas fa-box-open fa-5x text-muted mb-3"></i>
+                        <p class="mb-0">Không có hình ảnh</p>
+                    </div>
+                }
+            </div>
+            
+            <div class="col-md-8">
+                <h4 class="mb-4">@Model.TenSanPham</h4>
+                
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <div class="mb-2">
+                            <strong>Mã sản phẩm:</strong> @Model.IdSanPham
+                        </div>
+                        <div class="mb-2">
+                            <strong>Danh mục:</strong> @(Model.IdDanhMucNavigation?.TenDanhMuc ?? "N/A")
+                        </div>
+                        <div class="mb-2">
+                            <strong>Thương hiệu:</strong> @(Model.IdThuongHieuNavigation?.TenThuongHieu ?? "N/A")
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="mb-2">
+                            <strong>Giá bán:</strong> @Model.GiaBan.ToString("#,##0") đ
+                        </div>
+                        <div class="mb-2">
+                            <strong>Tồn kho:</strong> @Model.SoLuongTonKho
+                        </div>
+                        <div class="mb-2">
+                            <strong>Trạng thái:</strong> 
+                            @if (Model.TrangThai == "Còn hàng")
+                            {
+                                <span class="badge bg-success">@Model.TrangThai</span>
+                            }
+                            else if (Model.TrangThai == "Hết hàng")
+                            {
+                                <span class="badge bg-danger">@Model.TrangThai</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-warning">@Model.TrangThai</span>
+                            }
+                        </div>
+                    </div>
+                </div>
+                
+                @if (!string.IsNullOrEmpty(Model.MoTa))
+                {
+                    <div class="mb-3">
+                        <strong>Mô tả:</strong>
+                        <div class="p-2 bg-light rounded">
+                            @Html.Raw(Model.MoTa.Replace("\n", "<br />"))
+                        </div>
+                    </div>
+                }
+                
+                <div class="alert alert-info mt-4">
+                    <i class="fas fa-info-circle me-2"></i>
+                    <strong>Thông tin thêm:</strong> Sản phẩm này đã bán được @Model.SoLuongDaBan đơn vị và được xem @Model.SoLanXem lần.
+                </div>
+            </div>
+        </div>
+        
+        <form asp-action="Delete" class="mt-4">
+            <input type="hidden" asp-for="IdSanPham" />
+            <div class="form-group text-end">
+                <button type="submit" class="btn btn-danger">
+                    <i class="fas fa-trash-alt me-1"></i> Xác nhận xóa
+                </button>
+                <a asp-action="Index" class="btn btn-secondary ms-2">
+                    <i class="fas fa-times me-1"></i> Hủy bỏ
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Styles {
+    <style>
+        .card {
+            border: none;
+            box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
+        }
+        
+        .card-header {
+            border-bottom: 1px solid #e3e6f0;
+            background-color: #f8f9fc;
+        }
+        
+        .bg-danger {
+            background-color: #e74a3b !important;
+        }
+        
+        .alert {
+            border: none;
+            border-left: 4px solid;
+        }
+        
+        .alert-warning {
+            border-left-color: #f6c23e;
+        }
+        
+        .alert-info {
+            border-left-color: #36b9cc;
+        }
+    </style>
+}

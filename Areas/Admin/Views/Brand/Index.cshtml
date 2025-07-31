@@ -1,0 +1,147 @@
+@model IEnumerable<PawVerse.Models.ViewModels.Admin.BrandIndexViewModel>
+@inject PawVerse.Data.ApplicationDbContext _context
+
+@{
+    ViewData["Title"] = "Quản lý Thương hiệu";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayoutV2.cshtml";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1>Quản lý Thương hiệu</h1>
+    <a asp-action="Create" class="btn btn-primary">
+        <i class="fas fa-plus"></i> Thêm thương hiệu mới
+    </a>
+</div>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        @TempData["SuccessMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        @TempData["ErrorMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Danh sách thương hiệu</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Hình ảnh</th>
+                        <th>Tên thương hiệu</th>
+                        <th>Tên Alias</th>
+                        <th>Trạng thái</th>
+                        <th>Số sản phẩm</th>
+                        <th>Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @if (!string.IsNullOrEmpty(item.Brand.Logo))
+                                {
+                                    <img src="@Url.Content(item.Brand.Logo)" alt="Logo @item.Brand.TenThuongHieu" style="width: 60px; height: 60px; object-fit: cover;" />
+                                }
+                                else
+                                {
+                                    <div class="bg-light d-flex align-items-center justify-content-center" style="width: 60px; height: 60px;">
+                                        <i class="fas fa-tags fa-2x text-secondary"></i>
+                                    </div>
+                                }
+                            </td>
+                            <td>@Html.DisplayFor(modelItem => item.Brand.TenThuongHieu)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Brand.TenAlias)</td>
+                            <td>
+                                @if (item.Brand.TrangThai == "Hoạt động")
+                                {
+                                    <span class="badge bg-success">@item.Brand.TrangThai</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-secondary">@item.Brand.TrangThai</span>
+                                }
+                            </td>
+                            <td>@item.ProductCount</td>
+                            <td>
+                                <div class="btn-group" role="group">
+                                    <a asp-action="Edit" asp-route-id="@item.Brand.IdThuongHieu" class="btn btn-sm btn-primary" title="Sửa">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <a asp-action="Details" asp-route-id="@item.Brand.IdThuongHieu" class="btn btn-sm btn-info" title="Xem chi tiết">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
+                                    <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal-@item.Brand.IdThuongHieu" title="Xóa">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+
+                                <!-- Delete Modal -->
+                                <div class="modal fade" id="deleteModal-@item.Brand.IdThuongHieu" tabindex="-1" aria-labelledby="deleteModalLabel-@item.Brand.IdThuongHieu" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="deleteModalLabel-@item.Brand.IdThuongHieu">Xác nhận xóa</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                Bạn có chắc chắn muốn xóa thương hiệu <strong>@item.Brand.TenThuongHieu</strong>?
+                                                @if (item.ProductCount > 0)
+                                                {
+                                                    <p class="text-danger mt-2">Thương hiệu này đang được sử dụng bởi <strong>@item.ProductCount</strong> sản phẩm và không thể xóa.</p>
+                                                }
+                                                else
+                                                {
+                                                    <p class="text-warning mt-2">Lưu ý: Hành động này không thể hoàn tác!</p>
+                                                }
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                                                @if (item.ProductCount == 0)
+                                                {
+                                                    <form asp-area="Admin" asp-controller="Brand" asp-action="DeleteConfirmed" asp-route-id="@item.Brand.IdThuongHieu" method="post">
+                                                        @Html.AntiForgeryToken()
+                                                        <button type="submit" class="btn btn-danger">Xóa</button>
+                                                    </form>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // Initialize DataTable
+        $(document).ready(function() {
+            $('#dataTable').DataTable({
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.10.25/i18n/Vietnamese.json"
+                },
+                "order": [[1, "asc"]], // Sort by brand name by default
+                "columnDefs": [
+                    { "orderable": false, "targets": [0, 5] } // Disable sorting for image and actions columns
+                ]
+            });
+        });
+    </script>
+}

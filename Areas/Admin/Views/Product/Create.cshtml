@@ -1,0 +1,274 @@
+@model PawVerse.Models.SanPham
+
+@{
+    ViewData["Title"] = "Thêm sản phẩm mới";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1>Thêm sản phẩm mới</h1>
+    <a asp-action="Index" class="btn btn-secondary">
+        <i class="fas fa-arrow-left"></i> Quay lại danh sách
+    </a>
+</div>
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Thông tin sản phẩm</h6>
+    </div>
+    <div class="card-body">
+        <form asp-action="Create" method="post" enctype="multipart/form-data" id="productForm">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group mb-3">
+                        <label asp-for="TenSanPham" class="control-label">Tên sản phẩm <span class="text-danger">*</span></label>
+                        <input asp-for="TenSanPham" class="form-control" placeholder="Nhập tên sản phẩm" />
+                        <span asp-validation-for="TenSanPham" class="text-danger"></span>
+                    </div>
+                    
+                    <div class="form-group mb-3">
+                        <label asp-for="TenAlias" class="control-label">Tên rút gọn</label>
+                        <input asp-for="TenAlias" class="form-control" placeholder="Tự động tạo từ tên sản phẩm" />
+                        <span asp-validation-for="TenAlias" class="text-danger"></span>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group mb-3">
+                                <label asp-for="IdDanhMuc" class="control-label">Danh mục <span class="text-danger">*</span></label>
+                                @{
+                                    var danhMucList = ViewData["DanhMucList"] as SelectList;
+                                }
+                                <select asp-for="IdDanhMuc" class="form-control" asp-items="danhMucList">
+                                    <option value="">-- Chọn danh mục --</option>
+                                </select>
+                                <span asp-validation-for="IdDanhMuc" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group mb-3">
+                                <label asp-for="IdThuongHieu" class="control-label">Thương hiệu <span class="text-danger">*</span></label>
+                                @{
+                                    var thuongHieuList = ViewData["ThuongHieuList"] as SelectList;
+                                }
+                                <select asp-for="IdThuongHieu" class="form-control" asp-items="thuongHieuList">
+                                    <option value="">-- Chọn thương hiệu --</option>
+                                </select>
+                                <span asp-validation-for="IdThuongHieu" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group mb-3">
+                                <label asp-for="TrongLuong" class="control-label">Trọng lượng (g)</label>
+                                <input asp-for="TrongLuong" class="form-control" type="number" min="0" step="1" />
+                                <span asp-validation-for="TrongLuong" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group mb-3">
+                                <label asp-for="MauSac" class="control-label">Màu sắc</label>
+                                <input asp-for="MauSac" class="form-control" placeholder="Ví dụ: Đen, Trắng, Xám" />
+                                <span asp-validation-for="MauSac" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group mb-3">
+                        <label asp-for="XuatXu" class="control-label">Xuất xứ</label>
+                        <input asp-for="XuatXu" class="form-control" placeholder="Nhập xuất xứ sản phẩm" />
+                        <span asp-validation-for="XuatXu" class="text-danger"></span>
+                    </div>
+                    
+                    <div class="form-group mb-3">
+                        <label asp-for="MoTa" class="control-label">Mô tả sản phẩm</label>
+                        <textarea asp-for="MoTa" class="form-control" rows="4" placeholder="Mô tả chi tiết về sản phẩm"></textarea>
+                        <span asp-validation-for="MoTa" class="text-danger"></span>
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group mb-3">
+                                <label asp-for="SoLuongTonKho" class="control-label">Số lượng tồn kho</label>
+                                <input asp-for="SoLuongTonKho" class="form-control" type="number" min="0" value="0" />
+                                <span asp-validation-for="SoLuongTonKho" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group mb-3">
+                                <label asp-for="SoLuongDaBan" class="control-label">Đã bán</label>
+                                <input asp-for="SoLuongDaBan" class="form-control" type="number" min="0" value="0" readonly />
+                                <span asp-validation-for="SoLuongDaBan" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group mb-3">
+                                <label asp-for="GiaBan" class="control-label">Giá bán (VNĐ) <span class="text-danger">*</span></label>
+                                <input asp-for="GiaBan" class="form-control" type="number" min="0" step="1000" />
+                                <span asp-validation-for="GiaBan" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group mb-3">
+                                <label asp-for="GiaKhuyenMai" class="control-label">Giá khuyến mãi (VNĐ)</label>
+                                <input asp-for="GiaKhuyenMai" class="form-control" type="number" min="0" step="1000" />
+                                <span asp-validation-for="GiaKhuyenMai" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group mb-3">
+                        <label asp-for="GiaVon" class="control-label">Giá vốn (VNĐ)</label>
+                        <input asp-for="GiaVon" class="form-control" type="number" min="0" step="1000" />
+                        <span asp-validation-for="GiaVon" class="text-danger"></span>
+                    </div>
+                    
+                    <div class="form-group mb-3">
+                        <label class="control-label">Hình ảnh sản phẩm <span class="text-danger">*</span></label>
+                        <div class="input-group">
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="imageFile" name="imageFile" accept="image/*" required>
+                                <label class="custom-file-label" for="imageFile" id="imageFileName">Chọn hình ảnh</label>
+                            </div>
+                        </div>
+                        <small class="form-text text-muted">Chỉ chấp nhận file ảnh (JPG, JPEG, PNG, GIF). Kích thước tối đa: 5MB</small>
+                        <div class="mt-2">
+                            <img id="imagePreview" src="#" alt="Preview Image" style="max-width: 200px; max-height: 200px; display: none;" class="img-thumbnail" />
+                        </div>
+                        <span id="imageValidation" class="text-danger"></span>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group mb-3">
+                                <label asp-for="NgaySanXuat" class="control-label">Ngày sản xuất</label>
+                                <input asp-for="NgaySanXuat" class="form-control" type="date" />
+                                <span asp-validation-for="NgaySanXuat" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group mb-3">
+                                <label asp-for="HanSuDung" class="control-label">Hạn sử dụng</label>
+                                <input asp-for="HanSuDung" class="form-control" type="date" />
+                                <span asp-validation-for="HanSuDung" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group mb-3">
+                        <label asp-for="TrangThai" class="control-label">Trạng thái</label>
+                        <select asp-for="TrangThai" class="form-control">
+                            <option value="Còn hàng">Còn hàng</option>
+                            <option value="Hết hàng">Hết hàng</option>
+                        </select>
+                        <span asp-validation-for="TrangThai" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-group text-end">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-save"></i> Lưu sản phẩm
+                </button>
+                <a asp-action="Index" class="btn btn-secondary">
+                    <i class="fas fa-times"></i> Hủy bỏ
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    
+    <script src="https://cdn.jsdelivr.net/npm/bs-custom-file-input/dist/bs-custom-file-input.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        // Disable form submission if there are invalid fields
+        (function () {
+            'use strict';
+            window.addEventListener('load', function () {
+                // Fetch the form we want to apply custom Bootstrap validation styles to
+                var form = document.getElementById('productForm');
+                form.addEventListener('submit', function (event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            }, false);
+        })();
+        // Initialize bs-custom-file-input
+        $(document).ready(function() {
+            bsCustomFileInput.init();
+        });
+        
+        // Handle file upload validation and preview
+        document.getElementById('imageFile').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            const preview = document.getElementById('imagePreview');
+            const validationSpan = document.getElementById('imageValidation');
+            const maxSize = 5 * 1024 * 1024; // 5MB
+            
+            // Reset validation and preview
+            validationSpan.textContent = '';
+            preview.style.display = 'none';
+            
+            if (file) {
+                // Check file type
+                const validTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/jpg'];
+                if (!validTypes.includes(file.type)) {
+                    validationSpan.textContent = 'Chỉ chấp nhận file ảnh (JPG, JPEG, PNG, GIF)';
+                    this.value = '';
+                    return false;
+                }
+                
+                // Check file size
+                if (file.size > maxSize) {
+                    validationSpan.textContent = 'Kích thước file quá lớn (tối đa 5MB)';
+                    this.value = '';
+                    return false;
+                }
+                
+                // Show preview
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                    
+                    // Update file name in label
+                    document.getElementById('imageFileName').textContent = file.name;
+                };
+                reader.readAsDataURL(file);
+            } else {
+                // Reset to default label if no file selected
+                document.getElementById('imageFileName').textContent = 'Chọn hình ảnh';
+            }
+        });
+        
+        // Auto-generate alias from product name
+        document.getElementById('TenSanPham').addEventListener('blur', function() {
+            const name = this.value;
+            const aliasInput = document.getElementById('TenAlias');
+            
+            if (name && (!aliasInput.value || aliasInput.value === '')) {
+                const alias = name.toLowerCase()
+                    .normalize('NFD').replace(/[\u0300-\u036f]/g, '') // Remove accents
+                    .replace(/[^a-z0-9\s-]/g, '') // Remove invalid chars
+                    .replace(/\s+/g, '-')           // Replace spaces with -
+                    .replace(/-+/g, '-')            // Replace multiple - with single -
+                    .replace(/^-+|-+$/g, '');       // Trim - from start/end
+                aliasInput.value = alias;
+            }
+        });
+    </script>
+}

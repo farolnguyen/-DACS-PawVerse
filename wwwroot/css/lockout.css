@@ -1,0 +1,176 @@
+/* Lockout Page Styles */
+.lockout-container {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f8f9fa;
+    padding: 2rem 0;
+    margin-top: 100px;
+}
+
+.lockout-card {
+    border: none;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.lockout-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+}
+
+.lockout-header {
+    position: relative;
+    background: linear-gradient(135deg, #ff6b35 0%, #f9a03f 100%);
+    padding: 2.5rem 0;
+    text-align: center;
+    border-radius: 15px 15px 0 0;
+}
+
+.lockout-icon {
+    font-size: 5rem;
+    color: white;
+    background-color: rgba(255, 255, 255, 0.2);
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    animation: pulse 2s infinite;
+}
+
+.lockout-body {
+    padding: 2.5rem;
+    background-color: white;
+}
+
+.lockout-title {
+    color: #ff6b35;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    font-size: 2.2rem;
+}
+
+.lockout-message {
+    background-color: #fff5f2;
+    border-left: 4px solid #ff6b35;
+    padding: 1.5rem;
+    border-radius: 5px;
+    margin-bottom: 2rem;
+}
+
+.lockout-message p {
+    color: #555;
+    font-size: 1.1rem;
+    margin-bottom: 0;
+}
+
+.lockout-help-text {
+    color: #666;
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.lockout-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.btn-support {
+    background-color: white;
+    color: #ff6b35;
+    border: 2px solid #ff6b35;
+    padding: 0.75rem 1.5rem;
+    border-radius: 50px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-support:hover {
+    background-color: #ff6b35;
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(255, 107, 53, 0.3);
+}
+
+.btn-home {
+    background-color: #ff6b35;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 50px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-home:hover {
+    background-color: #e55a2b;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(255, 107, 53, 0.3);
+}
+
+/* Animation */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.05);
+        opacity: 0.8;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .lockout-card {
+        margin: 0 1rem;
+    }
+    
+    .lockout-icon {
+        width: 100px;
+        height: 100px;
+        font-size: 4rem;
+    }
+    
+    .lockout-title {
+        font-size: 1.8rem;
+    }
+}
+
+/* Add animation for the buttons */
+.btn-support, .btn-home {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-support::after, .btn-home::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.5s, height 0.5s;
+}
+
+.btn-support:hover::after, .btn-home:hover::after {
+    width: 300px;
+    height: 300px;
+}

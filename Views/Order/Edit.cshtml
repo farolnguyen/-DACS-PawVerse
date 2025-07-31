@@ -1,0 +1,117 @@
+@model PawVerse.Models.ViewModels.UpdateOrderViewModel
+
+@{
+    ViewData["Title"] = "Cập nhật đơn hàng";
+    Layout = "_Layout";
+}
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card
+                <div class="card-header bg-light">
+                    <h5 class="mb-0">Cập nhật thông tin đơn hàng #@Model.OrderId</h5>
+                </div>
+                <div class="card-body">
+                    <form asp-action="Edit" method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input type="hidden" asp-for="OrderId" />
+
+                        <div class="mb-3">
+                            <label asp-for="PhoneNumber" class="form-label">Số điện thoại</label>
+                            <input asp-for="PhoneNumber" class="form-control" />
+                            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Địa chỉ giao hàng</label>
+                            
+                            <div class="mb-3">
+                                <label asp-for="SelectedProvinceCode" class="form-label">Tỉnh/Thành phố</label>
+                                <select asp-for="SelectedProvinceCode" class="form-select location-select" 
+                                        id="province" data-placeholder="Chọn tỉnh/thành phố">
+                                    <option value="">Chọn tỉnh/thành phố</option>
+                                    @if (ViewBag.Provinces != null)
+                                    {
+                                        foreach (var province in ViewBag.Provinces)
+                                        {
+                                            <option value="@province.Code">@province.Name</option>
+                                        }
+                                    }
+                                </select>
+                                <span asp-validation-for="SelectedProvinceCode" class="text-danger"></span>
+                            </div>
+
+                            <div class="mb-3">
+                                <label asp-for="SelectedDistrictCode" class="form-label">Quận/Huyện</label>
+                                <select asp-for="SelectedDistrictCode" class="form-select location-select" 
+                                        id="district" data-placeholder="Chọn quận/huyện" disabled>
+                                    <option value="">Chọn quận/huyện</option>
+                                </select>
+                                <span asp-validation-for="SelectedDistrictCode" class="text-danger"></span>
+                            </div>
+
+                            <div class="mb-3">
+                                <label asp-for="SelectedWardCode" class="form-label">Phường/Xã</label>
+                                <select asp-for="SelectedWardCode" class="form-select location-select" 
+                                        id="ward" data-placeholder="Chọn phường/xã" disabled>
+                                    <option value="">Chọn phường/xã</option>
+                                </select>
+                                <span asp-validation-for="SelectedWardCode" class="text-danger"></span>
+                            </div>
+
+                            <div class="mb-3">
+                                <label asp-for="StreetAddress" class="form-label">Địa chỉ cụ thể</label>
+                                <input asp-for="StreetAddress" class="form-control" placeholder="Số nhà, tên đường..." />
+                                <span asp-validation-for="StreetAddress" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label asp-for="Note" class="form-label">Ghi chú</label>
+                            <textarea asp-for="Note" class="form-control" rows="3"></textarea>
+                            <span asp-validation-for="Note" class="text-danger"></span>
+                        </div>
+
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <a asp-action="Details" asp-route-id="@Model.OrderId" class="btn btn-outline-secondary me-md-2">
+                                <i class="fas fa-arrow-left"></i> Quay lại
+                            </a>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i> Lưu thay đổi
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    
+    <script>
+        $(document).ready(function() {
+            // Khởi tạo Select2
+            $('.location-select').select2({
+                theme: 'bootstrap-5',
+                width: '100%'
+            });
+
+            // Khởi tạo location select
+            initializeLocationSelection();
+        });
+
+        function initializeLocationSelection() {
+            if (typeof window.initializeLocationSelects === 'function') {
+                window.initializeLocationSelects({
+                    provinceSelector: '#province',
+                    districtSelector: '#district',
+                    wardSelector: '#ward',
+                    apiBaseUrl: '/api/locations'
+                });
+            }
+        }
+    </script>
+}

@@ -1,0 +1,188 @@
+@model PawVerse.Models.ViewModels.ProfileViewModel
+@{
+    ViewData["Title"] = "Chỉnh sửa hồ sơ";
+    Layout = "_Layout";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/profile.css" />
+}
+
+<div class="profile-container">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="profile-card">
+                    <div class="profile-header">
+                        <div class="avatar-container">
+                            @if (!string.IsNullOrEmpty(Model.Avatar))
+                            {
+                                <img id="avatarPreview" src="@Url.Content(Model.Avatar)" alt="Avatar" class="avatar-img">
+                            }
+                            else
+                            {
+                                <div id="avatarPlaceholder" class="avatar-placeholder">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <img id="avatarPreview" src="" alt="Avatar Preview" class="avatar-img d-none">
+                            }
+                        </div>
+                    </div>
+                    
+                    <div class="user-info">
+                        <h1 class="user-name">Chỉnh sửa hồ sơ</h1>
+                        <p class="user-email mb-4">
+                            Cập nhật thông tin cá nhân của bạn
+                        </p>
+                    </div>
+                    
+                    <div class="profile-details px-4">
+                        <form asp-action="Edit" method="post" enctype="multipart/form-data" class="needs-validation" novalidate>
+                            <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+                            <input type="hidden" asp-for="Id" />
+                            
+                            <div class="mb-4 text-center">
+                                <label for="AvatarFile" class="custom-file-upload">
+                                    <i class="fas fa-camera me-2"></i>Thay đổi ảnh đại diện
+                                </label>
+                                <input id="AvatarFile" name="AvatarFile" type="file" class="d-none" accept="image/*" onchange="previewImage(this)">
+                                <span asp-validation-for="AvatarFile" class="text-danger d-block mt-2"></span>
+                                <div class="form-text">Chọn ảnh vuông, kích thước tối thiểu 200x200px</div>
+                            </div>
+                            
+                            <div class="row mb-3">
+                                <div class="col-md-6 mb-3">
+                                    <label asp-for="FullName" class="form-label">Họ và tên <span class="text-danger">*</span></label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                        <input asp-for="FullName" class="form-control" required />
+                                    </div>
+                                    <span asp-validation-for="FullName" class="text-danger small"></span>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label asp-for="Email" class="form-label">Email <span class="text-danger">*</span></label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                                        <input asp-for="Email" class="form-control" required />
+                                    </div>
+                                    <span asp-validation-for="Email" class="text-danger small"></span>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-md-6 mb-3">
+                                    <label asp-for="PhoneNumber" class="form-label">Số điện thoại</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                                        <input asp-for="PhoneNumber" class="form-control" />
+                                    </div>
+                                    <span asp-validation-for="PhoneNumber" class="text-danger small"></span>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label asp-for="Gender" class="form-label">Giới tính</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-venus-mars"></i></span>
+                                        <select asp-for="Gender" class="form-select">
+                                            <option value="">-- Chọn giới tính --</option>
+                                            <option value="Nam">Nam</option>
+                                            <option value="Nữ">Nữ</option>
+                                            <option value="Khác">Khác</option>
+                                        </select>
+                                    </div>
+                                    <span asp-validation-for="Gender" class="text-danger small"></span>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label asp-for="Address" class="form-label">Địa chỉ</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fas fa-map-marker-alt"></i></span>
+                                    <input asp-for="Address" class="form-control" />
+                                </div>
+                                <span asp-validation-for="Address" class="text-danger small"></span>
+                            </div>
+
+                            <div class="mb-4">
+                                <label asp-for="NgaySinh" class="form-label">Ngày sinh</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fas fa-calendar-alt"></i></span>
+                                    <input asp-for="NgaySinh" type="date" class="form-control" />
+                                </div>
+                                <span asp-validation-for="NgaySinh" class="text-danger small"></span>
+                            </div>
+
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
+                                <a asp-action="Index" class="btn btn-change-password me-2">
+                                    <i class="fas fa-arrow-left me-2"></i>Quay lại
+                                </a>
+                                <button type="submit" class="btn btn-edit">
+                                    <i class="fas fa-save me-2"></i>Lưu thay đổi
+                                </button>
+                            </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    
+    <script>
+        // Xem trước ảnh đại diện
+        function previewImage(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                
+                reader.onload = function(e) {
+                    var avatarPreview = document.getElementById('avatarPreview');
+                    var avatarPlaceholder = document.getElementById('avatarPlaceholder');
+                    
+                    if (avatarPlaceholder) {
+                        avatarPlaceholder.classList.add('d-none');
+                    }
+                    
+                    if (avatarPreview) {
+                        avatarPreview.src = e.target.result;
+                        avatarPreview.classList.remove('d-none');
+                    } else {
+                        // Nếu chưa có avatarPreview, tạo mới
+                        var newAvatar = document.createElement('img');
+                        newAvatar.id = 'avatarPreview';
+                        newAvatar.src = e.target.result;
+                        newAvatar.alt = 'Avatar Preview';
+                        newAvatar.className = 'rounded-circle mb-3';
+                        newAvatar.style = 'width: 150px; height: 150px; object-fit: cover;';
+                        
+                        var container = input.parentNode;
+                        container.insertBefore(newAvatar, input);
+                    }
+                };
+                
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        // Kích hoạt validation form
+        (function () {
+            'use strict';
+            var forms = document.querySelectorAll('.needs-validation');
+            Array.prototype.slice.call(forms).forEach(function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        })();
+
+        // Hiển thị thông báo thành công nếu có
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <text>toastr.success('@TempData["SuccessMessage"]');</text>
+        }
+    </script>
+}

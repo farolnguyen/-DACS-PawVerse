@@ -1,0 +1,154 @@
+@model PawVerse.Models.ThuongHieu
+
+@{
+    ViewData["Title"] = "Chi tiết Thương hiệu: " + Model.TenThuongHieu;
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayoutV2.cshtml";
+}
+
+<div class="container-fluid px-4">
+    <h1 class="mt-4">@ViewData["Title"]</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item"><a asp-area="Admin" asp-controller="Dashboard" asp-action="Index">Trang chủ</a></li>
+        <li class="breadcrumb-item"><a asp-area="Admin" asp-controller="Brand" asp-action="Index">Quản lý Thương hiệu</a></li>
+        <li class="breadcrumb-item active">@Model.TenThuongHieu</li>
+    </ol>
+
+    <div class="card mb-4">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <h5 class="mb-0"><i class="fas fa-info-circle me-1"></i> Thông tin chi tiết</h5>
+            <div>
+                <a asp-area="Admin" asp-controller="Brand" asp-action="Edit" asp-route-id="@Model.IdThuongHieu" class="btn btn-primary btn-sm">
+                    <i class="fas fa-edit me-1"></i> Chỉnh sửa
+                </a>
+                <a asp-area="Admin" asp-controller="Brand" asp-action="Index" class="btn btn-secondary btn-sm">
+                    <i class="fas fa-arrow-left me-1"></i> Quay lại danh sách
+                </a>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="text-center mb-4">
+                        @if (!string.IsNullOrEmpty(Model.Logo))
+                        {
+                            <img src="@Url.Content(Model.Logo)" alt="Logo @Model.TenThuongHieu" class="img-fluid rounded shadow-sm" style="max-height: 200px; max-width: 100%; object-fit: contain;" />
+                        }
+                        else
+                        {
+                            <div class="border rounded p-5 bg-light text-center" style="height: 200px; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                                <i class="fas fa-image fa-3x text-muted mb-2"></i>
+                                <p class="mb-0 text-muted small">Không có logo</p>
+                            </div>
+                        }
+                    </div>
+
+                    <div class_="card mb-3">
+                        <div class="card-header">
+                            <strong>Trạng thái</strong>
+                        </div>
+                        <div class="card-body">
+                             <span class="badge @(Model.TrangThai == "Hoạt động" ? "bg-success" : "bg-danger")">
+                                @Model.TrangThai
+                            </span>
+                        </div>
+                    </div>
+                     <div class_="card">
+                        <div class="card-header">
+                            <strong>Thông tin khác</strong>
+                        </div>
+                        <div class="card-body">
+                            <p class="mb-1"><strong>ID:</strong> @Model.IdThuongHieu</p>
+                            <p class="mb-1"><strong>Alias:</strong> @(string.IsNullOrEmpty(Model.TenAlias) ? "N/A" : Model.TenAlias)</p>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-md-8">
+                     <div class="card mb-4">
+                        <div class="card-header">
+                           <h5 class="mb-0"> <i class="fas fa-copyright me-1"></i> @Model.TenThuongHieu</h5>
+                        </div>
+                        <div class="card-body">
+                            <dl class="row">
+                                <dt class="col-sm-3">Mô tả:</dt>
+                                <dd class="col-sm-9">@(string.IsNullOrEmpty(Model.MoTa) ? "Chưa có mô tả." : Model.MoTa)</dd>
+                            </dl>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0"><i class="fas fa-boxes me-1"></i> Sản phẩm thuộc thương hiệu</h5>
+                            <span class="badge bg-info rounded-pill">@ViewBag.ProductCount sản phẩm</span>
+                        </div>
+                        <div class="card-body">
+                            @if (ViewBag.Products != null && ViewBag.Products.Count > 0)
+                            {
+                                <div class="table-responsive">
+                                    <table class="table table-hover table-sm" id="productsTable">
+                                        <thead>
+                                            <tr>
+                                                <th>Hình ảnh</th>
+                                                <th>Tên sản phẩm</th>
+                                                <th>Giá</th>
+                                                <th>Trạng thái</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var product in ViewBag.Products)
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        <img src="@Url.Content(product.HinhAnh ?? "/images/placeholder-image.png")" alt="@product.TenSanPham" style="width: 40px; height: 40px; object-fit: cover; border-radius: .25rem;" />
+                                                    </td>
+                                                    <td>@product.TenSanPham</td>
+                                                    <td>@product.GiaBan.ToString("N0") đ</td>
+                                                    <td>
+                                                        <span class="badge @(product.TrangThai == "Còn hàng" ? "bg-success-soft text-success" : (product.TrangThai == "Hết hàng" ? "bg-danger-soft text-danger" : "bg-warning-soft text-warning"))">
+                                                            @product.TrangThai
+                                                        </span>
+                                                    </td>
+                                                    <td class="text-end">
+                                                        <a asp-area="Admin" asp-controller="Product" asp-action="Details" asp-route-id="@product.IdSanPham" class="btn btn-outline-info btn-sm" title="Xem chi tiết">
+                                                            <i class="fas fa-eye"></i>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="text-center py-3">
+                                    <i class="fas fa-box-open fa-2x text-muted mb-2"></i>
+                                    <p class="mb-0">Chưa có sản phẩm nào thuộc thương hiệu này.</p>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('#productsTable').DataTable({
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.10.25/i18n/Vietnamese.json"
+                },
+                "pageLength": 5,
+                "lengthMenu": [ [5, 10, 25, -1], [5, 10, 25, "Tất cả"] ],
+                "columnDefs": [
+                    { "orderable": false, "targets": [0, 4] } 
+                ],
+                 "order": [[1, "asc"]]
+            });
+        });
+    </script>
+}

@@ -1,0 +1,320 @@
+/* ====================================================================
+   Author: Cascade
+   Description: Custom styles for Login and Register pages.
+==================================================================== */
+
+body {
+    background-color: #f8f9fa; /* A light grey background for the page */
+}
+
+.account-container {
+    display: flex;
+    min-height: 100vh;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    animation: fadeIn 0.8s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.account-card {
+    display: flex;
+    max-width: 1000px;
+    width: 100%;
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+    animation: slideUp 0.6s ease-out;
+}
+
+@keyframes slideUp {
+    from { transform: translateY(30px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.account-banner {
+    flex: 1;
+    background: url('https://images.unsplash.com/photo-1552053831-71594a27632d?q=80&w=1962&auto=format&fit=crop') center center/cover no-repeat;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    color: #fff;
+    text-align: center;
+}
+
+.account-banner::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 102, 0, 0.7); /* Slightly darker orange overlay */
+    z-index: 1;
+}
+
+.account-banner-content {
+    position: relative;
+    z-index: 2;
+    animation: fadeInUp 0.8s ease-out 0.3s both;
+}
+
+@keyframes fadeInUp {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.account-banner img {
+    width: 140px; /* Slightly larger logo */
+    margin-bottom: 1.5rem;
+    filter: drop-shadow(0 5px 10px rgba(0,0,0,0.2));
+    animation: pulse 3s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.account-banner h1 {
+    font-family: 'Bangers', cursive;
+    font-size: 3rem;
+    margin-bottom: 0.8rem;
+    text-shadow: 2px 2px 6px rgba(0,0,0,0.4);
+    letter-spacing: 1px;
+}
+
+.account-banner p {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.2rem;
+    max-width: 80%;
+    margin: 0 auto;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+}
+
+.account-form-wrapper {
+    flex: 1;
+    padding: 3rem 2.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    animation: fadeIn 0.8s ease-out 0.5s both;
+}
+
+.account-form-wrapper h2 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 2.2rem;
+    color: #333;
+    margin-bottom: 1.8rem;
+    position: relative;
+}
+
+.account-form-wrapper h2::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 60px;
+    height: 4px;
+    background-color: var(--orange);
+    border-radius: 2px;
+}
+
+.form-floating > .form-control {
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    transition: all 0.3s;
+    font-family: 'Poppins', sans-serif;
+    padding: 1rem 0.75rem;
+}
+
+.form-floating > .form-control:focus {
+    border-color: var(--orange);
+    box-shadow: 0 0 0 0.25rem rgba(255, 102, 0, 0.25);
+}
+
+.form-check-label {
+    font-family: 'Poppins', sans-serif;
+}
+
+.account-form-wrapper .btn-primary {
+    background-color: var(--orange);
+    border-color: var(--orange);
+    border-radius: 10px;
+    padding: 0.8rem;
+    font-weight: 600;
+    font-family: 'Poppins', sans-serif;
+    letter-spacing: 0.5px;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+}
+
+.account-form-wrapper .btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: 0.5s;
+}
+
+.account-form-wrapper .btn-primary:hover::before {
+    left: 100%;
+}
+
+.account-form-wrapper .btn-primary:hover {
+    background-color: #e65c00;
+    border-color: #e65c00;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(230, 92, 0, 0.3);
+}
+
+.account-form-wrapper a {
+    color: var(--orange);
+    text-decoration: none;
+    transition: all 0.3s;
+    font-weight: 500;
+}
+
+.account-form-wrapper a:hover {
+    color: #e65c00;
+    text-decoration: underline;
+}
+
+.divider-text {
+    text-align: center;
+    margin: 1.8rem 0;
+    font-weight: 500;
+    color: #888;
+    position: relative;
+    font-family: 'Poppins', sans-serif;
+}
+
+.divider-text::before,
+.divider-text::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: calc(50% - 30px);
+    height: 1px;
+    background-color: #ddd;
+}
+
+.divider-text::before {
+    left: 0;
+}
+
+.divider-text::after {
+    right: 0;
+}
+
+/* Social Login Buttons */
+.social-login-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.btn-social {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 10px 15px;
+    border-radius: 10px;
+    font-weight: 500;
+    font-family: 'Poppins', sans-serif;
+    transition: all 0.3s;
+    color: #fff;
+    border: none;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-social::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: 0.5s;
+}
+
+.btn-social:hover::before {
+    left: 100%;
+}
+
+.btn-social img {
+    width: 24px;
+    height: 24px;
+}
+
+.btn-github {
+    background-color: #24292e;
+}
+
+.btn-github:hover {
+    background-color: #1a1e22;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.btn-google {
+    background-color: #4285F4;
+}
+
+.btn-google:hover {
+    background-color: #3367d6;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(66, 133, 244, 0.3);
+}
+
+/* Register Page Specific Styles */
+.register-card {
+    flex-direction: row-reverse; /* Reverse the order of children */
+}
+
+.register-banner {
+    background: url('https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?q=80&w=2043&auto=format&fit=crop') center center/cover no-repeat;
+}
+
+.register-banner::before {
+    background: rgba(255, 102, 0, 0.65); /* Slightly lighter orange overlay for cat image */
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+    .account-banner {
+        display: none; /* Hide banner on smaller screens */
+    }
+    .account-form-wrapper {
+        padding: 2.5rem 2rem;
+    }
+    .account-card {
+        max-width: 500px;
+    }
+}
+
+@media (max-width: 576px) {
+    .account-form-wrapper {
+        padding: 2rem 1.5rem;
+    }
+    .account-form-wrapper h2 {
+        font-size: 1.8rem;
+    }
+}

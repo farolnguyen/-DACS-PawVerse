@@ -1,0 +1,510 @@
+@{
+    var chatbotId = "pawverse-chatbot-" + Guid.NewGuid().ToString("N");
+}
+
+<div class="chatbot-container" id="@chatbotId-container">
+    <div class="chatbot-header">
+        <div class="chatbot-title">
+            <img src="~/Images/headerandfooter/Logobig.png" alt="PawVerse Chatbot" class="chatbot-logo" />
+            <span>PawVerse Trợ lý</span>
+        </div>
+        <div class="chatbot-controls">
+            <button class="btn-expand" id="@chatbotId-expand" title="Mở rộng"><i class="fa fa-expand"></i></button>
+            <button class="btn-minimize" id="@chatbotId-minimize" title="Thu nhỏ">_</button>
+            <button class="btn-close" id="@chatbotId-close" title="Đóng">×</button>
+        </div>
+    </div>
+    <div class="chatbot-body">
+        <div class="chatbot-messages" id="@chatbotId-messages">
+            <div class="message bot">
+                <div class="message-content">
+                    Xin chào! Tôi là PawVerse Assistant. Tôi có thể giúp gì cho bạn về thú cưng hôm nay?
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="chatbot-input">
+        <textarea id="@chatbotId-input" placeholder="Nhập tin nhắn..." rows="1"></textarea>
+        <button id="@chatbotId-send">
+            <i class="fa fa-paper-plane"></i>
+        </button>
+    </div>
+</div>
+
+<div class="chatbot-button" id="@chatbotId-button">
+    <i class="fa fa-comments"></i>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const chatbotId = '@chatbotId';
+        const container = document.getElementById(`${chatbotId}-container`);
+        const button = document.getElementById(`${chatbotId}-button`);
+        const expand = document.getElementById(`${chatbotId}-expand`);
+        const minimize = document.getElementById(`${chatbotId}-minimize`);
+        const close = document.getElementById(`${chatbotId}-close`);
+        const input = document.getElementById(`${chatbotId}-input`);
+        const send = document.getElementById(`${chatbotId}-send`);
+        const messages = document.getElementById(`${chatbotId}-messages`);
+        
+        // Track expansion state: 0 = normal, 1 = 150%, 2 = half-screen
+        let expansionState = 0;
+        
+        let conversationId = null;
+
+        // Initialize conversation with the chatbot
+        fetch('/api/chatbot/start-conversation', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            conversationId = data.conversationId;
+            console.log('Conversation initialized:', conversationId);
+        })
+        .catch(error => {
+            console.error('Error initializing conversation:', error);
+        });
+
+        // Toggle chatbot visibility
+        button.addEventListener('click', function() {
+            container.classList.toggle('active');
+            button.classList.toggle('hidden');
+        });
+
+        // Minimize chatbot
+        minimize.addEventListener('click', function() {
+            container.classList.remove('active');
+            button.classList.remove('hidden');
+        });
+
+        // Close chatbot
+        close.addEventListener('click', function() {
+            container.classList.remove('active');
+            button.classList.remove('hidden');
+        });
+        
+        // Expand/collapse chatbot - with 3 states
+        expand.addEventListener('click', function() {
+            // Cycle through expansion states: 0 (normal) -> 1 (150%) -> 2 (half-screen) -> 0 (normal)
+            expansionState = (expansionState + 1) % 3;
+            
+            // Remove all expansion classes first
+            container.classList.remove('expanded', 'expanded-fullsize');
+            
+            // Apply appropriate class based on state
+            if (expansionState === 1) {
+                // 150% size
+                container.classList.add('expanded');
+                expand.innerHTML = '<i class="fa fa-expand"></i>'; // Still expanding icon
+                expand.title = 'Mở rộng tối đa'; // "Expand to maximum"
+            } else if (expansionState === 2) {
+                // Half-screen size
+                container.classList.add('expanded-fullsize');
+                expand.innerHTML = '<i class="fa fa-compress"></i>'; // Compress icon
+                expand.title = 'Thu nhỏ'; // "Collapse"
+            } else {
+                // Normal size
+                expand.innerHTML = '<i class="fa fa-expand"></i>';
+                expand.title = 'Mở rộng'; // "Expand"
+            }
+        });
+
+        // Auto-resize textarea
+        function autoResizeTextarea() {
+            // Reset height to auto first to get the correct scrollHeight
+            input.style.height = 'auto';
+            // Set the height to scrollHeight to fit the content
+            input.style.height = input.scrollHeight + 'px';
+        }
+        
+        // Initialize auto-resize and add input event listener
+        input.addEventListener('input', autoResizeTextarea);
+        
+        // Send message on Enter key (without shift)
+        input.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault(); // Prevent default to avoid new line
+                sendMessage();
+            }
+        });
+
+        // Send message on button click
+        send.addEventListener('click', sendMessage);
+
+        function sendMessage() {
+            const message = input.value.trim();
+            if (!message) return;
+
+            // Add user message to the chat
+            addMessage(message, 'user');
+            input.value = '';
+
+            // Simulate loading
+            addLoadingIndicator();
+
+            // Send message to the API
+            if (conversationId) {
+                // If we have a conversation ID, continue the conversation
+                fetch('/api/chatbot/continue-conversation', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        conversationId: conversationId,
+                        message: message
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    // Remove loading indicator
+                    removeLoadingIndicator();
+                    // Add bot response
+                    addMessage(data.response, 'bot');
+                })
+                .catch(error => {
+                    console.error('Error sending message:', error);
+                    removeLoadingIndicator();
+                    addMessage('Xin lỗi, tôi đang gặp sự cố kết nối. Vui lòng thử lại sau.', 'bot error');
+                });
+            } else {
+                // If no conversation ID, use single message endpoint
+                fetch('/api/chatbot/send-message', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        message: message
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    // Remove loading indicator
+                    removeLoadingIndicator();
+                    // Add bot response
+                    addMessage(data.response, 'bot');
+                })
+                .catch(error => {
+                    console.error('Error sending message:', error);
+                    removeLoadingIndicator();
+                    addMessage('Xin lỗi, tôi đang gặp sự cố kết nối. Vui lòng thử lại sau.', 'bot error');
+                });
+            }
+        }
+
+        function addMessage(content, type) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${type}`;
+            
+            const contentDiv = document.createElement('div');
+            contentDiv.className = 'message-content';
+            
+            // Xử lý định dạng văn bản - thay thế các ký tự xuống dòng bằng <br>
+            // Và xử lý đặc biệt các danh sách số nếu có
+            if (type === 'bot') {
+                // An toàn hơn là sanitize trước khi sử dụng innerHTML
+                const sanitizedContent = content
+                    .replace(/&/g, '&amp;')
+                    .replace(/</g, '&lt;')
+                    .replace(/>/g, '&gt;')
+                    .replace(/"/g, '&quot;')
+                    .replace(/'/g, '&#039;');
+                    
+                // Chuyển đổi các dòng mới thành thẻ <br>
+                const formattedContent = sanitizedContent.replace(/\n/g, '<br>');
+                
+                // Sử dụng innerHTML để hiển thị đúng các thẻ HTML
+                contentDiv.innerHTML = formattedContent;
+            } else {
+                // Với tin nhắn người dùng, giữ nguyên như cũ
+                contentDiv.textContent = content;
+            }
+            
+            messageDiv.appendChild(contentDiv);
+            messages.appendChild(messageDiv);
+            
+            // Scroll to bottom
+            messages.scrollTop = messages.scrollHeight;
+        }
+
+        function addLoadingIndicator() {
+            const loadingDiv = document.createElement('div');
+            loadingDiv.className = 'message bot loading';
+            loadingDiv.id = 'chatbot-loading';
+            
+            const contentDiv = document.createElement('div');
+            contentDiv.className = 'message-content';
+            contentDiv.innerHTML = '<div class="typing-indicator"><span></span><span></span><span></span></div>';
+            
+            loadingDiv.appendChild(contentDiv);
+            messages.appendChild(loadingDiv);
+            
+            // Scroll to bottom
+            messages.scrollTop = messages.scrollHeight;
+        }
+
+        function removeLoadingIndicator() {
+            const loadingDiv = document.getElementById('chatbot-loading');
+            if (loadingDiv) {
+                loadingDiv.remove();
+            }
+        }
+    });
+</script>
+
+<style>
+    .chatbot-container {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        width: 350px;
+        height: 450px;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 5px 40px rgba(0, 0, 0, 0.16);
+        display: flex;
+        flex-direction: column;
+        z-index: 1000;
+        overflow: hidden;
+        transform: translateY(100%);
+        opacity: 0;
+        transition: transform 0.3s ease, opacity 0.3s ease, width 0.3s ease, height 0.3s ease, font-size 0.3s ease;
+    }
+
+    .chatbot-container.active {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    
+    .chatbot-container.expanded {
+        width: 525px; /* 150% của kích thước ban đầu */
+        height: 675px; /* 150% của kích thước ban đầu */
+        font-size: 1.15em;
+        transition: width 0.3s ease, height 0.3s ease, font-size 0.3s ease;
+    }
+    
+    /* Chế độ nửa màn hình */
+    .chatbot-container.expanded-fullsize {
+        width: 50vw; /* 50% chiều rộng của viewport */
+        height: 80vh; /* 80% chiều cao của viewport */
+        font-size: 1.25em;
+        transition: width 0.3s ease, height 0.3s ease, font-size 0.3s ease;
+        right: 30px; /* Giữ khoảng cách với mép phải */
+    }
+    
+    /* Cải thiện hiển thị ở chế độ mở rộng */
+    .chatbot-container.expanded .message-content,
+    .chatbot-container.expanded-fullsize .message-content {
+        padding: 15px 20px;
+    }
+    
+    .chatbot-container.expanded .chatbot-input textarea,
+    .chatbot-container.expanded-fullsize .chatbot-input textarea {
+        font-size: 1.15em;
+    }
+    
+    .chatbot-container.expanded-fullsize .chatbot-input textarea {
+        font-size: 1.2em;
+    }
+
+    .chatbot-button {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        width: 60px;
+        height: 60px;
+        background: #f47b20;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        box-shadow: 0 5px 40px rgba(0, 0, 0, 0.16);
+        z-index: 999;
+        transition: all 0.3s ease;
+    }
+
+    .chatbot-button.hidden {
+        transform: scale(0);
+        opacity: 0;
+    }
+
+    .chatbot-button i {
+        font-size: 24px;
+        color: white;
+    }
+
+    .chatbot-header {
+        background: #f47b20;
+        color: white;
+        padding: 15px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .chatbot-title {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: bold;
+    }
+
+    .chatbot-logo {
+        width: 24px;
+        height: 24px;
+    }
+
+    .chatbot-controls {
+        display: flex;
+        gap: 5px;
+    }
+
+    .btn-expand, .btn-minimize, .btn-close {
+        border: none;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+        width: 24px;
+        height: 24px;
+        line-height: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 4px;
+        margin-left: 5px;
+    }
+    
+    .btn-expand {
+        background: #f58c37;
+        font-size: 14px;
+    }
+    
+    .btn-minimize, .btn-close {
+        background: none;
+    }
+
+    .chatbot-body {
+        flex: 1;
+        overflow-y: auto;
+        padding: 15px;
+        background: #f5f5f5;
+    }
+
+    .chatbot-messages {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .message {
+        max-width: 80%;
+        padding: 5px;
+    }
+
+    .message.user {
+        align-self: flex-end;
+    }
+
+    .message.bot {
+        align-self: flex-start;
+    }
+
+    .message-content {
+        padding: 10px 15px;
+        border-radius: 15px;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    }
+
+    .user .message-content {
+        background: #f47b20;
+        color: white;
+        border-bottom-right-radius: 5px;
+    }
+
+    .bot .message-content {
+        background: white;
+        color: #333;
+        border-bottom-left-radius: 5px;
+    }
+
+    .bot.error .message-content {
+        background: #ffdddd;
+        color: #d8000c;
+    }
+
+    .chatbot-input {
+        padding: 10px;
+        border-top: 1px solid #e0e0e0;
+        display: flex;
+        background: white;
+    }
+
+    .chatbot-input textarea {
+        flex: 1;
+        border: 1px solid #e0e0e0;
+        border-radius: 20px;
+        padding: 8px 15px;
+        font-size: 14px;
+        outline: none;
+        resize: none;
+        overflow-y: hidden;
+        min-height: 20px;
+        max-height: 100px;
+        transition: height 0.2s ease;
+    }
+
+    .chatbot-input button {
+        margin-left: 10px;
+        background: #f47b20;
+        color: white;
+        border: none;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+    }
+
+    .typing-indicator {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+    }
+
+    .typing-indicator span {
+        width: 8px;
+        height: 8px;
+        background: #888;
+        border-radius: 50%;
+        animation: typing 1s infinite;
+    }
+
+    .typing-indicator span:nth-child(1) {
+        animation-delay: 0s;
+    }
+
+    .typing-indicator span:nth-child(2) {
+        animation-delay: 0.2s;
+    }
+
+    .typing-indicator span:nth-child(3) {
+        animation-delay: 0.4s;
+    }
+
+    @@keyframes typing {
+        0%, 100% {
+            transform: translateY(0);
+        }
+        50% {
+            transform: translateY(-5px);
+        }
+    }
+</style>

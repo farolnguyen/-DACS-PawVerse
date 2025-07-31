@@ -1,0 +1,240 @@
+@model PawVerse.Areas.Admin.ViewModels.OrderDetailViewModel
+@{
+    ViewData["Title"] = "Chi tiết đơn hàng #" + Model.IdDonHang;
+}
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3 d-flex justify-content-between align-items-center">
+                <h6 class="m-0 font-weight-bold text-primary">Sản phẩm đã đặt</h6>
+                <span class="badge bg-@(Model.TrangThai == "completed" ? "success" : 
+                                      Model.TrangThai == "cancelled" ? "danger" : 
+                                      Model.TrangThai == "shipping" ? "primary" : 
+                                      Model.TrangThai == "processing" ? "info" : "warning")">
+                    @(Model.TrangThai == "pending" ? "Chờ xác nhận" :
+                      Model.TrangThai == "processing" ? "Đang xử lý" :
+                      Model.TrangThai == "shipping" ? "Đang giao hàng" :
+                      Model.TrangThai == "completed" ? "Hoàn thành" : "Đã hủy")
+                </span>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Sản phẩm</th>
+                                <th class="text-center">Đơn giá</th>
+                                <th class="text-center">Số lượng</th>
+                                <th class="text-end">Thành tiền</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.ChiTietDonHangs)
+                            {
+                                <tr>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <img src="@Url.Content(item.HinhAnh)" alt="@item.TenSanPham" style="width: 50px; height: 50px; object-fit: cover;" class="me-3">
+                                            <div>
+                                                <div class="fw-bold">@item.TenSanPham</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">@item.DonGia.ToString("N0") ₫</td>
+                                    <td class="text-center">@item.SoLuong</td>
+                                    <td class="text-end">@item.ThanhTien.ToString("N0") ₫</td>
+                                </tr>
+                            }
+                            <tr>
+                                <td colspan="3" class="text-end fw-bold">Tạm tính:</td>
+                                <td class="text-end fw-bold">@Model.TongTien.ToString("N0") ₫</td>
+                            </tr>
+                            @if (Model.GiamGia.HasValue && Model.GiamGia > 0)
+                            {
+                                <tr>
+                                    <td colspan="3" class="text-end">Giảm giá (@Model.CouponCode):</td>
+                                    <td class="text-end text-danger">-@Model.GiamGia.Value.ToString("N0") ₫</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3" class="text-end fw-bold">Tổng cộng:</td>
+                                    <td class="text-end fw-bold">@Model.ThanhTien.ToString("N0") ₫</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Thông tin đơn hàng</h6>
+            </div>
+            <div class="card-body">
+                <div class="mb-3">
+                    <h6>Mã đơn hàng: <span class="fw-normal">#@Model.IdDonHang</span></h6>
+                    <h6>Ngày đặt: <span class="fw-normal">@Model.NgayDatHang.ToString("dd/MM/yyyy HH:mm")</span></h6>
+                    @if (Model.NgayGiaoHangDuKien.HasValue)
+                    {
+                        <h6>Dự kiến giao: <span class="fw-normal">@Model.NgayGiaoHangDuKien.Value.ToString("dd/MM/yyyy")</span></h6>
+                    }
+                    @if (Model.NgayHuy.HasValue)
+                    {
+                        <h6>Ngày hủy: <span class="fw-normal text-danger">@Model.NgayHuy.Value.ToString("dd/MM/yyyy HH:mm")</span></h6>
+                    }
+                    <h6>Phương thức thanh toán: <span class="fw-normal">@Model.PhuongThucThanhToan</span></h6>
+                </div>
+                
+                <div class="mb-3">
+                    <h6 class="border-bottom pb-2">Thông tin khách hàng</h6>
+                    <p class="mb-1">@Model.TenKhachHang</p>
+                    <p class="mb-1">@Model.SoDienThoai</p>
+                    <p class="mb-0">@Model.DiaChiGiaoHang</p>
+                </div>
+                
+                @if (Model.TrangThai != "completed" && Model.TrangThai != "cancelled")
+                {
+                    <div class="d-grid gap-2">
+                        <a asp-action="Edit" asp-route-id="@Model.IdDonHang" class="btn btn-warning">
+                            <i class="fas fa-edit me-1"></i> Cập nhật trạng thái
+                        </a>
+                    </div>
+                }
+                @if (Model.TrangThai == "completed" || Model.TrangThai == "shipping")
+                {
+                    <div class="d-grid gap-2 mt-2">
+                        <a asp-action="GenerateInvoicePdf" asp-route-orderId="@Model.IdDonHang" class="btn btn-success">
+                            <i class="fas fa-file-pdf me-1"></i> Xuất hóa đơn (PDF)
+                        </a>
+                    </div>
+                }
+            </div>
+        </div>
+        
+        <div class="card shadow">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Lịch sử trạng thái</h6>
+            </div>
+            <div class="card-body">
+                <div class="timeline">
+                    <div class="timeline-item @(Model.TrangThai != "pending" ? "completed" : "")">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <h6>Đơn hàng đã đặt</h6>
+                            <p class="text-muted small mb-0">@Model.NgayDatHang.ToString("dd/MM/yyyy HH:mm")</p>
+                        </div>
+                    </div>
+                    
+                    @if (Model.TrangThai == "processing" || Model.TrangThai == "shipping" || Model.TrangThai == "completed")
+                    {
+                        <div class="timeline-item @(Model.TrangThai != "processing" ? "completed" : "")">
+                            <div class="timeline-marker"></div>
+                            <div class="timeline-content">
+                                <h6>Đã xác nhận đơn hàng</h6>
+                                <p class="text-muted small mb-0">@Model.NgayDatHang.AddMinutes(30).ToString("dd/MM/yyyy HH:mm")</p>
+                            </div>
+                        </div>
+                    }
+                    
+                    @if (Model.TrangThai == "shipping" || Model.TrangThai == "completed")
+                    {
+                        <div class="timeline-item @(Model.TrangThai != "shipping" ? "completed" : "")">
+                            <div class="timeline-marker"></div>
+                            <div class="timeline-content">
+                                <h6>Đang giao hàng</h6>
+                                @if (Model.NgayGiaoHangDuKien.HasValue)
+                                {
+                                    <p class="text-muted small mb-0">Dự kiến: @Model.NgayGiaoHangDuKien.Value.ToString("dd/MM/yyyy")</p>
+                                }
+                            </div>
+                        </div>
+                    }
+                    
+                    @if (Model.TrangThai == "completed")
+                    {
+                        <div class="timeline-item completed">
+                            <div class="timeline-marker"></div>
+                            <div class="timeline-content">
+                                <h6>Giao hàng thành công</h6>
+                                <p class="text-muted small mb-0">@Model.NgayGiaoHangDuKien?.AddHours(2).ToString("dd/MM/yyyy HH:mm")</p>
+                            </div>
+                        </div>
+                    }
+                    
+                    @if (Model.TrangThai == "cancelled")
+                    {
+                        <div class="timeline-item cancelled">
+                            <div class="timeline-marker"></div>
+                            <div class="timeline-content">
+                                <h6>Đơn hàng đã hủy</h6>
+                                @if (Model.NgayHuy.HasValue)
+                                {
+                                    <p class="text-muted small mb-0">@Model.NgayHuy.Value.ToString("dd/MM/yyyy HH:mm")</p>
+                                }
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="mb-4">
+    <a asp-action="Index" class="btn btn-secondary">
+        <i class="fas fa-arrow-left me-1"></i> Quay lại danh sách
+    </a>
+</div>
+
+@section Styles {
+    <style>
+        .timeline {
+            position: relative;
+            padding-left: 20px;
+        }
+        
+        .timeline-item {
+            position: relative;
+            padding-bottom: 20px;
+            border-left: 2px solid #e9ecef;
+            padding-left: 25px;
+        }
+        
+        .timeline-item:last-child {
+            border-left: 2px solid transparent;
+        }
+        
+        .timeline-item.completed {
+            border-left-color: #198754;
+        }
+        
+        .timeline-item.cancelled {
+            border-left-color: #dc3545;
+        }
+        
+        .timeline-marker {
+            position: absolute;
+            left: -8px;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background-color: #6c757d;
+            top: 4px;
+        }
+        
+        .timeline-item.completed .timeline-marker {
+            background-color: #198754;
+        }
+        
+        .timeline-item.cancelled .timeline-marker {
+            background-color: #dc3545;
+        }
+        
+        .timeline-content {
+            margin-bottom: 15px;
+        }
+    </style>
+}

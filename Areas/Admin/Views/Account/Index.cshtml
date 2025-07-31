@@ -1,0 +1,182 @@
+@model IEnumerable<PawVerse.Areas.Admin.Models.UserListViewModel>
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<ApplicationUser> UserManager
+@using PawVerse.Areas.Admin.Models
+@{
+    ViewData["Title"] = "Quản lý người dùng";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayoutV2.cshtml";
+    var userRoles = ViewBag.UserRoles as Dictionary<string, IList<string>>;
+}
+
+<nav aria-label="breadcrumb" class="mb-4">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/admin">Trang chủ</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Quản lý người dùng</li>
+    </ol>
+</nav>
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1>Quản lý người dùng</h1>
+</div>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        @TempData["SuccessMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        @TempData["ErrorMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3 d-flex justify-content-between align-items-center">
+        <h6 class="m-0 font-weight-bold text-primary">Danh sách người dùng</h6>
+        <div class="input-group" style="width: 300px;">
+            <input type="text" id="searchInput" class="form-control" placeholder="Tìm kiếm người dùng...">
+            <button class="btn btn-outline-secondary" type="button" id="searchButton">
+                <i class="fas fa-search"></i>
+            </button>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Ảnh đại diện</th>
+                        <th>Họ tên</th>
+                        <th>Email</th>
+                        <th>Điện thoại</th>
+                        <th>Vai trò</th>
+                        <th>Trạng thái tài khoản</th>
+                        <th>Ngày tạo</th>
+                        <th>Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var user in Model)
+                    {
+                        <tr>
+                            <td class="text-center">
+                                @if (!string.IsNullOrEmpty(user.Avatar))
+                                {
+                                    // Handle both paths with and without ~
+                                    var avatarPath = user.Avatar.StartsWith("~/") ? Url.Content(user.Avatar) : user.Avatar;
+                                    <img src="@avatarPath" alt="@user.FullName" class="rounded-circle" style="width: 40px; height: 40px; object-fit: cover;">
+                                }
+                                else
+                                {
+                                    <div class="bg-secondary rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                                        <i class="fas fa-user text-white"></i>
+                                    </div>
+                                }
+                            </td>
+                            <td>@user.FullName</td>
+                            <td>@user.Email</td>
+                            <td>@(user.PhoneNumber ?? "N/A")</td>
+                            <td>
+                                @if (userRoles.ContainsKey(user.Id) && userRoles[user.Id].Any())
+                                {
+                                    foreach (var role in userRoles[user.Id])
+                                    {
+                                        <span class="badge bg-primary me-1">@role</span>
+                                    }
+                                }
+                                else
+                                {
+                                    <span class="badge bg-secondary">Chưa có vai trò</span>
+                                }
+                            </td>
+                            <td>
+                                @if (user.LockoutEnabled && user.LockoutEnd != null && user.LockoutEnd > DateTimeOffset.Now)
+                                {
+                                    <span class="badge bg-danger">Đã khóa</span>
+                                }
+                                else if (user.EmailConfirmed)
+                                {
+                                    <span class="badge bg-success">Hoạt động</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-warning">Chưa xác thực</span>
+                                }
+                            </td>
+                            <td>@user.NgayTao.ToString("dd/MM/yyyy")</td>
+                            <td>
+                                <div class="btn-group" role="group">
+                                    <a asp-area="Admin" asp-controller="Account" asp-action="Details" asp-route-id="@user.Id" class="btn btn-info btn-sm" data-bs-toggle="tooltip" title="Xem chi tiết">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
+                                    <a asp-area="Admin" asp-controller="Account" asp-action="ChangePassword" asp-route-id="@user.Id" class="btn btn-warning btn-sm" data-bs-toggle="tooltip" title="Đặt lại mật khẩu">
+                                        <i class="fas fa-key"></i>
+                                    </a>
+                                    @if (user.LockoutEnabled && user.LockoutEnd != null && user.LockoutEnd > DateTimeOffset.Now)
+                                    {
+                                        <form asp-area="Admin" asp-controller="Account" asp-action="UnlockUser" method="post" class="d-inline" onsubmit="return confirm('Bạn có chắc chắn muốn mở khóa tài khoản này?');">
+                                            <input type="hidden" name="userId" value="@user.Id" />
+                                            <button type="submit" class="btn btn-success btn-sm" data-bs-toggle="tooltip" title="Mở khóa tài khoản">
+                                                <i class="fas fa-lock-open"></i>
+                                            </button>
+                                        </form>
+                                    }
+                                    else
+                                    {
+                                        <form asp-area="Admin" asp-controller="Account" asp-action="LockUser" method="post" class="d-inline" onsubmit="return confirm('Bạn có chắc chắn muốn khóa tài khoản này?');">
+                                            <input type="hidden" name="userId" value="@user.Id" />
+                                            <button type="submit" class="btn btn-danger btn-sm" data-bs-toggle="tooltip" title="Khóa tài khoản">
+                                                <i class="fas fa-lock"></i>
+                                            </button>
+                                        </form>
+                                    }
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // Initialize DataTables
+        $(document).ready(function() {
+            var table = $('#dataTable').DataTable({
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.10.25/i18n/Vietnamese.json"
+                },
+                "columnDefs": [
+                    { "orderable": false, "targets": [0, 7] },
+                    { "searchable": false, "targets": [0, 4, 5, 6, 7] }
+                ],
+                "order": [[1, "asc"]],
+                "responsive": true
+            });
+
+            // Search functionality
+            $('#searchButton').on('click', function() {
+                table.search($('#searchInput').val()).draw();
+            });
+
+            $('#searchInput').on('keyup', function(e) {
+                if (e.key === 'Enter') {
+                    table.search(this.value).draw();
+                }
+            });
+
+            // Initialize tooltips
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl)
+            });
+        });
+    </script>
+}

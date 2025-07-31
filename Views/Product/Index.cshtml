@@ -1,0 +1,161 @@
+@model PawVerse.Controllers.ProductController.ProductIndexViewModel
+
+@{
+    ViewData["Title"] = "PawVerse – Danh mục sản phẩm";
+}
+
+<main id="product-page">
+    <!-- ========== HERO ========== -->
+    <section class="hero">
+        <div class="hero__inner">
+            <!-- LEFT -->
+            <div class="hero__text">
+                <span class="hero__badge">PawVerse</span>
+                <h1 class="hero__title">
+                    A pet store <br>
+                    with <span class="highlight">everything</span><br>
+                    you need
+                </h1>
+                <p class="hero__desc">
+                    Không chỉ yêu thương – PawVerse tôn vinh vẻ đẹp, sức khỏe và
+                    hạnh phúc của thú cưng từng ngày.
+                </p>
+                <a href="#categories" class="btn-cta">Mua ngay</a>
+            </div>
+
+            <!-- RIGHT -->
+            <div class="hero__visual">
+                <img src="~/images/dogeatkem.png" class="hero__dog"  alt="Dog licking ice-cream">
+                <img src="~/images/birdfly.png"   class="hero__bird" alt="">
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== PRODUCT SECTION ========== -->
+    <section class="tool-category">
+        <div class="tool-container">
+            <!-- ==== SIDEBAR ==== -->
+            <aside class="tool-sidebar">
+                <h4>Danh mục sản phẩm</h4>
+                <ul>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li><a href="#" id="wishlistFilter" class="@(Model.ShowWishlist ? "active-cat" : "")">
+                            <i class="fas fa-heart"></i> Danh sách yêu thích
+                        </a></li>
+                    }
+                    <li><a href="#" data-category-id="" class="@(Model.SelectedCategoryId == null && !Model.ShowWishlist ? "active-cat" : "")">Tất cả sản phẩm</a></li>
+                    @if (Model.Categories != null && Model.Categories.Any())
+                    {
+                        foreach (var category in Model.Categories)
+                        {
+                            <li><a href="#" data-category-id="@category.IdDanhMuc" class="@(Model.SelectedCategoryId == category.IdDanhMuc ? "active-cat" : "")">@category.TenDanhMuc</a></li>
+                        }
+                    }
+                    
+                    @if (!Model.Categories?.Any() == true)
+                    {
+                        <li>Không có danh mục nào</li>
+                    }
+                </ul>
+            </aside>
+
+            <!-- ==== MAIN ==== -->
+            <main class="tool-main">
+                <!-- Tiêu đề -->
+                <h2 class="tool-title">
+                    <span id="categoryTitle">@Model.SelectedCategoryName</span>
+                    <i class="bi bi-heart-fill"></i>
+                </h2>
+
+                <!-- Thanh filter -->
+                <div class="tool-filter">
+                    <select id="brandFilter" class="form-select form-select-sm me-2" style="width: auto;">
+                        <option value="">Tất cả thương hiệu</option>
+                        @if (ViewBag.Brands != null)
+                        {
+                            foreach (var brand in ViewBag.Brands)
+                            {
+                                <option value="@brand">@brand</option>
+                            }
+                        }
+                    </select>
+                    
+                    <select id="priceFilter" class="form-select form-select-sm me-2" style="width: auto;">
+                        <option value="">Mức giá</option>
+                        <option value="0-100000">Dưới 100,000₫</option>
+                        <option value="100000-200000">100,000₫ - 200,000₫</option>
+                        <option value="200000-500000">200,000₫ - 500,000₫</option>
+                        <option value="500000-1000000">500,000₫ - 1,000,000₫</option>
+                        <option value="1000000-999999999">Trên 1,000,000₫</option>
+                    </select>
+                    
+                    <select id="sortBy" class="form-select form-select-sm" style="width: auto;">
+                        <option value="">Sắp xếp</option>
+                        <option value="name_asc">Tên A-Z</option>
+                        <option value="name_desc">Tên Z-A</option>
+                        <option value="price_asc">Giá tăng dần</option>
+                        <option value="price_desc">Giá giảm dần</option>
+                        <option value="newest">Mới nhất</option>
+                    </select>
+                </div>
+
+                <!-- Grid sản phẩm -->
+                <div id="productGrid" class="tool-grid">
+                    @if (Model.Products?.Any() == true)
+                    {
+                        foreach (var item in Model.Products)
+                        {
+                            <a asp-controller="Product"
+                               asp-action="Info"
+                               asp-route-id="@item.IdSanPham"
+                               class="tool-card-link">
+                                <div class="tool-card">
+                                    <div class="tool-img-container">
+                                        <img src="@(item.HinhAnh ?? "/images/default-product.jpg")"
+                                             class="tool-img"
+                                             alt="@item.TenSanPham" />
+                                    </div>
+                                    <div class="tool-body">
+                                        <h6 class="tool-name">@item.TenSanPham</h6>
+                                        @if (item.TrangThai?.ToLower() != "hết hàng" && item.TrangThai?.ToLower() != "out of stock")
+                                        {
+                                            <div class="price-block">
+                                                @if (item.GiaKhuyenMai.HasValue && item.GiaKhuyenMai > 0)
+                                                {
+                                                    <span class="original-price d-block">@item.GiaBan.ToString("N0")₫</span>
+                                                    <span class="discounted-price d-block">@item.GiaKhuyenMai.Value.ToString("N0")₫</span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="current-price d-block">@item.GiaBan.ToString("N0")₫</span>
+                                                }
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="price-block">
+                                                <span class="out-of-stock-message"></span> @* Để trống hoặc có thể thêm chữ 'Hết hàng' nếu muốn nhưng đã có ở dưới *@
+                                            </div>
+                                        }
+                                        <span class="stock @(item.TrangThai == "Còn hàng" ? "in" : "out")">
+                                            @item.TrangThai
+                                        </span>
+                                    </div>
+                                </div>
+                            </a>
+                        }
+                    }
+                    else
+                    {
+                        <p class="text-muted">Hiện chưa có sản phẩm nào.</p>
+                    }
+                </div>
+            </main>
+        </div>
+    </section>
+</main>
+
+@section Scripts {
+    <script src="~/js/productFilter.js"></script>
+}
