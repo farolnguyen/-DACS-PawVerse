@@ -207,12 +207,64 @@
             // Và xử lý đặc biệt các danh sách số nếu có
             if (type === 'bot') {
                 // An toàn hơn là sanitize trước khi sử dụng innerHTML
-                const sanitizedContent = content
+                let sanitizedContent = content
                     .replace(/&/g, '&amp;')
                     .replace(/</g, '&lt;')
                     .replace(/>/g, '&gt;')
                     .replace(/"/g, '&quot;')
                     .replace(/'/g, '&#039;');
+                
+                // Làm đẹp các trường được đánh dấu bằng ** hoặc dạng bullet list
+                // Thay thế các trường có định dạng **Key:** hoặc - Key: bằng icon + formatting
+                
+                // 1. Xử lý định dạng **Field:** (markdown)
+                sanitizedContent = sanitizedContent
+                    // Tên sản phẩm
+                    .replace(/\*\*Tên sản phẩm:\*\*/gi, '<span class="chat-field"><i class="fa fa-tag"></i> Tên sản phẩm:</span>')
+                    // Giá bán
+                    .replace(/\*\*Giá bán:\*\*/gi, '<span class="chat-field"><i class="fa fa-dollar"></i> Giá bán:</span>')
+                    // Mô tả
+                    .replace(/\*\*Mô tả:\*\*/gi, '<span class="chat-field"><i class="fa fa-info-circle"></i> Mô tả:</span>')
+                    // Xuất xứ
+                    .replace(/\*\*Xuất xứ:\*\*/gi, '<span class="chat-field"><i class="fa fa-globe"></i> Xuất xứ:</span>')
+                    // Thương hiệu
+                    .replace(/\*\*Thương hiệu:\*\*/gi, '<span class="chat-field"><i class="fa fa-copyright"></i> Thương hiệu:</span>')
+                    // Trạng thái
+                    .replace(/\*\*Trạng thái:\*\*/gi, '<span class="chat-field"><i class="fa fa-check-circle"></i> Trạng thái:</span>')
+                    // Danh mục
+                    .replace(/\*\*Danh mục:\*\*/gi, '<span class="chat-field"><i class="fa fa-folder"></i> Danh mục:</span>')
+                    // Công dụng
+                    .replace(/\*\*Công dụng:\*\*/gi, '<span class="chat-field"><i class="fa fa-wrench"></i> Công dụng:</span>')
+                    // Dạng sản phẩm
+                    .replace(/\*\*Dạng sản phẩm:\*\*/gi, '<span class="chat-field"><i class="fa fa-cube"></i> Dạng sản phẩm:</span>')
+                    // Tần suất sử dụng
+                    .replace(/\*\*Tần suất sử dụng:\*\*/gi, '<span class="chat-field"><i class="fa fa-calendar"></i> Tần suất sử dụng:</span>')
+                    // Chất liệu
+                    .replace(/\*\*Chất liệu:\*\*/gi, '<span class="chat-field"><i class="fa fa-cubes"></i> Chất liệu:</span>')
+                    // Tìm kiếm bất kỳ công thức **XXX:** nào chưa được xử lý
+                    .replace(/\*\*([^:]+):\*\*/g, '<span class="chat-field"><i class="fa fa-star"></i> $1:</span>')
+                    
+                    // 2. Xử lý định dạng - Field: (bullet list)
+                    // Tên sản phẩm
+                    .replace(/- Tên sản phẩm:/gi, '<span class="chat-field"><i class="fa fa-tag"></i> Tên sản phẩm:</span>')
+                    // Giá bán
+                    .replace(/- Giá bán:/gi, '<span class="chat-field"><i class="fa fa-dollar"></i> Giá bán:</span>')
+                    // Danh mục
+                    .replace(/- Danh mục:/gi, '<span class="chat-field"><i class="fa fa-folder"></i> Danh mục:</span>')
+                    // Loại thú cưng
+                    .replace(/- Loại thú cưng:/gi, '<span class="chat-field"><i class="fa fa-paw"></i> Loại thú cưng:</span>')
+                    // Giống loài
+                    .replace(/- Giống loài:/gi, '<span class="chat-field"><i class="fa fa-dna"></i> Giống loài:</span>')
+                    // Trọng lượng cơ thể
+                    .replace(/- Trọng lượng cơ thể:/gi, '<span class="chat-field"><i class="fa fa-balance-scale"></i> Trọng lượng cơ thể:</span>')
+                    // Độ tuổi
+                    .replace(/- Độ tuổi:/gi, '<span class="chat-field"><i class="fa fa-birthday-cake"></i> Độ tuổi:</span>')
+                    // Xuất xứ
+                    .replace(/- Xuất xứ:/gi, '<span class="chat-field"><i class="fa fa-globe"></i> Xuất xứ:</span>')
+                    // Công dụng
+                    .replace(/- Công dụng:/gi, '<span class="chat-field"><i class="fa fa-wrench"></i> Công dụng:</span>')
+                    // Tìm kiếm bất kỳ bullet list "- XXX:" nào chưa được xử lý
+                    .replace(/- ([^:]+):/gi, '<span class="chat-field"><i class="fa fa-circle"></i> $1:</span>');
                     
                 // Chuyển đổi các dòng mới thành thẻ <br>
                 const formattedContent = sanitizedContent.replace(/\n/g, '<br>');
@@ -497,6 +549,29 @@
 
     .typing-indicator span:nth-child(3) {
         animation-delay: 0.4s;
+    }
+    
+    /* CSS định dạng trường thông tin trong chatbot */
+    .chat-field {
+        display: inline-block;
+        font-weight: bold;
+        color: #f47b20;
+        margin-top: 8px;
+        margin-bottom: 2px;
+    }
+    
+    .chat-field i {
+        margin-right: 5px;
+    }
+    
+    /* Thêm margin cho tin nhắn của bot để phân cách các phần */
+    .bot .message-content {
+        line-height: 1.5;
+    }
+    
+    /* Đường kẻ ngang giữa các trường dữ liệu */
+    .chat-field + br {
+        margin-bottom: 5px;
     }
 
     @@keyframes typing {

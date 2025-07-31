@@ -8943,11 +8943,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "F:\\1Hutech\\LTWEB\\WEB\\PawVerse\\PawVerse.csproj",
+      "projectUniqueName": "F:\\1Hutech\\DACS\\PawVerse\\PawVerse.csproj",
       "projectName": "PawVerse",
-      "projectPath": "F:\\1Hutech\\LTWEB\\WEB\\PawVerse\\PawVerse.csproj",
+      "projectPath": "F:\\1Hutech\\DACS\\PawVerse\\PawVerse.csproj",
       "packagesPath": "C:\\Users\\FAROL\\.nuget\\packages\\",
-      "outputPath": "F:\\1Hutech\\LTWEB\\WEB\\PawVerse\\obj\\",
+      "outputPath": "F:\\1Hutech\\DACS\\PawVerse\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "D:\\DEV\\DevIDE\\VSStudio\\Shared\\NuGetPackages"

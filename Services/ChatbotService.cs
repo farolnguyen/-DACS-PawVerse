@@ -139,8 +139,7 @@ namespace PawVerse.Services
                                 try
                                 {
                                     var dataJson = JsonDocument.Parse(dataStr);
-                                    // Trong một số trường hợp, data sẽ chứa các chunked content từ knowledge base
-                                    // Ta có thể bỏ qua dữ liệu này vì đây là thông tin nội bộ
+                                    
                                     _logger.LogInformation("Data field contains valid JSON, but likely internal data. Searching for answer elsewhere.");
                                 }
                                 catch
