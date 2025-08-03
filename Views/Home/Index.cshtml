@@ -35,57 +35,59 @@
     </div>
     </section>
     <!-- DANH MỤC SẢN PHẨM ======================================== -->
-    <div class="container categories">
+    <div class="container categories" id="categories">
     <h2 class="cat-title text-center mb-4">Danh mục sản phẩm</h2>
 
     <div class="row g-4">
-        <!-- CARD 1 -->
-        <div class="col-12 col-sm-6 col-lg-3">
-        <a asp-controller="Product" asp-action="Index" asp-route-categoryId="@ViewData["ToyCategoryId"]" class="cat-card">
-            <img src="~/images/catephukien.png"   alt="Đồ chơi"  class="cat-img">
-            <div class="cat-body">
-            <h5>Phụ kiện &amp; Đồ chơi</h5>
-            <span class="cat-count">@ViewData["ToyProductCount"] sản phẩm</span>
-            <i class="bi bi-arrow-right-short cat-arrow"></i>
-            </div>
-        </a>
-        </div>
+        @{
+            var categories = ViewData["Categories"] as IEnumerable<dynamic>;
+            if (categories != null && categories.Any())
+            {
+                // Dictionary ánh xạ tên danh mục với hình ảnh mặc định
+                var defaultImages = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+                {
+                    { "Phụ kiện & Đồ chơi", "/images/categories/catephukien.png" },
+                    { "Thực phẩm", "/images/categories/catephukien.png" },
+                    { "Nội thất", "/images/categories/catephukien.png" },
+                    { "Trang phục", "/images/categories/catephukien.png" },
+                    { "default", "/images/default-category.png" }
+                };
 
-        <!-- CARD 2 -->
-        <div class="col-12 col-sm-6 col-lg-3">
-        <a asp-controller="Product" asp-action="Index" asp-route-categoryId="@ViewData["FoodCategoryId"]" class="cat-card">
-            <img src="~/images/catethucpham.png"  alt="Thức phẩm" class="cat-img">
-            <div class="cat-body">
-            <h5>Thực phẩm</h5>
-            <span class="cat-count">@ViewData["FoodProductCount"] sản phẩm</span>
-            <i class="bi bi-arrow-right-short cat-arrow"></i>
-            </div>
-        </a>
-        </div>
+                foreach (var category in categories)
+                {
+                    string imagePath;
+                    if (!string.IsNullOrEmpty(category.Image))
+                    {
+                        imagePath = category.Image;
+                    }
+                    else if (defaultImages.TryGetValue(category.Name, out string defaultImage))
+                    {
+                        imagePath = defaultImage;
+                    }
+                    else
+                    {
+                        imagePath = defaultImages["default"];
+                    }
 
-        <!-- CARD 3 -->
-        <div class="col-12 col-sm-6 col-lg-3">
-        <a asp-controller="Product" asp-action="Index" asp-route-categoryId="@ViewData["InteriorCategoryId"]" class="cat-card">
-            <img src="~/images/catenoithat.png"  alt="Nội thất" class="cat-img">
-            <div class="cat-body">
-            <h5>Nội thất</h5>
-            <span class="cat-count">@ViewData["InteriorProductCount"] sản phẩm</span>
-            <i class="bi bi-arrow-right-short cat-arrow"></i>
-            </div>
-        </a>
-        </div>
-
-        <!-- CARD 4 -->
-        <div class="col-12 col-sm-6 col-lg-3">
-        <a asp-controller="Product" asp-action="Index" asp-route-categoryId="@ViewData["FashionCategoryId"]" class="cat-card">
-            <img src="~/images/catetrangphuc.png"  alt="Trang phục" class="cat-img">
-            <div class="cat-body">
-            <h5>Trang phục</h5>
-            <span class="cat-count">@ViewData["FashionProductCount"] sản phẩm</span>
-            <i class="bi bi-arrow-right-short cat-arrow"></i>
-            </div>
-        </a>
-        </div>
+                    <div class="col-12 col-sm-6 col-lg-3 mb-4">
+                        <a asp-controller="Product" asp-action="Index" asp-route-categoryId="@category.Id" class="cat-card">
+                            <img src="@imagePath" alt="@category.Name" class="cat-img">
+                            <div class="cat-body">
+                                <h5>@category.Name</h5>
+                                <span class="cat-count">@category.ProductCount sản phẩm</span>
+                                <i class="bi bi-arrow-right-short cat-arrow"></i>
+                            </div>
+                        </a>
+                    </div>
+                }
+            }
+            else
+            {
+                <div class="col-12 text-center">
+                    <p>Không tìm thấy danh mục nào.</p>
+                </div>
+            }
+        }
     </div>
     </div>
     <!-- THƯƠNG HIỆU NỔI BẬT -------------------------------------->

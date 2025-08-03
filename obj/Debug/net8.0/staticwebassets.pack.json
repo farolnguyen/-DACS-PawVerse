@@ -1,0 +1,1325 @@
+{
+  "Files": [
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\aboutus\\AnhJ.png",
+      "PackagePath": "staticwebassets\\Images\\aboutus\\AnhJ.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\aboutus\\womanwithdog.png",
+      "PackagePath": "staticwebassets\\Images\\aboutus\\womanwithdog.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\bgcute.png",
+      "PackagePath": "staticwebassets\\Images\\bgcute.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\bigdog.png",
+      "PackagePath": "staticwebassets\\Images\\bigdog.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\birdfly.png",
+      "PackagePath": "staticwebassets\\Images\\birdfly.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\blob.png",
+      "PackagePath": "staticwebassets\\Images\\blob.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\brands\\Bowwow.jpg",
+      "PackagePath": "staticwebassets\\Images\\brands\\Bowwow.jpg"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\brands\\BudleBudle.jpg",
+      "PackagePath": "staticwebassets\\Images\\brands\\BudleBudle.jpg"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\brands\\Catsrang.jpg",
+      "PackagePath": "staticwebassets\\Images\\brands\\Catsrang.jpg"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\brands\\Catty.jpg",
+      "PackagePath": "staticwebassets\\Images\\brands\\Catty.jpg"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\brands\\CattyMan.jpg",
+      "PackagePath": "staticwebassets\\Images\\brands\\CattyMan.jpg"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\brands\\Cature.jpg",
+      "PackagePath": "staticwebassets\\Images\\brands\\Cature.jpg"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\brands\\DoggyMan.jpg",
+      "PackagePath": "staticwebassets\\Images\\brands\\DoggyMan.jpg"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\brands\\Drontal.jpg",
+      "PackagePath": "staticwebassets\\Images\\brands\\Drontal.jpg"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\brands\\Frontline.jpg",
+      "PackagePath": "staticwebassets\\Images\\brands\\Frontline.jpg"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\brands\\GanadoAdult.jpg",
+      "PackagePath": "staticwebassets\\Images\\brands\\GanadoAdult.jpg"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\brands\\KingsPet.jpg",
+      "PackagePath": "staticwebassets\\Images\\brands\\KingsPet.jpg"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\brands\\LOGO_Pawver.png",
+      "PackagePath": "staticwebassets\\Images\\brands\\LOGO_Pawver.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\brands\\Lapaw.jpg",
+      "PackagePath": "staticwebassets\\Images\\brands\\Lapaw.jpg"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\brands\\MeO.jpg",
+      "PackagePath": "staticwebassets\\Images\\brands\\MeO.jpg"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\brands\\Miratorg.jpg",
+      "PackagePath": "staticwebassets\\Images\\brands\\Miratorg.jpg"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\brands\\ND.jpg",
+      "PackagePath": "staticwebassets\\Images\\brands\\ND.jpg"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\brands\\NexgardSpectra.jpg",
+      "PackagePath": "staticwebassets\\Images\\brands\\NexgardSpectra.jpg"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\brands\\NoBrand.jpg",
+      "PackagePath": "staticwebassets\\Images\\brands\\NoBrand.jpg"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\brands\\PateHug.jpg",
+      "PackagePath": "staticwebassets\\Images\\brands\\PateHug.jpg"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\brands\\PateMeowcat.jpg",
+      "PackagePath": "staticwebassets\\Images\\brands\\PateMeowcat.jpg"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\brands\\Predogen.jpg",
+      "PackagePath": "staticwebassets\\Images\\brands\\Predogen.jpg"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\brands\\Reflex.jpg",
+      "PackagePath": "staticwebassets\\Images\\brands\\Reflex.jpg"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\brands\\Teddy.jpg",
+      "PackagePath": "staticwebassets\\Images\\brands\\Teddy.jpg"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\brands\\Tropiclean.jpg",
+      "PackagePath": "staticwebassets\\Images\\brands\\Tropiclean.jpg"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\brands\\Whiskas.jpg",
+      "PackagePath": "staticwebassets\\Images\\brands\\Whiskas.jpg"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\brands\\Yu.jpg",
+      "PackagePath": "staticwebassets\\Images\\brands\\Yu.jpg"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\brands\\Zenith.jpg",
+      "PackagePath": "staticwebassets\\Images\\brands\\Zenith.jpg"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\brands\\catit.jpg",
+      "PackagePath": "staticwebassets\\Images\\brands\\catit.jpg"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\brands\\ferplast.jpg",
+      "PackagePath": "staticwebassets\\Images\\brands\\ferplast.jpg"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\brands\\royal-canin.png",
+      "PackagePath": "staticwebassets\\Images\\brands\\royal-canin.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\categories\\BanhThuong.png",
+      "PackagePath": "staticwebassets\\Images\\categories\\BanhThuong.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\categories\\DoChoi.png",
+      "PackagePath": "staticwebassets\\Images\\categories\\DoChoi.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\categories\\DungCu.png",
+      "PackagePath": "staticwebassets\\Images\\categories\\DungCu.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\categories\\Pate.png",
+      "PackagePath": "staticwebassets\\Images\\categories\\Pate.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\categories\\PhuKien.png",
+      "PackagePath": "staticwebassets\\Images\\categories\\PhuKien.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\categories\\ThucAnHat.png",
+      "PackagePath": "staticwebassets\\Images\\categories\\ThucAnHat.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\categories\\ThucPhamChucNang.png",
+      "PackagePath": "staticwebassets\\Images\\categories\\ThucPhamChucNang.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\categories\\VeSinh.png",
+      "PackagePath": "staticwebassets\\Images\\categories\\VeSinh.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\categories\\catenoithat.png",
+      "PackagePath": "staticwebassets\\Images\\categories\\catenoithat.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\categories\\catephukien.png",
+      "PackagePath": "staticwebassets\\Images\\categories\\catephukien.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\categories\\catethucpham.png",
+      "PackagePath": "staticwebassets\\Images\\categories\\catethucpham.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\categories\\catetrangphuc.png",
+      "PackagePath": "staticwebassets\\Images\\categories\\catetrangphuc.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\default-product.jpg",
+      "PackagePath": "staticwebassets\\Images\\default-product.jpg"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\dogeatkem.png",
+      "PackagePath": "staticwebassets\\Images\\dogeatkem.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\headerandfooter\\Logo.png",
+      "PackagePath": "staticwebassets\\Images\\headerandfooter\\Logo.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\headerandfooter\\Logobig.png",
+      "PackagePath": "staticwebassets\\Images\\headerandfooter\\Logobig.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\headerandfooter\\bg-footer.png",
+      "PackagePath": "staticwebassets\\Images\\headerandfooter\\bg-footer.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\headerandfooter\\visa.png",
+      "PackagePath": "staticwebassets\\Images\\headerandfooter\\visa.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\icons\\github-logo.svg",
+      "PackagePath": "staticwebassets\\Images\\icons\\github-logo.svg"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\icons\\google-logo.svg",
+      "PackagePath": "staticwebassets\\Images\\icons\\google-logo.svg"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\news\\img-1.png",
+      "PackagePath": "staticwebassets\\Images\\news\\img-1.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\news\\img-2.png",
+      "PackagePath": "staticwebassets\\Images\\news\\img-2.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\news\\img-3.png",
+      "PackagePath": "staticwebassets\\Images\\news\\img-3.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\picaboutus.png",
+      "PackagePath": "staticwebassets\\Images\\picaboutus.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\product\\Vongco_Heart.png",
+      "PackagePath": "staticwebassets\\Images\\product\\Vongco_Heart.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\product\\banhthuong\\bowwow_120g.png",
+      "PackagePath": "staticwebassets\\Images\\product\\banhthuong\\bowwow_120g.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\product\\banhthuong\\catty_man_30g.png",
+      "PackagePath": "staticwebassets\\Images\\product\\banhthuong\\catty_man_30g.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\product\\banhthuong\\doggy_man_100g.png",
+      "PackagePath": "staticwebassets\\Images\\product\\banhthuong\\doggy_man_100g.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\product\\banhthuong\\meo_50g.png",
+      "PackagePath": "staticwebassets\\Images\\product\\banhthuong\\meo_50g.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\product\\banhthuong\\que_co_meo_200g.png",
+      "PackagePath": "staticwebassets\\Images\\product\\banhthuong\\que_co_meo_200g.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\product\\best\\batancham.png",
+      "PackagePath": "staticwebassets\\Images\\product\\best\\batancham.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\product\\best\\batandoi.png",
+      "PackagePath": "staticwebassets\\Images\\product\\best\\batandoi.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\product\\best\\botgiammangbam.png",
+      "PackagePath": "staticwebassets\\Images\\product\\best\\botgiammangbam.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\product\\best\\catvesinh.png",
+      "PackagePath": "staticwebassets\\Images\\product\\best\\catvesinh.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\product\\best\\nemdabao.png",
+      "PackagePath": "staticwebassets\\Images\\product\\best\\nemdabao.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\product\\best\\nvs.png",
+      "PackagePath": "staticwebassets\\Images\\product\\best\\nvs.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\product\\best\\pate.png",
+      "PackagePath": "staticwebassets\\Images\\product\\best\\pate.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\product\\best\\vongco.png",
+      "PackagePath": "staticwebassets\\Images\\product\\best\\vongco.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\product\\catfood.png",
+      "PackagePath": "staticwebassets\\Images\\product\\catfood.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\product\\dochoi\\ban_cao_mong.png",
+      "PackagePath": "staticwebassets\\Images\\product\\dochoi\\ban_cao_mong.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\product\\dochoi\\ca_lon.png",
+      "PackagePath": "staticwebassets\\Images\\product\\dochoi\\ca_lon.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\product\\dochoi\\chuong_huan_luyen.png",
+      "PackagePath": "staticwebassets\\Images\\product\\dochoi\\chuong_huan_luyen.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\product\\dochoi\\que_tet_45cm.png",
+      "PackagePath": "staticwebassets\\Images\\product\\dochoi\\que_tet_45cm.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\product\\dochoi\\tru_cao_65cm.png",
+      "PackagePath": "staticwebassets\\Images\\product\\dochoi\\tru_cao_65cm.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\product\\dogfood.png",
+      "PackagePath": "staticwebassets\\Images\\product\\dogfood.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\product\\dogsnack.png",
+      "PackagePath": "staticwebassets\\Images\\product\\dogsnack.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\product\\dungcu\\bat_trai_dau.png",
+      "PackagePath": "staticwebassets\\Images\\product\\dungcu\\bat_trai_dau.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\product\\dungcu\\binh_thuc_an.png",
+      "PackagePath": "staticwebassets\\Images\\product\\dungcu\\binh_thuc_an.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\product\\dungcu\\cay_lan_long.png",
+      "PackagePath": "staticwebassets\\Images\\product\\dungcu\\cay_lan_long.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\product\\dungcu\\luoc_bo_chet.png",
+      "PackagePath": "staticwebassets\\Images\\product\\dungcu\\luoc_bo_chet.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\product\\dungcu\\may_loc_nuoc.png",
+      "PackagePath": "staticwebassets\\Images\\product\\dungcu\\may_loc_nuoc.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\product\\kibble_wh.png",
+      "PackagePath": "staticwebassets\\Images\\product\\kibble_wh.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\product\\pate\\pate_hug_120g.png",
+      "PackagePath": "staticwebassets\\Images\\product\\pate\\pate_hug_120g.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\product\\pate\\pate_kings_pet_380g.png",
+      "PackagePath": "staticwebassets\\Images\\product\\pate\\pate_kings_pet_380g.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\product\\pate\\pate_meowcat_70g.png",
+      "PackagePath": "staticwebassets\\Images\\product\\pate\\pate_meowcat_70g.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\product\\pate\\pate_miratorg_85g.png",
+      "PackagePath": "staticwebassets\\Images\\product\\pate\\pate_miratorg_85g.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\product\\pate\\pate_whiskas_400g.png",
+      "PackagePath": "staticwebassets\\Images\\product\\pate\\pate_whiskas_400g.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\product\\pate_rc.png",
+      "PackagePath": "staticwebassets\\Images\\product\\pate_rc.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\product\\phukien\\balo_phuong_gia.png",
+      "PackagePath": "staticwebassets\\Images\\product\\phukien\\balo_phuong_gia.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\product\\phukien\\day_dat_balo.png",
+      "PackagePath": "staticwebassets\\Images\\product\\phukien\\day_dat_balo.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\product\\phukien\\ro_mom_hong.png",
+      "PackagePath": "staticwebassets\\Images\\product\\phukien\\ro_mom_hong.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\product\\phukien\\vay_trung_thu.png",
+      "PackagePath": "staticwebassets\\Images\\product\\phukien\\vay_trung_thu.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\product\\phukien\\vong_co_chuong.png",
+      "PackagePath": "staticwebassets\\Images\\product\\phukien\\vong_co_chuong.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\product\\supplement_anf.png",
+      "PackagePath": "staticwebassets\\Images\\product\\supplement_anf.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\product\\thucanhat\\catsrang_2kg.png",
+      "PackagePath": "staticwebassets\\Images\\product\\thucanhat\\catsrang_2kg.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\product\\thucanhat\\ganado_3kg.png",
+      "PackagePath": "staticwebassets\\Images\\product\\thucanhat\\ganado_3kg.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\product\\thucanhat\\lapaw_400g.png",
+      "PackagePath": "staticwebassets\\Images\\product\\thucanhat\\lapaw_400g.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\product\\thucanhat\\reflex_2kg.png",
+      "PackagePath": "staticwebassets\\Images\\product\\thucanhat\\reflex_2kg.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\product\\thucanhat\\zenith_1.2kg.png",
+      "PackagePath": "staticwebassets\\Images\\product\\thucanhat\\zenith_1.2kg.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\product\\thucphamchucnang\\drontal_cho.png",
+      "PackagePath": "staticwebassets\\Images\\product\\thucphamchucnang\\drontal_cho.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\product\\thucphamchucnang\\frontline_meo.png",
+      "PackagePath": "staticwebassets\\Images\\product\\thucphamchucnang\\frontline_meo.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\product\\thucphamchucnang\\nexgard_spectra.png",
+      "PackagePath": "staticwebassets\\Images\\product\\thucphamchucnang\\nexgard_spectra.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\product\\thucphamchucnang\\predogen_cho_110g.png",
+      "PackagePath": "staticwebassets\\Images\\product\\thucphamchucnang\\predogen_cho_110g.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\product\\thucphamchucnang\\predogen_meo_110g.png",
+      "PackagePath": "staticwebassets\\Images\\product\\thucphamchucnang\\predogen_meo_110g.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\product\\treats_pd.png",
+      "PackagePath": "staticwebassets\\Images\\product\\treats_pd.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\product\\vesinh\\cat_cature_6l.png",
+      "PackagePath": "staticwebassets\\Images\\product\\vesinh\\cat_cature_6l.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\product\\vesinh\\dau_tam_yu.png",
+      "PackagePath": "staticwebassets\\Images\\product\\vesinh\\dau_tam_yu.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\product\\vesinh\\khay_luoi_cho.png",
+      "PackagePath": "staticwebassets\\Images\\product\\vesinh\\khay_luoi_cho.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\product\\vesinh\\xit_rang_budle.png",
+      "PackagePath": "staticwebassets\\Images\\product\\vesinh\\xit_rang_budle.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\product\\vesinh\\xit_rang_tropiclean.png",
+      "PackagePath": "staticwebassets\\Images\\product\\vesinh\\xit_rang_tropiclean.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\service\\bird.png",
+      "PackagePath": "staticwebassets\\Images\\service\\bird.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\service\\cat.png",
+      "PackagePath": "staticwebassets\\Images\\service\\cat.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\service\\dog.png",
+      "PackagePath": "staticwebassets\\Images\\service\\dog.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\service\\hotel-service.jpg",
+      "PackagePath": "staticwebassets\\Images\\service\\hotel-service.jpg"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\service\\other-service.jpg",
+      "PackagePath": "staticwebassets\\Images\\service\\other-service.jpg"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\Images\\service\\spa-service.jpg",
+      "PackagePath": "staticwebassets\\Images\\service\\spa-service.jpg"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\css\\account.css",
+      "PackagePath": "staticwebassets\\css\\account.css"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\css\\admin-v2.css",
+      "PackagePath": "staticwebassets\\css\\admin-v2.css"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\css\\adminproduct.css",
+      "PackagePath": "staticwebassets\\css\\adminproduct.css"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\css\\auth.css",
+      "PackagePath": "staticwebassets\\css\\auth.css"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\css\\cart.css",
+      "PackagePath": "staticwebassets\\css\\cart.css"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\css\\checkout.css",
+      "PackagePath": "staticwebassets\\css\\checkout.css"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\css\\identity.css",
+      "PackagePath": "staticwebassets\\css\\identity.css"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\css\\lockout.css",
+      "PackagePath": "staticwebassets\\css\\lockout.css"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\css\\order.css",
+      "PackagePath": "staticwebassets\\css\\order.css"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\css\\profile.css",
+      "PackagePath": "staticwebassets\\css\\profile.css"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\css\\sb-admin-2.min.css",
+      "PackagePath": "staticwebassets\\css\\sb-admin-2.min.css"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\css\\service.css",
+      "PackagePath": "staticwebassets\\css\\service.css"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\css\\social-login.css",
+      "PackagePath": "staticwebassets\\css\\social-login.css"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\css\\style.css",
+      "PackagePath": "staticwebassets\\css\\style.css"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\favicon.ico",
+      "PackagePath": "staticwebassets\\favicon.ico"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\js\\admin-v2.js",
+      "PackagePath": "staticwebassets\\js\\admin-v2.js"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\js\\admin-v2.min.js",
+      "PackagePath": "staticwebassets\\js\\admin-v2.min.js"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\js\\admin.js",
+      "PackagePath": "staticwebassets\\js\\admin.js"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\js\\admin\\password-utils.js",
+      "PackagePath": "staticwebassets\\js\\admin\\password-utils.js"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\js\\location.js",
+      "PackagePath": "staticwebassets\\js\\location.js"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\js\\main.js",
+      "PackagePath": "staticwebassets\\js\\main.js"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\js\\productFilter.js",
+      "PackagePath": "staticwebassets\\js\\productFilter.js"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\js\\productList.js",
+      "PackagePath": "staticwebassets\\js\\productList.js"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\js\\sb-admin-2.min.js",
+      "PackagePath": "staticwebassets\\js\\sb-admin-2.min.js"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\lib\\bootstrap\\LICENSE",
+      "PackagePath": "staticwebassets\\lib\\bootstrap"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css.map"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js.map"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\lib\\jquery-validation\\LICENSE.md",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\LICENSE.md"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\additional-methods.js"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\additional-methods.min.js"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\jquery.validate.js"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\jquery.validate.min.js"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\lib\\jquery\\LICENSE.txt",
+      "PackagePath": "staticwebassets\\lib\\jquery\\LICENSE.txt"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\lib\\jquery\\dist\\jquery.js",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.js"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\lib\\jquery\\dist\\jquery.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.js"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\avatars\\8017b204-85c6-4b6b-a346-b99cc78277f9_ERD NGK.png",
+      "PackagePath": "staticwebassets\\uploads\\avatars\\8017b204-85c6-4b6b-a346-b99cc78277f9_ERD NGK.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\avatars\\dec1dae7-c9ce-4133-9625-44e91b721eed_RDNGK.png",
+      "PackagePath": "staticwebassets\\uploads\\avatars\\dec1dae7-c9ce-4133-9625-44e91b721eed_RDNGK.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\avatars\\default-avatar.png",
+      "PackagePath": "staticwebassets\\uploads\\avatars\\default-avatar.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\categories\\f0b5c64c-862a-4e78-a346-a1cbc0632c18_ERD.png",
+      "PackagePath": "staticwebassets\\uploads\\categories\\f0b5c64c-862a-4e78-a346-a1cbc0632c18_ERD.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\00fd0753-098c-4f6a-82d2-7d0498852d94.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\00fd0753-098c-4f6a-82d2-7d0498852d94.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\0115d687-ad19-41c2-b793-4967e941a07f.jpg",
+      "PackagePath": "staticwebassets\\uploads\\products\\0115d687-ad19-41c2-b793-4967e941a07f.jpg"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\017c2a40-bec4-4c77-bf4f-3bf3d296e044.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\017c2a40-bec4-4c77-bf4f-3bf3d296e044.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\01db0f6a-1f92-4aff-8673-5fcaf42f2b3c.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\01db0f6a-1f92-4aff-8673-5fcaf42f2b3c.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\02680888-3c81-4865-9d04-f810d7a5324b.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\02680888-3c81-4865-9d04-f810d7a5324b.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\05c72b89-36f9-44b6-b317-0d512edf93aa.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\05c72b89-36f9-44b6-b317-0d512edf93aa.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\05e30761-5b40-495e-ab31-1979757ce479.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\05e30761-5b40-495e-ab31-1979757ce479.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\0bc40562-fb9d-45af-b1bc-55233f9b3231.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\0bc40562-fb9d-45af-b1bc-55233f9b3231.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\0c047bad-cad9-48a8-9860-1ef097d74c7b.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\0c047bad-cad9-48a8-9860-1ef097d74c7b.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\0ffc141a-3c4d-43c5-826c-f9f1fcbc22a0.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\0ffc141a-3c4d-43c5-826c-f9f1fcbc22a0.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\11c1ba49-7152-49f9-aff2-3d76615de0d5.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\11c1ba49-7152-49f9-aff2-3d76615de0d5.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\13a92586-8d6e-48c4-830d-1c0cbfb9f25e.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\13a92586-8d6e-48c4-830d-1c0cbfb9f25e.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\15fd74c6-a7f4-4d2c-a0cc-7d14ba48c1de.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\15fd74c6-a7f4-4d2c-a0cc-7d14ba48c1de.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\173a1310-6c18-4bc3-a64b-84baa7a9fd21.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\173a1310-6c18-4bc3-a64b-84baa7a9fd21.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\1c44a6a5-50f7-4489-8203-e71f1976fb01.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\1c44a6a5-50f7-4489-8203-e71f1976fb01.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\1cd2b5b7-5792-4e96-999b-b73584c90e05.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\1cd2b5b7-5792-4e96-999b-b73584c90e05.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\214ba50e-3fa2-421b-8d8d-a03247eeeb04.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\214ba50e-3fa2-421b-8d8d-a03247eeeb04.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\28efbe58-81bf-46c2-b521-55a13e6ba2af.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\28efbe58-81bf-46c2-b521-55a13e6ba2af.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\29383d31-f059-4f93-9bf8-66453cff17f2.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\29383d31-f059-4f93-9bf8-66453cff17f2.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\2b2383ae-e99f-4caf-9442-6d0174e8b6d6.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\2b2383ae-e99f-4caf-9442-6d0174e8b6d6.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\2ba36d04-e8c5-4cbe-8bef-850a39dab42d.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\2ba36d04-e8c5-4cbe-8bef-850a39dab42d.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\2d912329-449a-4120-afde-1d65b9dd1755.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\2d912329-449a-4120-afde-1d65b9dd1755.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\300e9cf4-d5e1-48c0-b016-22e3e47c7a80.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\300e9cf4-d5e1-48c0-b016-22e3e47c7a80.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\336b72ca-fe59-4807-8cb4-04c2c0061745.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\336b72ca-fe59-4807-8cb4-04c2c0061745.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\342bf37b-37d6-4d3d-a732-bcfd802de525.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\342bf37b-37d6-4d3d-a732-bcfd802de525.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\34b0711c-d460-42ae-a289-18c2c8efcb02.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\34b0711c-d460-42ae-a289-18c2c8efcb02.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\37baebd9-063c-403b-b30d-5fdcc82969d7.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\37baebd9-063c-403b-b30d-5fdcc82969d7.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\393d57bc-0900-4fb9-9335-09d095185c8d.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\393d57bc-0900-4fb9-9335-09d095185c8d.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\3e0d22d6-f2c2-4ef0-8a01-06fea09912ee.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\3e0d22d6-f2c2-4ef0-8a01-06fea09912ee.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\3eb0ecb2-4977-4dae-984d-dfa3153026a5.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\3eb0ecb2-4977-4dae-984d-dfa3153026a5.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\41810e35-add8-4321-ba43-47c13d882473.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\41810e35-add8-4321-ba43-47c13d882473.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\45917766-5630-44de-89d2-28bc0bd672e8.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\45917766-5630-44de-89d2-28bc0bd672e8.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\4607fc40-a253-4efa-818a-d85d15ea0407.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\4607fc40-a253-4efa-818a-d85d15ea0407.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\461538f3-0dfa-4c42-90d2-8626c1fcaa9e.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\461538f3-0dfa-4c42-90d2-8626c1fcaa9e.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\465f3a8a-e8c6-4bbe-ba04-cc689314fa62.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\465f3a8a-e8c6-4bbe-ba04-cc689314fa62.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\48889e19-9e1f-4d52-822d-27edae20921c.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\48889e19-9e1f-4d52-822d-27edae20921c.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\517c0e44-466b-4798-87a5-78afa4b2e73a.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\517c0e44-466b-4798-87a5-78afa4b2e73a.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\56193d31-6984-4819-b379-74feb2aa523b.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\56193d31-6984-4819-b379-74feb2aa523b.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\5633f498-f331-4bba-89bd-9f1912e3b7bc.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\5633f498-f331-4bba-89bd-9f1912e3b7bc.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\5769c6b2-488d-4f0f-b9b0-45822b7c2412.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\5769c6b2-488d-4f0f-b9b0-45822b7c2412.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\5a7fb798-a91b-43dc-95a6-7cc964e7cc90.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\5a7fb798-a91b-43dc-95a6-7cc964e7cc90.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\5a947a6a-1cc1-4c39-b3c6-2170f9be3e5d.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\5a947a6a-1cc1-4c39-b3c6-2170f9be3e5d.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\5b30355e-606e-4e36-8325-87f71c0a2f32.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\5b30355e-606e-4e36-8325-87f71c0a2f32.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\5b84cbca-e5e1-42a6-9a00-b8c3aaf40fdb.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\5b84cbca-e5e1-42a6-9a00-b8c3aaf40fdb.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\5c2bdaea-3f17-4568-ba42-5bd9df02aa24.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\5c2bdaea-3f17-4568-ba42-5bd9df02aa24.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\626586c5-6c9f-4ab8-8967-d9b0fed3425d.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\626586c5-6c9f-4ab8-8967-d9b0fed3425d.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\63aafbc7-dbf7-46d3-b4d3-d1b603e9a255.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\63aafbc7-dbf7-46d3-b4d3-d1b603e9a255.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\66be22e1-04de-4a78-9a34-3a5bff2b2482.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\66be22e1-04de-4a78-9a34-3a5bff2b2482.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\689bc65a-1362-455b-a847-64063fb4a6e6.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\689bc65a-1362-455b-a847-64063fb4a6e6.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\6c81650b-7aa3-44c7-b764-a97212a8aef8.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\6c81650b-7aa3-44c7-b764-a97212a8aef8.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\6cc33682-d645-47d3-81c6-cf9ce0700335.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\6cc33682-d645-47d3-81c6-cf9ce0700335.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\6ffb7b5c-ef9e-4b09-9853-ca8cbb80dacb.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\6ffb7b5c-ef9e-4b09-9853-ca8cbb80dacb.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\70fe95ba-93ba-43a6-babe-931c4e9fca93.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\70fe95ba-93ba-43a6-babe-931c4e9fca93.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\745e0c27-eda7-483f-ba5b-023acacdabbe.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\745e0c27-eda7-483f-ba5b-023acacdabbe.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\754ca783-1851-437b-80df-6cd467a39750.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\754ca783-1851-437b-80df-6cd467a39750.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\76880ea8-8473-455e-b01b-fd4aebf109f4.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\76880ea8-8473-455e-b01b-fd4aebf109f4.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\78062b83-4dfc-45c0-afb1-c2e6bbfa7916.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\78062b83-4dfc-45c0-afb1-c2e6bbfa7916.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\7e358b5f-1c4d-4fc2-8e86-eb9efe79135f.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\7e358b5f-1c4d-4fc2-8e86-eb9efe79135f.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\7f7b4bf3-7864-4e4d-9b69-a88ab95f1a6c.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\7f7b4bf3-7864-4e4d-9b69-a88ab95f1a6c.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\812aa191-72b1-476e-8ea2-33a6bda49070.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\812aa191-72b1-476e-8ea2-33a6bda49070.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\817b0018-1b83-4637-8fb5-092dce7aff69.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\817b0018-1b83-4637-8fb5-092dce7aff69.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\825d08e0-dcaa-4c55-8e6d-fae07360b267.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\825d08e0-dcaa-4c55-8e6d-fae07360b267.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\8e1e1c4f-cef5-4fe0-979f-f24cb842f87a.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\8e1e1c4f-cef5-4fe0-979f-f24cb842f87a.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\8e8402fc-d296-42f0-a2f8-a1fc938af573.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\8e8402fc-d296-42f0-a2f8-a1fc938af573.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\912d307f-9187-47f1-9088-2c579548177f.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\912d307f-9187-47f1-9088-2c579548177f.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\91acbe1b-b503-4571-8c8d-4828d63373df.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\91acbe1b-b503-4571-8c8d-4828d63373df.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\91d44e17-23e6-4a4d-8997-9aade073ae37.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\91d44e17-23e6-4a4d-8997-9aade073ae37.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\93d02690-c8f9-4ce8-9973-f2cb585aa595.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\93d02690-c8f9-4ce8-9973-f2cb585aa595.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\94c7bc62-d073-4623-b2d0-cb9c6ef89b20.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\94c7bc62-d073-4623-b2d0-cb9c6ef89b20.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\96184e39-c6d8-439b-9187-303289d25ee2.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\96184e39-c6d8-439b-9187-303289d25ee2.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\96b689ff-7304-4139-a027-3663a958466f.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\96b689ff-7304-4139-a027-3663a958466f.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\97ea0e92-7dcc-4040-99f6-ed6e18ecbdc1.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\97ea0e92-7dcc-4040-99f6-ed6e18ecbdc1.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\987ce65f-bbfd-4a36-90a1-f9fabaf20494.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\987ce65f-bbfd-4a36-90a1-f9fabaf20494.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\996222a9-6e35-46d3-9067-b49886c2ddde.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\996222a9-6e35-46d3-9067-b49886c2ddde.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\99776a3e-0d3f-4ddd-b6b7-c592a3f0457c.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\99776a3e-0d3f-4ddd-b6b7-c592a3f0457c.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\9cc3ca1a-9de4-46c2-86ac-826361ac3319.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\9cc3ca1a-9de4-46c2-86ac-826361ac3319.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\9de53332-f4f3-44f4-881b-99b8ecf229ae.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\9de53332-f4f3-44f4-881b-99b8ecf229ae.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\9f20cfec-82e8-4db4-b8fa-6f741baeaf69.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\9f20cfec-82e8-4db4-b8fa-6f741baeaf69.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\a41a10b6-144a-4cfd-8003-cf6982c14f9f.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\a41a10b6-144a-4cfd-8003-cf6982c14f9f.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\a47051aa-fbab-447e-88e8-7fe901d08bf4.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\a47051aa-fbab-447e-88e8-7fe901d08bf4.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\a90dc242-c9d9-48e7-b86b-e88a1773de6c.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\a90dc242-c9d9-48e7-b86b-e88a1773de6c.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\a9218670-ed50-4e6d-87d5-8ae94b68f993.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\a9218670-ed50-4e6d-87d5-8ae94b68f993.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\a9e53944-712d-4e2d-a9f2-af1981d53853.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\a9e53944-712d-4e2d-a9f2-af1981d53853.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\abdb04eb-9ce0-4e2a-99b0-d9187821e1b2.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\abdb04eb-9ce0-4e2a-99b0-d9187821e1b2.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\adff6055-c5ef-4eb5-b8be-42a7ab19b58f.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\adff6055-c5ef-4eb5-b8be-42a7ab19b58f.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\af589a49-3f08-404c-9b04-858f3f6655d5.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\af589a49-3f08-404c-9b04-858f3f6655d5.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\b51591ae-cda7-495c-b45b-582311fc90ed.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\b51591ae-cda7-495c-b45b-582311fc90ed.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\bb20d865-8441-4c25-bc58-b8c7cb15e900.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\bb20d865-8441-4c25-bc58-b8c7cb15e900.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\bfae3dc7-35e9-40e1-b46e-0aed05ac8251.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\bfae3dc7-35e9-40e1-b46e-0aed05ac8251.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\c17c5156-2ef3-4797-8040-11cc24d30ace.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\c17c5156-2ef3-4797-8040-11cc24d30ace.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\c2832f91-edd7-43b4-adea-c33278df7aac.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\c2832f91-edd7-43b4-adea-c33278df7aac.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\c34a3b51-74da-4900-b2c9-d46320661350.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\c34a3b51-74da-4900-b2c9-d46320661350.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\c375928a-c771-4a9e-8056-24b64305ada0.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\c375928a-c771-4a9e-8056-24b64305ada0.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\ca1c3080-9021-4aea-8529-8567046ee56d.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\ca1c3080-9021-4aea-8529-8567046ee56d.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\cab5c535-5960-4e73-b6a5-f25dcff028a4.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\cab5c535-5960-4e73-b6a5-f25dcff028a4.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\cb736622-aa29-4c8d-958f-693f2540bf01.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\cb736622-aa29-4c8d-958f-693f2540bf01.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\d05b7f9f-e6c3-4adb-9610-98c861b58ad5.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\d05b7f9f-e6c3-4adb-9610-98c861b58ad5.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\d355a635-19c5-4e73-a57a-90c87960040a.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\d355a635-19c5-4e73-a57a-90c87960040a.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\d40ec5a3-ab15-4010-becc-a54f6873a3fe.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\d40ec5a3-ab15-4010-becc-a54f6873a3fe.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\d6a5a326-da34-4363-be30-8c14d63b5490.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\d6a5a326-da34-4363-be30-8c14d63b5490.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\d6b49b91-426d-4a90-b186-6114475688fa.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\d6b49b91-426d-4a90-b186-6114475688fa.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\d6e5b5e4-921b-4ee8-afda-de6444217293.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\d6e5b5e4-921b-4ee8-afda-de6444217293.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\d80973bf-c239-4cfd-a06a-4b494b632388.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\d80973bf-c239-4cfd-a06a-4b494b632388.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\d8d49066-c20c-425b-947f-f4eca5906c82.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\d8d49066-c20c-425b-947f-f4eca5906c82.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\dcc3c418-f769-423e-8409-74decbfc4921.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\dcc3c418-f769-423e-8409-74decbfc4921.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\dfd2da19-9384-47e7-8417-3a5765663dad.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\dfd2da19-9384-47e7-8417-3a5765663dad.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\e0f68fbe-10fc-4dce-a714-7f6ad36e3d5b.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\e0f68fbe-10fc-4dce-a714-7f6ad36e3d5b.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\e359e066-b2eb-4036-9cbb-ab4ac5e0d01f.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\e359e066-b2eb-4036-9cbb-ab4ac5e0d01f.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\e43cb1f3-edfc-4b08-b43c-5f168395ee08.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\e43cb1f3-edfc-4b08-b43c-5f168395ee08.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\e634498c-fe26-42be-be04-be3e0723b016.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\e634498c-fe26-42be-be04-be3e0723b016.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\e6d283de-e8da-40a1-9e13-a7b95e2a6525.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\e6d283de-e8da-40a1-9e13-a7b95e2a6525.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\ec42f47f-e8c2-40e8-a58d-b7e37b179708.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\ec42f47f-e8c2-40e8-a58d-b7e37b179708.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\ed9e31fa-175a-45df-8fea-51469cd4f3e9.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\ed9e31fa-175a-45df-8fea-51469cd4f3e9.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\eed5385d-7b5c-458d-9ed3-bbc30ee14fa9.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\eed5385d-7b5c-458d-9ed3-bbc30ee14fa9.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\f0dc1962-ed42-4ada-8aef-2206f8fc6982.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\f0dc1962-ed42-4ada-8aef-2206f8fc6982.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\f439770f-f2dd-4dfc-917f-58de0c61806e.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\f439770f-f2dd-4dfc-917f-58de0c61806e.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\f60b62e2-a95c-4d31-a0ad-d13c82a0d1de.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\f60b62e2-a95c-4d31-a0ad-d13c82a0d1de.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\fd04d99a-0426-4732-87a4-1c942976af1a.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\fd04d99a-0426-4732-87a4-1c942976af1a.png"
+    },
+    {
+      "Id": "D:\\1Hutech\\DACS\\PawVerse\\wwwroot\\uploads\\products\\feb4c757-74f1-4391-beae-b1eca3a90cf8.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\feb4c757-74f1-4391-beae-b1eca3a90cf8.png"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.PawVerse.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.PawVerse.props",
+      "PackagePath": "build\\PawVerse.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.PawVerse.props",
+      "PackagePath": "buildMultiTargeting\\PawVerse.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.PawVerse.props",
+      "PackagePath": "buildTransitive\\PawVerse.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

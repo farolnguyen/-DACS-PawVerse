@@ -8937,31 +8937,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\FAROL\\.nuget\\packages\\": {},
-    "D:\\DEV\\DevIDE\\VSStudio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\FAROL\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "F:\\1Hutech\\DACS\\PawVerse\\PawVerse.csproj",
+      "projectUniqueName": "D:\\1Hutech\\DACS\\PawVerse\\PawVerse.csproj",
       "projectName": "PawVerse",
-      "projectPath": "F:\\1Hutech\\DACS\\PawVerse\\PawVerse.csproj",
+      "projectPath": "D:\\1Hutech\\DACS\\PawVerse\\PawVerse.csproj",
       "packagesPath": "C:\\Users\\FAROL\\.nuget\\packages\\",
-      "outputPath": "F:\\1Hutech\\DACS\\PawVerse\\obj\\",
+      "outputPath": "D:\\1Hutech\\DACS\\PawVerse\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "D:\\DEV\\DevIDE\\VSStudio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\FAROL\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\FAROL\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -8979,8 +8972,7 @@
         "enableAudit": "true",
         "auditLevel": "low",
         "auditMode": "direct"
-      },
-      "SdkAnalysisLevel": "9.0.300"
+      }
     },
     "frameworks": {
       "net8.0": {
@@ -9054,7 +9046,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.300/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.412/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

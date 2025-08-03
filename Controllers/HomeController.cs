@@ -31,35 +31,20 @@ public class HomeController : Controller
 
         ViewData["FeaturedBrands"] = featuredBrands;
 
-        // Lấy ID và số lượng sản phẩm cho các danh mục cố định một cách hiệu quả
-        var categoryNames = new[] { "Phụ kiện & Đồ chơi", "Thực phẩm", "Nội thất", "Trang phục" };
-        var categoryData = await _context.DanhMucs
-            .Where(d => categoryNames.Contains(d.TenDanhMuc))
+        // Lấy tất cả danh mục từ cơ sở dữ liệu
+        var categories = await _context.DanhMucs
             .Select(d => new
             {
                 Id = d.IdDanhMuc,
                 Name = d.TenDanhMuc,
+                Image = d.HinhAnh,
                 ProductCount = d.SanPhams.Count()
             })
             .ToListAsync();
 
-        // Ánh xạ dữ liệu vào ViewData để View sử dụng
-        var toyData = categoryData.FirstOrDefault(c => c.Name == "Phụ kiện & Đồ chơi");
-        ViewData["ToyCategoryId"] = toyData?.Id ?? 0;
-        ViewData["ToyProductCount"] = toyData?.ProductCount ?? 0;
-
-        var foodData = categoryData.FirstOrDefault(c => c.Name == "Thực phẩm");
-        ViewData["FoodCategoryId"] = foodData?.Id ?? 0;
-        ViewData["FoodProductCount"] = foodData?.ProductCount ?? 0;
-
-        var interiorData = categoryData.FirstOrDefault(c => c.Name == "Nội thất");
-        ViewData["InteriorCategoryId"] = interiorData?.Id ?? 0;
-        ViewData["InteriorProductCount"] = interiorData?.ProductCount ?? 0;
-
-        var fashionData = categoryData.FirstOrDefault(c => c.Name == "Trang phục");
-        ViewData["FashionCategoryId"] = fashionData?.Id ?? 0;
-        ViewData["FashionProductCount"] = fashionData?.ProductCount ?? 0;
-
+        // Đưa danh sách danh mục vào ViewData để View sử dụng
+        ViewData["Categories"] = categories;
+            
         // Lấy tối đa 8 sản phẩm cho khu vực "Bán chạy nhất"
         var bestsellerProducts = await _context.SanPhams.Take(8).ToListAsync();
 
