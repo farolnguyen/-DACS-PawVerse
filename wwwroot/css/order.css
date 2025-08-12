@@ -1,3 +1,9 @@
+/* Order Confirmation Page */
+.container.py-5 {
+    margin-top: 80px; /* Add margin to push content below the fixed header */
+    padding-top: 2rem !important; /* Additional padding for better spacing */
+}
+
 /* Main container for the order list */
 .order-list-container {
     background-color: #ffffff;
