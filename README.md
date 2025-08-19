@@ -11,10 +11,9 @@
 - 🛒 Danh mục sản phẩm: phụ kiện, thực phẩm, nội thất, thời trang
 - 🌟 Sản phẩm nổi bật và sản phẩm bán chạy nhất
 - 🐶 Dịch vụ chăm sóc thú cưng (Tắm, Cắt lông, Tiêm ngừa…)
-- 💬 Đánh giá từ người dùng
+- 💬 Chatbot AI tư vấn sản phẩm phù hợp cho thú cưng
 - 📬 Form đăng ký nhận tin tức
 - 📰 Trang blog & tin tức mới nhất
-- 📱 Responsive trên mọi thiết bị (PC, tablet, mobile)
 - 🔍 Thanh tìm kiếm, giỏ hàng, đăng nhập
 - 🔒 Footer hiện đại, thông tin liên hệ và phương thức thanh toán
 
@@ -22,9 +21,9 @@
 
 ## 🛠️ Công nghệ sử dụng
 
-- **HTML5** & **CSS3**
+- **HTML** & **CSS**
 - **JavaScript**
-- **Bootstrap 5** (tuỳ chọn)
+- **Bootstrap** 
 - **Google Fonts** & **FontAwesome / Bootstrap Icons**
 - **Responsive Design** & **Flexbox / Grid**
 - C# and ASP.NET
@@ -39,7 +38,7 @@ cd pawverse
 ```
 2. Mở terminal và nhập:
 ```bash
-dotnet run
+dotnet run --launch-profile https
 ```
 3. Mở trình duyệt
 
@@ -52,6 +51,3 @@ dotnet run
 
 ## © Bản quyền
 © 2025 PawVerse Pet Shop. Thiết kế bởi Tung tung tung.
-- Bạn có thể sử dụng cho mục đích cá nhân hoặc học tập. Vui lòng ghi rõ nguồn nếu chia sẻ lại.
-## Link figma
-https://www.figma.com/design/zQl8mV9RtWNa6bLKv8mN2f/PawVerse?node-id=34-5111&t=bYyiJtuIFjUztInu-0

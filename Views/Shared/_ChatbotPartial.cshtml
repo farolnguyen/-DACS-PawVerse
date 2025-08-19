@@ -239,6 +239,8 @@
                     .replace(/\*\*Dạng sản phẩm:\*\*/gi, '<span class="chat-field"><i class="fa fa-cube"></i> Dạng sản phẩm:</span>')
                     // Tần suất sử dụng
                     .replace(/\*\*Tần suất sử dụng:\*\*/gi, '<span class="chat-field"><i class="fa fa-calendar"></i> Tần suất sử dụng:</span>')
+                    // Năng lượng 
+                    .replace(/\*\*Năng lượng:\*\*/gi, '<span class="chat-field"><i class="fa fa-bolt"></i> Năng lượng:</span>')
                     // Chất liệu
                     .replace(/\*\*Chất liệu:\*\*/gi, '<span class="chat-field"><i class="fa fa-cubes"></i> Chất liệu:</span>')
                     // Tìm kiếm bất kỳ công thức **XXX:** nào chưa được xử lý
@@ -263,8 +265,57 @@
                     .replace(/- Xuất xứ:/gi, '<span class="chat-field"><i class="fa fa-globe"></i> Xuất xứ:</span>')
                     // Công dụng
                     .replace(/- Công dụng:/gi, '<span class="chat-field"><i class="fa fa-wrench"></i> Công dụng:</span>')
+                    // Năng lượng
+                    .replace(/- Năng lượng:/gi, '<span class="chat-field"><i class="fa fa-bolt"></i> Năng lượng:</span>')
+                    // Chất liệu
+                    .replace(/- Chất liệu:/gi, '<span class="chat-field"><i class="fa fa-cubes"></i> Chất liệu:</span>')
                     // Tìm kiếm bất kỳ bullet list "- XXX:" nào chưa được xử lý
-                    .replace(/- ([^:]+):/gi, '<span class="chat-field"><i class="fa fa-circle"></i> $1:</span>');
+                    // Thay đổi cách tiếp cận để xử lý cả các bullet points trong tiêu đề
+                    ;
+                    
+                    // Xử lý trường hợp đặc biệt "Tần suất sử dụng" có kèm theo dấu gạch ngang
+                    sanitizedContent = sanitizedContent.replace(/(Tần suất sử dụng: \d+) - (\d+)/g, '$1-$2');
+                    
+                    // Xử lý các bullet points và trường thông tin sản phẩm
+                    // Bước 1: Bảo vệ các dấu gạch ngang trong các phạm vi số (ví dụ: 1 - 3, 10–15)
+                    sanitizedContent = sanitizedContent.replace(/(\d+)\s*[-–]\s*(\d+)/g, '$1__HYPHEN__$2');
+                    
+                    // Bước 2: Xử lý các bullet points bằng cách tìm các dòng bắt đầu bằng dấu gạch ngang
+                    sanitizedContent = sanitizedContent.replace(/^- ([^:]+):/gim, '<span class="chat-field"><i class="fa fa-circle"></i> $1:</span>');
+                    
+                    // Bước 3: Xử lý các bullet points nằm trong nội dung sau dấu hai chấm
+                    sanitizedContent = sanitizedContent.replace(/(:\s*<br>|:\s*\n)\s*- ([^<\n]+)/g, 
+                        '$1<span class="nested-bullet"><i class="fa fa-circle-o" style="font-size: 0.8em;"></i> $2</span>');
+                    
+                    // Bước 4: Xử lý trường hợp thông tin sản phẩm không có bullet points hoặc dấu sao
+                    // Danh sách các trường thông tin thường gặp
+                    const fieldPatterns = [
+                        { name: 'Tên sản phẩm', icon: 'fa-tag' },
+                        { name: 'Giá bán', icon: 'fa-dollar' },
+                        { name: 'Loại thú cưng', icon: 'fa-paw' },
+                        { name: 'Trọng lượng cơ thể', icon: 'fa-balance-scale' },
+                        { name: 'Độ tuổi', icon: 'fa-birthday-cake' },
+                        { name: 'Xuất xứ', icon: 'fa-globe' },
+                        { name: 'Công dụng', icon: 'fa-wrench' },
+                        { name: 'Năng lượng', icon: 'fa-bolt' },
+                        { name: 'Chất liệu', icon: 'fa-cubes' },
+                        { name: 'Giống loài', icon: 'fa-dna' },
+                        { name: 'Danh mục', icon: 'fa-folder' },
+                        { name: 'Tần suất sử dụng', icon: 'fa-calendar' },
+                        { name: 'Dạng sản phẩm', icon: 'fa-cube' }
+                    ];
+                    
+                    // Áp dụng pattern cho từng trường thông tin
+                    fieldPatterns.forEach(field => {
+                        const pattern = new RegExp(`^${field.name}:\s`, 'gim');
+                        sanitizedContent = sanitizedContent.replace(
+                            pattern, 
+                            `<span class="chat-field"><i class="fa ${field.icon}"></i> ${field.name}:</span> `
+                        );
+                    });
+                    
+                    // Bước 5: Khôi phục các dấu gạch ngang trong các phạm vi số
+                    sanitizedContent = sanitizedContent.replace(/__HYPHEN__/g, '-');
                     
                 // Chuyển đổi các dòng mới thành thẻ <br>
                 const formattedContent = sanitizedContent.replace(/\n/g, '<br>');
