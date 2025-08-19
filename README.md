@@ -43,11 +43,10 @@ dotnet run --launch-profile https
 3. Mở trình duyệt
 
 ## 📌 Ghi chú
-- Bạn có thể dễ dàng tích hợp thêm backend hoặc CMS nếu muốn mở rộng thành trang thương mại điện tử hoàn chỉnh.
-- Thiết kế lấy cảm hứng từ Figma và đã được hiện thực hoá bằng HTML/CSS.
+- Thiết kế bằng Figma và đã được hiện thực hoá bằng HTML/CSS.
 
 ## 📧 Liên hệ
 - 📮 Email: farolnguyen824@gmail.com
 
 ## © Bản quyền
-© 2025 PawVerse Pet Shop. Thiết kế bởi Tung tung tung.
+© 2025 PawVerse Pet Shop.
